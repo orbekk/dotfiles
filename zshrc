@@ -30,7 +30,9 @@ export WORDCHARS=''
 setopt DVORAK
 
 alias ls="ls --color"
-alias vi="gvim --remote"
+if which gvim >/dev/null;
+  alias vi="gvim --remote"
+fi
 alias ff="fileutil --gfs_user=gfp-reporting"
 alias diff=colordiff
 

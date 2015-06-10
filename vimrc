@@ -17,6 +17,8 @@ set noswapfile
 set timeoutlen=1000
 set ignorecase
 set expandtab
+set shiftwidth=2
+set softtabstop=2
 set smarttab
 set smartcase
 set incsearch

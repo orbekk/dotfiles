@@ -18,7 +18,7 @@ if ! which git >/dev/null; then
 fi
 
 cd ~/dotfiles
-git submodule update --recursive
+git submodule update --init --recursive
 git submodule foreach pull
 
 cd
