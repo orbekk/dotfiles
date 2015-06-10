@@ -8,6 +8,7 @@ call vundle#begin()
 " Plugin 'wincent/command-t'
 Plugin 'chriskempson/vim-tomorrow-theme'
 Plugin 'gmarik/Vundle.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
 call vundle#end()
 
 set modeline
@@ -39,6 +40,10 @@ setlocal complete+=ktags
 
 nmap <silent> <C-N> :silent noh<CR>
 map <leader>cd :cd %:p:h<CR>:pwd<CR>
+
+map <leader>t :CtrlP<CR>
+map <leader>b :CtrlPBuffer<CR>
+map <leader>r :CtrlPMRU<CR>
 
 set wildignore+=*.class,target/*,project/*
 
