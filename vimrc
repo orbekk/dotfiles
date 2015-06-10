@@ -7,7 +7,6 @@ call vundle#begin()
 " TODO(orbekk): Try ctrlp.vim instead.
 " Plugin 'wincent/command-t'
 Plugin 'chriskempson/vim-tomorrow-theme'
-Plugin 'farseer90718/vim-taskwarrior'
 Plugin 'gmarik/Vundle.vim'
 call vundle#end()
 
