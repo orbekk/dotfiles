@@ -26,3 +26,4 @@ create_symlink() {
 }
 
 create_symlink dotfiles/gitconfig .gitconfig
+create_symlink dotfiles/zshrc .zshrc
