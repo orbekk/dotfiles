@@ -1,0 +1,8 @@
+[user]
+	name = Kjetil Orbekk
+	email = kjetil.orbekk@gmail.com
+[color]
+        diff = auto
+        status = auto
+        branch = auto
+        ui = true
