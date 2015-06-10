@@ -17,7 +17,8 @@ if ! zgen saved; then
   # completions
   zgen load zsh-users/zsh-completions src
   # theme
-  zgen oh-my-zsh themes/frisk
+  # zgen oh-my-zsh themes/frisk
+  zgen load ehamberg/pure
   # save all to init script
   zgen save
 fi
