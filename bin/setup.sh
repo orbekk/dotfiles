@@ -12,6 +12,16 @@ if [[ ! -f dotfiles/bin/setup.sh ]]; then
  exit 1
 fi
 
+if ! which git >/dev/null; then
+  echo -e "${red}[FAIL]${none} git not installed"
+  exit 1
+fi
+
+cd ~/dotfiles
+git submodule update --recursive
+git submodule foreach pull
+
+cd
 # Creates a symlink with target $1 at location $2.
 # Does nothing and prints an error message if $2 exists and is not a symlink.
 create_symlink() {
@@ -47,21 +57,17 @@ else
 fi
 
 create_symlink dotfiles/vimrc .vimrc
-if which git >/dev/null; then
-  if [[ -e .vim/bundle/Vundle.vim ]]; then
-    echo -e "${orange}[SKIPPED]${none} Vundle.vim already installed"
-  else
-    success=1
-    mkdir -p .vim/bundle
-    git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim \
-      || success=0
-    vim +PluginInstall +qall || success=0
-    if [[ "$success" == "1" ]]; then
-      echo -e "${green}[OK]${none} installed vim plugins"
-    else
-      echo -e "${red}[WARNING]${none} failed to install vim plugins"
-    fi
-  fi
+if [[ -e .vim/bundle/Vundle.vim ]]; then
+  echo -e "${orange}[SKIPPED]${none} Vundle.vim already installed"
 else
-  echo -e "${red}[WARNING]${none} git not installed"
+  success=1
+  mkdir -p .vim/bundle
+  git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim \
+    || success=0
+  vim +PluginInstall +qall || success=0
+  if [[ "$success" == "1" ]]; then
+    echo -e "${green}[OK]${none} installed vim plugins"
+  else
+    echo -e "${red}[WARNING]${none} failed to install vim plugins"
+  fi
 fi
