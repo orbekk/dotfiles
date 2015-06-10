@@ -29,7 +29,7 @@ export WORDCHARS=''
 # Dvorak
 setopt DVORAK
 
-alias ls="ls --color"
+# alias ls="ls --color"
 if which gvim >/dev/null; then
   alias vi="gvim --remote"
 fi
