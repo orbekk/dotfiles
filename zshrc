@@ -13,6 +13,7 @@ if ! zgen saved; then
   zgen oh-my-zsh plugins/history
   zgen oh-my-zsh plugins/autojump
   zgen oh-my-zsh plugins/command-not-found
+  zgen oh-my-zsh plugins/taskwarrior
   zgen load zsh-users/zsh-syntax-highlighting
   # completions
   zgen load zsh-users/zsh-completions src
