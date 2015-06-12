@@ -24,6 +24,10 @@ if ! zgen saved; then
   zgen save
 fi
 
+if (( $+commands[ack-grep] )) ; then
+  alias ack=ack-grep
+fi
+
 # Emacs-like editor
 bindkey -e
 export WORDCHARS=''
