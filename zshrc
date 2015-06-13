@@ -24,6 +24,8 @@ if ! zgen saved; then
   zgen save
 fi
 
+LANG=en_US.UTF-8
+
 if (( $+commands[ack-grep] )) ; then
   alias ack=ack-grep
 fi
