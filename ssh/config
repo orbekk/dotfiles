@@ -1,0 +1,3 @@
+Host *.orbekk.com
+  GSSAPIKeyExchange no
+  GSSAPIAuthentication no

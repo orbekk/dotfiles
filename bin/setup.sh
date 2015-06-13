@@ -49,6 +49,9 @@ else
   printf "${orange}[SKIPPED]${none} shell is not zsh :-(.\n"
 fi
 
+mkdir -p .ssh
+create_symlink ../dotfiles/ssh/config .ssh/config
+
 if which i3 >/dev/null; then
   mkdir -p .i3
   create_symlink ../dotfiles/i3/config .i3/config
@@ -64,10 +67,10 @@ else
   mkdir -p .vim/bundle
   git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim \
     || success=0
-  vim +PluginInstall +qall || success=0
-  if [[ "$success" == "1" ]]; then
-    printf "${green}[OK]${none} installed vim plugins\n"
-  else
-    printf "${red}[WARNING]${none} failed to install vim plugins\n"
-  fi
+fi
+vim +PluginInstall +qall || success=0
+if [[ "$success" == "1" ]]; then
+  printf "${green}[OK]${none} installed vim plugins\n"
+else
+  printf "${red}[WARNING]${none} failed to install vim plugins\n"
 fi
