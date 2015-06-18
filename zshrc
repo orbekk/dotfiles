@@ -8,7 +8,7 @@ if ! zgen saved; then
   echo "Creating a zgen save"
   zgen oh-my-zsh
   # plugins
-  zgen oh-my-zsh plugins/git
+  # zgen oh-my-zsh plugins/git
   zgen oh-my-zsh plugins/sudo
   zgen oh-my-zsh plugins/history
   zgen oh-my-zsh plugins/autojump
@@ -24,7 +24,10 @@ if ! zgen saved; then
   zgen save
 fi
 
+setopt extendedglob
 LANG=en_US.UTF-8
+HISTSIZE=1000000
+SAVEHIST=1000000
 
 if (( $+commands[ack-grep] )) ; then
   alias ack=ack-grep
