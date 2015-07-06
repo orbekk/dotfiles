@@ -59,3 +59,16 @@ export TZ='America/New_York'
 autoload -U edit-command-line
 zle -N edit-command-line
 bindkey "^V" edit-command-line
+
+function get-parent-dir() {
+  words=(${(z)LBUFFER})
+  if [[ "${words[${#words}]}" = /* ]]; then
+    # There is already a path thing here.
+    words[${#words}]="${words[${#words}]:h}/"  # Parent directory.
+  else
+    words=($words $PWD)
+  fi
+  LBUFFER="${words[@]}"
+}
+zle -N get-parent-dir
+bindkey "^[u" get-parent-dir
