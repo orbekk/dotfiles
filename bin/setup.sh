@@ -41,6 +41,7 @@ create_symlink() {
 }
 
 create_symlink dotfiles/gitconfig .gitconfig
+create_symlink dotfiles/taskrc .taskrc
 create_symlink /dev/null .vimrc.local
 
 if [[ "${SHELL}" = *zsh* ]]; then

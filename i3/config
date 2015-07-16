@@ -10,13 +10,16 @@
 #
 
 # font for window titles. ISO 10646 = Unicode
-font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+# font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+font xft:Droid Sans Bold 9
 
 # use Mouse+Mod4 to drag floating windows to their wanted position
 floating_modifier Mod4
 
 # start a terminal
 bindsym Mod4+Return exec urxvt
+
+bindsym Pause exec i3lock
 
 # kill focused window
 bindsym Mod4+Shift+q kill
@@ -105,6 +108,13 @@ bindsym Mod4+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym Mod4+Shift+e exit
 
+# # class                 border  backgr. text    indicator
+client.focused          #000000 #76c7b7 #000000 #2e9ef4
+client.focused_inactive #333333 #999999 #000000 #484e50
+client.unfocused        #333333 #cccccc #333333 #292d2e
+client.urgent           #2f343a #900000 #ffffff #900000
+# client.placeholder      #000000 #0c0c0c #ffffff #000000
+
 # resize window (you can also use the mouse for that)
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
@@ -143,14 +153,17 @@ mode "resize" {
         bindsym Escape mode "default"
 }
 
-bindsym Mod4+r mode "resize"
+# NOTE(orbekk): Disable resize mode: I never use it and sometimes I accidentally trigger it.
+# bindsym Mod4+r mode "resize"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
         status_command i3status
+        font xft:Droid Sans Mono 10
 }
 
 exec xrdb -merge $HOME/.Xresources
 exec setxkbmap us -variant dvorak -option compose:ralt -option caps:ctrl_modifier
 exec google-chrome &
+exec xautolock -time 10 -locker 'i3lock' &
