@@ -51,6 +51,7 @@ fi
 export EDITOR=vim
 export PAGER=less
 export TZ='America/New_York'
+export PATH=$HOME/bin:$PATH
 
 # allow editing of command line
 autoload -U edit-command-line
