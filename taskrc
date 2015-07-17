@@ -21,7 +21,7 @@ report.gtd.sort=tags+,due+,project+,description+
 
 # Color theme (uncomment one to use)
 #include /usr/share/task/light-16.theme
-# include /usr/share/task/light-256.theme
+include /usr/share/task/light-256.theme
 #include /usr/share/task/dark-16.theme
 #include /usr/share/task/dark-256.theme
 #include /usr/share/task/dark-red-256.theme
