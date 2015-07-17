@@ -6,6 +6,9 @@ if [[ -f  $HOME/.zshrc.local ]]; then
     source $HOME/.zshrc.local
 fi
 
+# Don't upgrade oh-my-zsh automatically.
+DISABLE_AUTO_UPDATE="true"
+
 source $HOME/dotfiles/zgen/zgen.zsh
 # check if there's no init script
 if ! zgen saved; then
@@ -54,6 +57,7 @@ alias diff=colordiff
 export EDITOR=vim
 export PAGER=less
 export TZ='America/New_York'
+export PATH=$HOME/bin:$PATH
 
 # allow editing of command line
 autoload -U edit-command-line
