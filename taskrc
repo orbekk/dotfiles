@@ -15,13 +15,13 @@ data.location=~/.task
 
 report.gtd.columns=tags,id,description,project,due
 report.gtd.description=List GTD style task
-report.gtd.filter=status:pending limit:page
+report.gtd.filter=status:pending limit:page +next
 report.gtd.labels=Context,ID,Task,Project,Due
 report.gtd.sort=tags+,due+,project+,description+
 
 # Color theme (uncomment one to use)
 #include /usr/share/task/light-16.theme
-include /usr/share/task/light-256.theme
+# include /usr/share/task/light-256.theme
 #include /usr/share/task/dark-16.theme
 #include /usr/share/task/dark-256.theme
 #include /usr/share/task/dark-red-256.theme
@@ -61,7 +61,7 @@ color.recurring=rgb013
 color.overdue=color1
 color.due.today=rgb400
 color.due=color9
-color.active=rgb555 on rgb520
+color.active=rgb210
 color.pri.none=
 color.pri.H=color232
 color.pri.M=color237
