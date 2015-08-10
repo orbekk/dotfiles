@@ -53,6 +53,7 @@ if which gvim >/dev/null; then
 fi
 alias ff="fileutil --gfs_user=gfp-reporting"
 alias diff=colordiff
+alias j=jump
 
 export EDITOR=vim
 export PAGER=less
