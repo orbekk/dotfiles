@@ -26,7 +26,7 @@ if [[ ! -f "${authorized_keys_file}" ]]; then
 fi
 
 add_keys_to_file() {
-  filename="$1"
+  local filename="$1"
   awk \
     "/$begin_marker/"' { exit 0 } { print }' \
     ${filename} > ${filename}.header
