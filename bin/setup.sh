@@ -12,10 +12,13 @@ if [[ ! -f dotfiles/bin/setup.sh ]]; then
  exit 1
 fi
 
-if ! which git >/dev/null; then
-  printf "${red}[FAIL]${none} git not installed\n"
-  exit 1
-fi
+required_commands=(git basename)
+for command in ${required_commands[@]}; do
+  if ! which "${command}" >/dev/null; then
+    printf "${red}[FAIL]${none} ${command} not installed\n"
+    exit 1
+  fi
+done
 
 cd ~/dotfiles
 git submodule update --init --recursive
@@ -43,6 +46,12 @@ create_symlink() {
 create_symlink dotfiles/gitconfig .gitconfig
 create_symlink dotfiles/taskrc .taskrc
 create_symlink /dev/null .vimrc.local
+
+mkdir -p bin
+for binary in dotfiles/bin/*; do
+  binary=$(basename "${binary}")
+  create_symlink "../dotfiles/bin/${binary}" "bin/${binary}"
+done
 
 if [[ "${SHELL}" = *zsh* ]]; then
   create_symlink dotfiles/zshrc .zshrc
