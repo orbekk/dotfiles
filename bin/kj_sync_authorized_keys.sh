@@ -18,6 +18,7 @@ targets=(
   login.pvv.ntnu.no
   aji.orbekk.com
   moyo.orbekk.com
+  pi@photobox.6.orbekk.com
 )
 authorized_keys_file=$HOME/dotfiles/authorized_keys
 if [[ ! -f "${authorized_keys_file}" ]]; then
