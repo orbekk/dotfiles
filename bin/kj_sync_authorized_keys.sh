@@ -11,10 +11,10 @@ declare -r overwrite=false
 declare -r tmpdir=$(mktemp -d /tmp/kj_sync_authorized_keys.XXXXX)
 
 targets=(
+  root@orbekk.osl.trygveandre.net
   tesuji.6.orbekk.com
   login.6.orbekk.com
   minecraft.6.orbekk.com
-  backup.6.orbekk.com
   login.pvv.ntnu.no
   aji.orbekk.com
   moyo.orbekk.com
