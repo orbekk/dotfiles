@@ -47,7 +47,8 @@ map <leader>r :CtrlPMRU<CR>
 
 set wildignore+=*.class,target/*,project/*
 
-set guifont=DroidSansMono\ 10
+"set guifont=DroidSansMono\ 10
+set guifont="Source Code Pro 10"
 set guioptions-=m
 set guioptions-=T
 set guioptions-=r
