@@ -11,13 +11,13 @@
 
 # font for window titles. ISO 10646 = Unicode
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-font xft:Droid Sans Bold 9
+font xft:Droid Sans Bold 7
 
 # use Mouse+Mod4 to drag floating windows to their wanted position
 floating_modifier Mod4
 
 # start a terminal
-bindsym Mod4+Return exec urxvt
+bindsym Mod4+Return exec gnome-terminal
 
 bindsym Pause exec i3lock
 
@@ -160,7 +160,7 @@ mode "resize" {
 # finds out, if available)
 bar {
         status_command i3status
-        font xft:Droid Sans Mono 10
+        font xft:Droid Sans Mono 8
 }
 
 exec xrdb -merge $HOME/.Xresources

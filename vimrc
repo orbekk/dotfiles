@@ -6,6 +6,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 " TODO(orbekk): Try ctrlp.vim instead.
 " Plugin 'wincent/command-t'
+Plugin 'chriskempson/base16-vim'
 Plugin 'chriskempson/vim-tomorrow-theme'
 Plugin 'gmarik/Vundle.vim'
 Plugin 'ctrlpvim/ctrlp.vim'
@@ -51,7 +52,7 @@ set guifont=DroidSansMono\ 10
 set guioptions-=m
 set guioptions-=T
 set guioptions-=r
-colorscheme Tomorrow
+colorscheme base16-tomorrow
 
 set colorcolumn=81
 
