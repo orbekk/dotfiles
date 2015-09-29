@@ -52,7 +52,7 @@ set guifont="Source Code Pro 10"
 set guioptions-=m
 set guioptions-=T
 set guioptions-=r
-colorscheme Tomorrow
+colorscheme Tomorrow-Night
 
 set colorcolumn=81
 
