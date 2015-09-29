@@ -19,7 +19,7 @@ floating_modifier Mod4
 # start a terminal
 bindsym Mod4+Return exec gnome-terminal
 
-bindsym Pause exec i3lock
+bindsym Pause exec i3lock -c 2A3462
 
 # kill focused window
 bindsym Mod4+Shift+q kill
@@ -165,5 +165,6 @@ bar {
 
 exec xrdb -merge $HOME/.Xresources
 exec setxkbmap us -variant dvorak -option compose:ralt -option caps:ctrl_modifier
+exec xbindkeys
 exec google-chrome &
-exec xautolock -time 10 -locker 'i3lock' &
+exec xautolock -time 10 -locker 'i3lock -c 2A3462' &
