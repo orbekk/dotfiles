@@ -23,7 +23,7 @@ report.gtd.sort=tags+,due+,project+,description+
 #include /usr/share/task/light-16.theme
 # include /usr/share/task/light-256.theme
 #include /usr/share/task/dark-16.theme
-#include /usr/share/task/dark-256.theme
+include /usr/share/task/dark-256.theme
 #include /usr/share/task/dark-red-256.theme
 #include /usr/share/task/dark-green-256.theme
 #include /usr/share/task/dark-blue-256.theme
@@ -32,46 +32,46 @@ report.gtd.sort=tags+,due+,project+,description+
 #include /usr/share/task/dark-gray-256.theme
 #include /usr/share/task/solarized-light-256.theme
 # Copy of light-256.theme:
-color=on
-color.header=color4
-color.footnote=color4
-color.error=color4
-color.debug=color4
-color.summary.bar=black on rgb141
-color.summary.background=white on color0
-color.history.add=color0 on rgb500
-color.history.done=color0 on rgb050
-color.history.delete=color0 on rgb550
-color.burndown.pending=on rgb200
-color.burndown.started=on rgb520
-color.burndown.done=on rgb011
-color.sync.added=rgb011
-color.sync.changed=rgb520
-color.sync.rejected=rgb200
-color.undo.before=color1
-color.undo.after=color2
-color.calendar.today=color15 on rgb013
-color.calendar.due=color0 on color9
-color.calendar.due.today=color15 on color1
-color.calendar.overdue=color0 on color1
-color.calendar.weekend=on color253
-color.calendar.holiday=color0 on color3
-color.calendar.weeknumber=rgb013
-color.recurring=rgb013
-color.overdue=color1
-color.due.today=rgb400
-color.due=color9
-color.active=rgb210
-color.pri.none=
-color.pri.H=color232
-color.pri.M=color237
-color.pri.L=color242
-color.tagged=rgb020
-color.blocked=gray12 on gray4
-color.blocking=gray12 on gray6
-color.project.none=
-color.tag.none=
-color.alternate=on color254
+#color=on
+#color.header=color4
+#color.footnote=color4
+#color.error=color4
+#color.debug=color4
+#color.summary.bar=black on rgb141
+#color.summary.background=white on color0
+#color.history.add=color0 on rgb500
+#color.history.done=color0 on rgb050
+#color.history.delete=color0 on rgb550
+#color.burndown.pending=on rgb200
+#color.burndown.started=on rgb520
+#color.burndown.done=on rgb011
+#color.sync.added=rgb011
+#color.sync.changed=rgb520
+#color.sync.rejected=rgb200
+#color.undo.before=color1
+#color.undo.after=color2
+#color.calendar.today=color15 on rgb013
+#color.calendar.due=color0 on color9
+#color.calendar.due.today=color15 on color1
+#color.calendar.overdue=color0 on color1
+#color.calendar.weekend=on color253
+#color.calendar.holiday=color0 on color3
+#color.calendar.weeknumber=rgb013
+#color.recurring=rgb013
+#color.overdue=color1
+#color.due.today=rgb400
+#color.due=color9
+#color.active=rgb210
+#color.pri.none=
+#color.pri.H=color232
+#color.pri.M=color237
+#color.pri.L=color242
+#color.tagged=rgb020
+#color.blocked=gray12 on gray4
+#color.blocking=gray12 on gray6
+#color.project.none=
+#color.tag.none=
+#color.alternate=on color254
 
 # Custom colors
 color.blocking=rgb111 on rgb543
