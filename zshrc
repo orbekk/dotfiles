@@ -51,6 +51,7 @@ setopt DVORAK
 # alias ls="ls --color"
 if which gvim >/dev/null; then
   alias vi="gvim --remote"
+  alias e="gvim --remote"
 fi
 alias ff="fileutil --gfs_user=gfp-reporting"
 alias diff=colordiff

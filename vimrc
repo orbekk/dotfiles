@@ -53,6 +53,7 @@ set guifont="Source Code Pro 10"
 set guioptions-=m
 set guioptions-=T
 set guioptions-=r
+set background=dark
 colorscheme base16-tomorrow
 
 set colorcolumn=81
