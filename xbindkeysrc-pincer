@@ -3,3 +3,18 @@
 
 "xbacklight -dec 20"
   XF86MonBrightnessDown
+
+"amixer -c 1 set Master 1dB-"
+  XF86AudioLowerVolume
+
+"amixer -c 1 set Master 1dB+"
+  XF86AudioRaiseVolume
+
+"amixer -c 1 set Master toggle"
+  XF86AudioMute
+
+"amixer -c 1 set Mic toggle"
+  XF86AudioMicMute
+
+"i3lock -c 2A3462"
+  XF86Tools
