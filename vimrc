@@ -50,9 +50,10 @@ set wildignore+=*.class,target/*,project/*
 
 "set guifont=DroidSansMono\ 10
 set guifont="Source Code Pro 10"
-set guioptions-=m
+set guioptions-=M
 set guioptions-=T
 set guioptions-=r
+set guioptions-=L
 set background=dark
 colorscheme base16-tomorrow
 
