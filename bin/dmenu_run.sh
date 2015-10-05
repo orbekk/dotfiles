@@ -1,3 +1,3 @@
 #!/bin/bash
-PATH=$HOME/dotfiles/bin:$PATH dmenu_run -fn -*-*-*-*-*-*-20-*-*-*-*-*-*-* "$@"
+PATH=$HOME/dotfiles/bin:$HOME/bin:$PATH dmenu_run -fn -*-*-*-*-*-*-20-*-*-*-*-*-*-* "$@"
 
