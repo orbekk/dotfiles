@@ -166,5 +166,6 @@ exec xrdb -merge $HOME/.Xresources
 setxkbmap us -variant dvorak -option compose:ralt -option caps:ctrl_modifier
 exec $HOME/bin/keyboard_setup.sh
 exec xbindkeys
+exec xset -b
 exec google-chrome &
 exec xautolock -time 10 -locker 'i3lock -c 2A3462' &
