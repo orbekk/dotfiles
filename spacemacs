@@ -26,6 +26,12 @@ values."
      ;; auto-completion
      ;; better-defaults
      emacs-lisp
+     shell
+     c-c++
+     haskell
+     html
+     javascript
+     markdown
      ;; git
      ;; markdown
      ;; org
@@ -94,7 +100,7 @@ values."
                                :size 20
                                :weight normal
                                :width normal
-                               :powerline-scale 1.0)
+                               :powerline-scale 1.1)
    ;; The leader key
    dotspacemacs-leader-key "SPC"
    ;; The leader key accessible in `emacs state' and `insert state'
@@ -193,6 +199,14 @@ values."
   "Initialization function for user code.
 It is called immediately after `dotspacemacs/init'.  You are free to put any
 user code."
+  ;; bind ctrl-w to backwards-kill-word when no region is selected
+  (global-set-key (kbd "C-w") 'backward-kill-word-or-kill-region)
+
+  (defun backward-kill-word-or-kill-region (&optional arg)
+    (interactive "p")
+    (if (region-active-p)
+        (kill-region (region-beginning) (region-end))
+      (backward-kill-word arg)))
   )
 
 (defun dotspacemacs/user-config ()
@@ -200,6 +214,7 @@ user code."
  This function is called at the very end of Spacemacs initialization after
 layers configuration. You are free to put any user code."
   (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
+  (setq-default vc-follow-symlinks nil)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
