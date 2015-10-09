@@ -46,6 +46,7 @@ create_symlink() {
 create_symlink dotfiles/gitconfig .gitconfig
 create_symlink dotfiles/taskrc .taskrc
 create_symlink dotfiles/tmux.conf .tmux.conf
+create_symlink dotfiles/spacemacs .spacemacs
 create_symlink /dev/null .vimrc.local
 
 mkdir -p bin
