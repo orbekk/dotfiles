@@ -47,13 +47,17 @@ nmap <silent> <C-N> :silent noh<CR>
 map <leader>cd :cd %:p:h<CR>:pwd<CR>
 
 if executable('ag')
-let g:unite_source_history_yank_enable = 1
 let g:unite_source_grep_command = 'ag'
 let g:unite_source_grep_default_opts =
 \ '-i --vimgrep --ignore ' .
 \ '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
 endif
 
+" let g:unite_source_rec_find_command =
+" \ ['-path', '*/.git/*', '-prune', '-o', '-path', '*/\.*', '-prune', 
+" \ '-o', '-type', 'l', '-print']
+
+let g:unite_source_history_yank_enable = 1
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 nnoremap <leader>t :<C-u>Unite -no-split -buffer-name=files   -start-insert file_mru file_rec/async:!<cr>
 nnoremap <leader>r :<C-u>Unite -no-split -buffer-name=mru     -start-insert file_rec/git<cr>
