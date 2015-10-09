@@ -53,10 +53,6 @@ let g:unite_source_grep_default_opts =
 \ '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
 endif
 
-" let g:unite_source_rec_find_command =
-" \ ['-path', '*/.git/*', '-prune', '-o', '-path', '*/\.*', '-prune', 
-" \ '-o', '-type', 'l', '-print']
-
 let g:unite_source_history_yank_enable = 1
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 nnoremap <leader>t :<C-u>Unite -no-split -buffer-name=files   -start-insert file_mru file_rec/async:!<cr>
