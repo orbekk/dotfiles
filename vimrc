@@ -6,10 +6,14 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 " TODO(orbekk): Try ctrlp.vim instead.
 " Plugin 'wincent/command-t'
+" Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'chriskempson/base16-vim'
 Plugin 'chriskempson/vim-tomorrow-theme'
 Plugin 'gmarik/Vundle.vim'
-Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'Shougo/vimproc.vim'
+Plugin 'Shougo/unite.vim'
+Plugin 'Shougo/unite-outline'
+Plugin 'Shougo/neomru.vim'
 call vundle#end()
 
 set modeline
@@ -42,9 +46,25 @@ setlocal complete+=ktags
 nmap <silent> <C-N> :silent noh<CR>
 map <leader>cd :cd %:p:h<CR>:pwd<CR>
 
-map <leader>t :CtrlP<CR>
-map <leader>b :CtrlPBuffer<CR>
-map <leader>r :CtrlPMRU<CR>
+if executable('ag')
+let g:unite_source_history_yank_enable = 1
+let g:unite_source_grep_command = 'ag'
+let g:unite_source_grep_default_opts =
+\ '-i --vimgrep --ignore ' .
+\ '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
+endif
+
+call unite#filters#matcher_default#use(['matcher_fuzzy'])
+nnoremap <leader>t :<C-u>Unite -no-split -buffer-name=files   -start-insert file_mru file_rec/async:!<cr>
+nnoremap <leader>r :<C-u>Unite -no-split -buffer-name=mru     -start-insert file_rec/git<cr>
+nnoremap <leader>o :<C-u>Unite -no-split -buffer-name=outline -start-insert outline<cr>
+nnoremap <leader>y :<C-u>Unite -no-split -buffer-name=yank    history/yank<cr>
+nnoremap <leader>b :<C-u>Unite -no-split -buffer-name=buffer  buffer bookmark<cr>
+nnoremap <leader>g :<C-u>Unite -no-split -buffer-name=grep  -start-insert grep<cr>
+
+" map <leader>t :CtrlP<CR>
+" map <leader>b :CtrlPBuffer<CR>
+" map <leader>r :CtrlPMRU<CR>
 
 set wildignore+=*.class,target/*,project/*
 
