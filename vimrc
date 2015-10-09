@@ -55,12 +55,12 @@ endif
 
 let g:unite_source_history_yank_enable = 1
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
-nnoremap <leader>t :<C-u>Unite -no-split -buffer-name=files   -start-insert file_mru file_rec/async:!<cr>
+nnoremap <leader>t :<C-u>Unite -no-split -buffer-name=files   -start-insert file_mru file_rec/async:.<cr>
 nnoremap <leader>r :<C-u>Unite -no-split -buffer-name=mru     -start-insert file_rec/git<cr>
-nnoremap <leader>o :<C-u>Unite -no-split -buffer-name=outline -start-insert outline<cr>
+nnoremap <leader>O :<C-u>Unite -no-split -buffer-name=outline outline<cr>
 nnoremap <leader>y :<C-u>Unite -no-split -buffer-name=yank    history/yank<cr>
 nnoremap <leader>b :<C-u>Unite -no-split -buffer-name=buffer  buffer bookmark<cr>
-nnoremap <leader>g :<C-u>Unite -no-split -buffer-name=grep  -start-insert grep<cr>
+nnoremap <leader>g :<C-u>Unite -no-split -buffer-name=grep  -start-insert grep:.<cr>
 
 " map <leader>t :CtrlP<CR>
 " map <leader>b :CtrlPBuffer<CR>
