@@ -163,7 +163,7 @@ bar {
 }
 
 exec xrdb -merge $HOME/.Xresources
-setxkbmap us -variant dvorak -option compose:ralt -option caps:ctrl_modifier
+exec setxkbmap us -variant dvorak -option compose:ralt -option caps:ctrl_modifier
 exec $HOME/bin/keyboard_setup.sh
 exec xbindkeys
 exec xset -b
