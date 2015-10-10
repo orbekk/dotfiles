@@ -35,8 +35,8 @@ values."
      markdown
      haskell
      git
-     ;; markdown
-     ;; org
+     markdown
+     org
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
@@ -48,7 +48,7 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages then consider to create a layer, you can also put the
    ;; configuration in `dotspacemacs/config'.
-   dotspacemacs-additional-packages '(haskell-mode)
+   dotspacemacs-additional-packages '(nyan-mode)
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '(smartparens)
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
@@ -86,7 +86,8 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(spacemacs-dark
+   dotspacemacs-themes '(base16-bright-dark
+                         spacemacs-dark
                          spacemacs-light
                          solarized-light
                          solarized-dark
@@ -218,7 +219,7 @@ layers configuration. You are free to put any user code."
   (setq-default
    vc-follow-symlinks nil
    web-mode-code-indent-offset 2)
+  (nyan-mode)
   )
-
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
