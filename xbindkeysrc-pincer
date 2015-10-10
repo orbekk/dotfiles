@@ -1,7 +1,7 @@
-"xbacklight -inc 10 && pkill -SIGUSR1 i3status"
+"/home/orbekk/bin/brightness.sh + && pkill -SIGUSR1 i3status"
   XF86MonBrightnessUp
 
-"xbacklight -dec 10 && pkill -SIGUSR1 i3status"
+"/home/orbekk/bin/brightness.sh - && pkill -SIGUSR1 i3status"
   XF86MonBrightnessDown
 
 "amixer -c 1 set Master 1dB- && pkill -SIGUSR1 i3status"
