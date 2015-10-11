@@ -68,6 +68,7 @@ if which i3 >/dev/null; then
   mkdir -p .i3
   create_symlink ../dotfiles/i3/config .i3/config
   create_symlink dotfiles/i3status.conf .i3status.conf
+  create_symlink dotfiles/i3blocks.conf .i3blocks.conf
 else
   printf "${orange}[SKIPPED]${none} i3 not installed.\n"
 fi

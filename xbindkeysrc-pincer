@@ -1,20 +1,20 @@
-"/home/orbekk/bin/brightness.sh + && pkill -SIGUSR1 i3status"
+"/home/orbekk/bin/brightness.sh + && pkill -RTMIN+10 i3blocks"
   XF86MonBrightnessUp
 
-"/home/orbekk/bin/brightness.sh - && pkill -SIGUSR1 i3status"
+"/home/orbekk/bin/brightness.sh - && pkill -RTMIN+10 i3blocks"
   XF86MonBrightnessDown
 
-"amixer -c 1 set Master 1dB- && pkill -SIGUSR1 i3status"
+"amixer -c 1 set Master 1dB- && pkill -RTMIN+10 i3blocks"
   XF86AudioLowerVolume
 
-"amixer -c 1 set Master 1dB+ && pkill -SIGUSR1 i3status"
+"amixer -c 1 set Master 1dB+ && pkill -RTMIN+10 i3blocks"
   XF86AudioRaiseVolume
 
-"amixer -c 1 set Master toggle && pkill -SIGUSR1 i3status"
+"amixer -c 1 set Master toggle && pkill -RTMIN+10 i3blocks"
   XF86AudioMute
 
-"amixer -c 1 set Mic toggle && pkill -SIGUSR1 i3status"
+"amixer -c 1 set Mic toggle && pkill -RTMIN+10 i3blocks"
   XF86AudioMicMute
 
-"i3lock -c 2A3462 && pkill -SIGUSR1 i3status"
+"i3lock -c 2A3462"
   XF86Tools
