@@ -7,7 +7,7 @@ none='\e[0m'
 
 cd
 # Check that things are in their right places.
-if [[ ! -f dotfiles/bin/setup.sh ]]; then
+if [[ ! -f dotfiles/bin/kj-setup.sh ]]; then
  printf "${red}[FAIL]${none} expected to find myself\n"
  exit 1
 fi
