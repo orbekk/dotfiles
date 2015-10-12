@@ -209,7 +209,6 @@ user code."
     (if (region-active-p)
         (kill-region (region-beginning) (region-end))
       (backward-kill-word arg)))
-  (load-file "~/.spacemacs.local")
   )
 
 (defun dotspacemacs/user-config ()
@@ -221,6 +220,7 @@ layers configuration. You are free to put any user code."
    vc-follow-symlinks nil
    web-mode-code-indent-offset 2)
   (nyan-mode)
+  (load-file "~/.spacemacs.local")
   )
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
