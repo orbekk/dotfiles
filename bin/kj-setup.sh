@@ -7,7 +7,7 @@ none='\e[0m'
 
 cd
 # Check that things are in their right places.
-if [[ ! -f dotfiles/bin/setup.sh ]]; then
+if [[ ! -f dotfiles/bin/kj-setup.sh ]]; then
  printf "${red}[FAIL]${none} expected to find myself\n"
  exit 1
 fi
@@ -68,6 +68,7 @@ if which i3 >/dev/null; then
   mkdir -p .i3
   create_symlink ../dotfiles/i3/config .i3/config
   create_symlink dotfiles/i3status.conf .i3status.conf
+  create_symlink dotfiles/i3blocks.conf .i3blocks.conf
 else
   printf "${orange}[SKIPPED]${none} i3 not installed.\n"
 fi
@@ -86,4 +87,8 @@ if [[ "$success" == "1" ]]; then
   printf "${green}[OK]${none} installed vim plugins\n"
 else
   printf "${red}[WARNING]${none} failed to install vim plugins\n"
+fi
+
+if which emacs >/dev/null && [[ ! -d .emacs.d ]]; then
+  git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
 fi

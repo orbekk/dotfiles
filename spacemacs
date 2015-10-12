@@ -26,23 +26,31 @@ values."
      ;; auto-completion
      ;; better-defaults
      emacs-lisp
-     ;; git
-     ;; markdown
-     ;; org
+     shell
+     c-c++
+     semantic
+     haskell
+     html
+     javascript
+     markdown
+     haskell
+     git
+     markdown
+     org
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
      ;; spell-checking
-     ;; syntax-checking
+     syntax-checking
      ;; version-control
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages then consider to create a layer, you can also put the
    ;; configuration in `dotspacemacs/config'.
-   dotspacemacs-additional-packages '(haskell-mode)
+   dotspacemacs-additional-packages '(nyan-mode)
    ;; A list of packages and/or extensions that will not be install and loaded.
-   dotspacemacs-excluded-packages '()
+   dotspacemacs-excluded-packages '(smartparens)
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
    ;; are declared in a layer which is not a member of
    ;; the list `dotspacemacs-configuration-layers'. (default t)
@@ -78,7 +86,7 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(base16-tomorrow-dark
+   dotspacemacs-themes '(base16-bright-dark
                          spacemacs-dark
                          spacemacs-light
                          solarized-light
@@ -94,7 +102,7 @@ values."
                                :size 20
                                :weight normal
                                :width normal
-                               :powerline-scale 1.0)
+                               :powerline-scale 1.1)
    ;; The leader key
    dotspacemacs-leader-key "SPC"
    ;; The leader key accessible in `emacs state' and `insert state'
@@ -135,7 +143,7 @@ values."
    dotspacemacs-enable-paste-micro-state nil
    ;; Which-key delay in seconds. The which-key buffer is the popup listing
    ;; the commands bound to the current keystroke sequence. (default 0.4)
-   dotspacemacs-which-key-delay 0.4
+   dotspacemacs-which-key-delay 0.2
    ;; Which-key frame position. Possible values are `right', `bottom' and
    ;; `right-then-bottom'. right-then-bottom tries to display the frame to the
    ;; right; if there is insufficient space it displays it at the bottom.
@@ -193,6 +201,14 @@ values."
   "Initialization function for user code.
 It is called immediately after `dotspacemacs/init'.  You are free to put any
 user code."
+  ;; bind ctrl-w to backwards-kill-word when no region is selected
+  (global-set-key (kbd "C-w") 'backward-kill-word-or-kill-region)
+
+  (defun backward-kill-word-or-kill-region (&optional arg)
+    (interactive "p")
+    (if (region-active-p)
+        (kill-region (region-beginning) (region-end))
+      (backward-kill-word arg)))
   )
 
 (defun dotspacemacs/user-config ()
@@ -200,7 +216,10 @@ user code."
  This function is called at the very end of Spacemacs initialization after
 layers configuration. You are free to put any user code."
   (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
+  (setq-default
+   vc-follow-symlinks nil
+   web-mode-code-indent-offset 2)
+  (nyan-mode)
   )
-
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
