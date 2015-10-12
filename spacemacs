@@ -28,13 +28,13 @@ values."
      emacs-lisp
      shell
      c-c++
-     semantic
+     ;; semantic
      haskell
      html
      javascript
      markdown
      haskell
-     git
+     ;; git
      markdown
      org
      ;; (shell :variables
@@ -209,6 +209,7 @@ user code."
     (if (region-active-p)
         (kill-region (region-beginning) (region-end))
       (backward-kill-word arg)))
+  (load-file "~/.spacemacs.local")
   )
 
 (defun dotspacemacs/user-config ()
