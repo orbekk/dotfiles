@@ -28,13 +28,13 @@ values."
      emacs-lisp
      shell
      c-c++
-     semantic
+     ;; semantic
      haskell
      html
      javascript
      markdown
      haskell
-     git
+     ;; git
      markdown
      org
      ;; (shell :variables
@@ -220,6 +220,7 @@ layers configuration. You are free to put any user code."
    vc-follow-symlinks nil
    web-mode-code-indent-offset 2)
   (nyan-mode)
+  (load-file "~/.spacemacs.local")
   )
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
