@@ -14,7 +14,7 @@
 font xft:Droid Sans Bold 7
 
 # i3 modifier key.
-set $mod Mod1
+set $mod Mod4
 
 # use Mouse+Mod1 to drag floating windows to their wanted position
 floating_modifier $mod
