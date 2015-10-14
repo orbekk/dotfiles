@@ -49,11 +49,9 @@ export WORDCHARS=''
 # Dvorak
 setopt DVORAK
 
-# alias ls="ls --color"
-if which gvim >/dev/null; then
-  alias vi="gvim --remote"
-  alias e="emacsclient -n"
-fi
+alias e="emacsclient -n"
+alias vi=sl
+
 alias ff="fileutil --gfs_user=gfp-reporting"
 alias diff=colordiff
 alias j=jump
