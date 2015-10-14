@@ -50,7 +50,7 @@ export WORDCHARS=''
 setopt DVORAK
 
 alias e="emacsclient -n"
-alias vi=sl
+alias vi=/usr/games/sl
 
 alias ff="fileutil --gfs_user=gfp-reporting"
 alias diff=colordiff
