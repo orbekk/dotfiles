@@ -211,6 +211,27 @@ user code."
       (backward-kill-word arg)))
   )
 
+(defun kj-bindings ()
+  "Set up my custom bindings."
+  (evil-leader/set-key "on" #'nohlsearch)
+  (spacemacs/declare-prefix "or" "org")
+  (evil-leader/set-key "orl" #'org-store-link)
+  (evil-leader/set-key "ora" #'org-agenda)
+  (evil-leader/set-key "orc" #'org-capture)
+  )
+
+(defun kj-org-config ()
+  "Org configuration."
+  (setq-default
+   org-todo-keywords
+   '((sequence "TODO(t)" "WAIT(w@/!)" "|" "DONE(d!)" "CANCELED(c@)"))
+   org-directory "~/org"
+   org-log-done 'time
+   org-capture-templates
+   '(("t" "Todo" entry (file+headline "~/org/in.org" "Tasks")
+      "* TODO %?\n  %i\n  %a")))
+  )
+
 (defun dotspacemacs/user-config ()
   "Configuration function for user code.
  This function is called at the very end of Spacemacs initialization after
@@ -220,6 +241,8 @@ layers configuration. You are free to put any user code."
    vc-follow-symlinks nil
    web-mode-code-indent-offset 2)
   (nyan-mode)
+  (kj-bindings)
+  (kj-org-config)
   (load-file "~/.spacemacs.local")
   )
 ;; Do not write anything past this comment. This is where Emacs will
