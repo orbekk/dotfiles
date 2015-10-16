@@ -22,7 +22,7 @@ done
 
 cd ~/dotfiles
 git submodule update --init --recursive
-git submodule foreach pull
+git submodule foreach git pull origin master
 
 cd
 # Creates a symlink with target $1 at location $2.
