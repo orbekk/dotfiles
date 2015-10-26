@@ -222,7 +222,6 @@ user code."
 
 (defun kj-org-config ()
   "Org configuration."
-  (set-face-underline 'org-link t)
   (setq-default
    org-todo-keywords
    '((sequence "TODO(t)" "WAIT(w@/!)" "|" "DONE(d!)" "CANCELED(c@)"))
