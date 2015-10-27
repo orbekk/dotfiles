@@ -41,7 +41,7 @@ values."
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
      ;; spell-checking
-     syntax-checking
+     ;; syntax-checking
      ;; version-control
      )
    ;; List of additional packages that will be installed without being
@@ -214,7 +214,9 @@ user code."
 (defun kj-bindings ()
   "Set up my custom bindings."
   (evil-leader/set-key "on" #'nohlsearch)
+  (evil-leader/set-key "of" #'auto-fill-mode)
   (spacemacs/declare-prefix "or" "org")
+  (evil-leader/set-key "orT" #'org-agenda-file-to-front)
   (evil-leader/set-key "orl" #'org-store-link)
   (evil-leader/set-key "ora" #'org-agenda)
   (evil-leader/set-key "orc" #'org-capture)
@@ -227,6 +229,7 @@ user code."
    '((sequence "TODO(t)" "WAIT(w@/!)" "|" "DONE(d!)" "CANCELED(c@)"))
    org-directory "~/org"
    org-log-done 'time
+   org-support-shift-select t
    org-capture-templates
    '(("t" "Todo" entry (file+headline "~/org/in.org" "Tasks")
       "* TODO %?\n  %i\n  %a")))
@@ -236,14 +239,13 @@ user code."
   "Configuration function for user code.
  This function is called at the very end of Spacemacs initialization after
 layers configuration. You are free to put any user code."
+  (load-file "~/.spacemacs.local")
   (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
   (setq-default
    vc-follow-symlinks nil
    web-mode-code-indent-offset 2)
-  (nyan-mode)
   (kj-bindings)
   (kj-org-config)
-  (load-file "~/.spacemacs.local")
   )
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
