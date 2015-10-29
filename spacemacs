@@ -239,6 +239,7 @@ user code."
   "Configuration function for user code.
  This function is called at the very end of Spacemacs initialization after
 layers configuration. You are free to put any user code."
+  (setq custom-file "~/.spacemacs.local")
   (load-file "~/.spacemacs.local")
   (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
   (setq-default
@@ -247,5 +248,3 @@ layers configuration. You are free to put any user code."
   (kj-bindings)
   (kj-org-config)
   )
-;; Do not write anything past this comment. This is where Emacs will
-;; auto-generate custom variable definitions.
