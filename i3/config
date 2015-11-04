@@ -150,6 +150,7 @@ bar {
 exec xrdb -merge $HOME/.Xresources
 exec setxkbmap us -variant dvorak -option compose:ralt -option caps:ctrl_modifier
 exec $HOME/bin/keyboard_setup.sh
+exec $HOME/bin/local.sh
 exec xbindkeys
 exec xset -b
 exec google-chrome &
