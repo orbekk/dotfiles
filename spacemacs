@@ -228,7 +228,6 @@ user code."
    org-todo-keywords
    '((sequence "TODO(t)" "WAIT(w@/!)" "|" "DONE(d!)" "CANCELED(c@)"))
    org-directory "~/org"
-   org-log-done 'time
    org-support-shift-select t
    org-capture-templates
    '(("t" "Todo" entry (file+headline "~/org/in.org" "Tasks")
