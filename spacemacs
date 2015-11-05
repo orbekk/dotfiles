@@ -219,7 +219,8 @@ user code."
   (evil-leader/set-key "orT" #'org-agenda-file-to-front)
   (evil-leader/set-key "orl" #'org-store-link)
   (evil-leader/set-key "ora" #'org-agenda)
-  (evil-leader/set-key "orc" #'org-capture)
+  (evil-leader/set-key "orc"
+    (lambda () (interactive) (org-capture nil "t")))
   )
 
 (defun kj-org-config ()
