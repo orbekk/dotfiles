@@ -86,8 +86,8 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(base16-bright-dark
-                         spacemacs-dark
+   dotspacemacs-themes '(spacemacs-dark
+                         base16-bright-dark
                          spacemacs-light
                          solarized-light
                          solarized-dark
@@ -216,11 +216,14 @@ user code."
   (evil-leader/set-key "on" #'nohlsearch)
   (evil-leader/set-key "of" #'auto-fill-mode)
   (spacemacs/declare-prefix "or" "org")
-  (evil-leader/set-key "orT" #'org-agenda-file-to-front)
+  (evil-leader/set-key "ort" #'org-agenda-file-to-front)
   (evil-leader/set-key "orl" #'org-store-link)
   (evil-leader/set-key "ora" #'org-agenda)
-  (evil-leader/set-key "orc"
+  (evil-leader/set-key "ot"
     (lambda () (interactive) (org-capture nil "t")))
+
+  (evil-leader/set-key-for-mode
+    'org-mode "mh" 'org-up-element)
   )
 
 (defun kj-org-config ()
