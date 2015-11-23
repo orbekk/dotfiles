@@ -215,7 +215,6 @@ user code."
   "Set up my custom bindings."
   (evil-leader/set-key "on" #'nohlsearch)
   (evil-leader/set-key "of" #'auto-fill-mode)
-  (spacemacs/declare-prefix "or" "org")
   (evil-leader/set-key "ort" #'org-agenda-file-to-front)
   (evil-leader/set-key "orl" #'org-store-link)
   (evil-leader/set-key "ora" #'org-agenda)
@@ -244,11 +243,11 @@ user code."
  This function is called at the very end of Spacemacs initialization after
 layers configuration. You are free to put any user code."
   (setq custom-file "~/.spacemacs.local")
-  (load-file "~/.spacemacs.local")
   (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
   (setq-default
    vc-follow-symlinks nil
    web-mode-code-indent-offset 2)
   (kj-bindings)
   (kj-org-config)
+  (load-file "~/.spacemacs.local")
   )
