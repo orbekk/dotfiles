@@ -14,6 +14,7 @@ targets=(
   root@orbekk.osl.trygveandre.net
   tesuji.6.orbekk.com
   sabaki.6.orbekk.com
+  dragon.6.orbekk.com
   login.pvv.ntnu.no
   gote.orbekk.com
 )
