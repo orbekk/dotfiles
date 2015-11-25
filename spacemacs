@@ -40,7 +40,7 @@ values."
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
-     ;; spell-checking
+     spell-checking
      ;; syntax-checking
      ;; version-control
      )
@@ -86,13 +86,13 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(spacemacs-dark
+   dotspacemacs-themes '(monokai
+                         spacemacs-dark
                          base16-bright-dark
                          spacemacs-light
                          solarized-light
                          solarized-dark
                          leuven
-                         monokai
                          zenburn)
    ;; If non nil the cursor color matches the state color.
    dotspacemacs-colorize-cursor-according-to-state t
@@ -215,7 +215,6 @@ user code."
   "Set up my custom bindings."
   (evil-leader/set-key "on" #'nohlsearch)
   (evil-leader/set-key "of" #'auto-fill-mode)
-  (spacemacs/declare-prefix "or" "org")
   (evil-leader/set-key "ort" #'org-agenda-file-to-front)
   (evil-leader/set-key "orl" #'org-store-link)
   (evil-leader/set-key "ora" #'org-agenda)
@@ -236,6 +235,7 @@ user code."
    org-capture-templates
    '(("t" "Todo" entry (file+headline "~/org/in.org" "Tasks")
       "* TODO %?\n  %i\n  %a")))
+  (eval-after-load "org" '(require 'ox-md nil t))
   )
 
 (defun dotspacemacs/user-config ()
@@ -243,11 +243,11 @@ user code."
  This function is called at the very end of Spacemacs initialization after
 layers configuration. You are free to put any user code."
   (setq custom-file "~/.spacemacs.local")
-  (load-file "~/.spacemacs.local")
   (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
   (setq-default
    vc-follow-symlinks nil
    web-mode-code-indent-offset 2)
   (kj-bindings)
   (kj-org-config)
+  (load-file "~/.spacemacs.local")
   )

@@ -13,12 +13,10 @@ declare -r tmpdir=$(mktemp -d /tmp/kj_sync_authorized_keys.XXXXX)
 targets=(
   root@orbekk.osl.trygveandre.net
   tesuji.6.orbekk.com
-  login.6.orbekk.com
-  minecraft.6.orbekk.com
+  sabaki.6.orbekk.com
+  dragon.6.orbekk.com
   login.pvv.ntnu.no
-  aji.orbekk.com
-  moyo.orbekk.com
-  pi@photobox.6.orbekk.com
+  gote.orbekk.com
 )
 authorized_keys_file=$HOME/dotfiles/authorized_keys
 if [[ ! -f "${authorized_keys_file}" ]]; then
@@ -32,7 +30,7 @@ add_keys_to_file() {
     "/$begin_marker/"' { exit 0 } { print }' \
     ${filename} > ${filename}.header
   awk \
-    "/$end_marker/"' { should_output=1 } should_output { print }' \
+    "/$end_marker/"' { should_output=1 } !'"/$end_marker/"' { if (should_output) { print } }' \
     ${filename} > ${filename}.footer
 
   cat "${filename}.header" > ${filename}
