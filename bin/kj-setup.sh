@@ -48,6 +48,7 @@ create_symlink dotfiles/taskrc .taskrc
 create_symlink dotfiles/tmux.conf .tmux.conf
 create_symlink dotfiles/spacemacs .spacemacs
 create_symlink /dev/null .vimrc.local
+create_symlink dotfiles/livestreamerrc .livestreamerrc
 
 mkdir -p bin
 for binary in dotfiles/bin/*; do
