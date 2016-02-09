@@ -34,7 +34,7 @@ values."
      javascript
      markdown
      haskell
-     ;; git
+     git
      markdown
      org
      ;; (shell :variables
@@ -42,7 +42,7 @@ values."
      ;;        shell-default-position 'bottom)
      spell-checking
      ;; syntax-checking
-     ;; version-control
+     version-control
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -54,7 +54,7 @@ values."
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
    ;; are declared in a layer which is not a member of
    ;; the list `dotspacemacs-configuration-layers'. (default t)
-   dotspacemacs-delete-orphan-packages t))
+   dotspacemacs-delete-orphan-packages nil))
 
 (defun dotspacemacs/init ()
   "Initialization function.
@@ -250,4 +250,7 @@ layers configuration. You are free to put any user code."
   (kj-bindings)
   (kj-org-config)
   (load-file "~/.spacemacs.local")
+  ;; I have been warned about magit stealing my files:
+  (setq magit-last-seen-setup-instructions "1.4.0")
+  (setq-default git-magit-status-fullscreen t)
   )
