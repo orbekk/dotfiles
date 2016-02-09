@@ -222,7 +222,7 @@ user code."
     (lambda () (interactive) (org-capture nil "t")))
 
   (evil-leader/set-key-for-mode
-    'org-mode "mh" 'org-up-element)
+    'org-mode "oh" 'org-up-element)
   )
 
 (defun kj-org-config ()
@@ -250,6 +250,9 @@ layers configuration. You are free to put any user code."
   (kj-bindings)
   (kj-org-config)
   (load-file "~/.spacemacs.local")
+  ;; Show 80-column marker
+  (define-globalized-minor-mode global-fci-mode fci-mode (lambda () (fci-mode 1)))
+  (global-fci-mode 1)
   ;; I have been warned about magit stealing my files:
   (setq magit-last-seen-setup-instructions "1.4.0")
   (setq-default git-magit-status-fullscreen t)
