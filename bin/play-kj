@@ -1,0 +1,2 @@
+#!/bin/bash
+livestreamer "$(xclip -selection clipboard -out)" best

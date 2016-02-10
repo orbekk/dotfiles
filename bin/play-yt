@@ -1,0 +1,6 @@
+#!/bin/bash
+
+rm /tmp/youtube.*
+youtube-dl -o /tmp/youtube "$@" &
+sleep 5s && mpv /tmp/youtube.*
+rm /tmp/youtube.*
