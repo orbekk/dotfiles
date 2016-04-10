@@ -264,17 +264,3 @@ layers configuration. You are free to put any user code."
   ;; I have been warned about magit stealing my files:
   (setq magit-last-seen-setup-instructions "1.4.0")
   )
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   (quote
-    (xterm-color web-mode web-beautify volatile-highlights toc-org spacemacs-theme spaceline powerline smooth-scrolling shm paradox hydra org-repo-todo org-plus-contrib neotree move-text markdown-toc markdown-mode magit-gitflow leuven-theme js2-refactor multiple-cursors js2-mode helm-projectile helm-make projectile helm-flx helm-ag gitconfig-mode gitattributes-mode git-timemachine evil-visualstar evil-surround evil-mc evil-magit evil-lisp-state smartparens evil-jumper evil-iedit-state evil-escape eshell-prompt-extras cmake-mode auto-compile packed aggressive-indent ace-window ace-jump-helm-line avy haskell-mode git-gutter yasnippet gitignore-mode helm helm-core json-reformat magit magit-popup with-editor async dash s quelpa use-package which-key bind-key bind-map evil ws-butler window-numbering vi-tilde-fringe undo-tree tern tagedit spinner smeargle slim-mode shell-pop scss-mode sass-mode restart-emacs rainbow-delimiters popwin pkg-info persp-mode pcre2el page-break-lines package-build orgit org-present org-pomodoro org-bullets open-junk-file multi-term monokai-theme mmm-mode macrostep lorem-ipsum linum-relative less-css-mode json-mode js-doc jade-mode info+ indent-guide iedit ido-vertical-mode hungry-delete htmlize hl-todo hindent highlight-parentheses highlight-numbers highlight-indentation help-fns+ helm-themes helm-swoop helm-mode-manager helm-gitignore helm-flyspell helm-descbinds helm-css-scss haskell-snippets goto-chg google-translate golden-ratio gnuplot git-messenger git-gutter-fringe git-gutter-fringe+ ghc gh-md flx-ido fill-column-indicator fancy-battery expand-region exec-path-from-shell evil-tutor evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-matchit evil-indent-plus evil-exchange evil-args evil-anzu eval-sexp-fu esh-help emmet-mode elisp-slime-nav disaster diminish diff-hl define-word coffee-mode cmm-mode clean-aindent-mode clang-format buffer-move bracketed-paste auto-highlight-symbol auto-dictionary adaptive-wrap ace-link))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
