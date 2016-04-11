@@ -43,6 +43,10 @@ values."
      ;; spell-checking
      ;; syntax-checking
      version-control
+     gnus
+     mu4e
+     (mu4e :variables
+           mu4e-installation-path "/usr/share/emacs/site-lisp")
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -50,7 +54,7 @@ values."
    ;; configuration in `dotspacemacs/config'.
    dotspacemacs-additional-packages '()
    ;; A list of packages and/or extensions that will not be install and loaded.
-   dotspacemacs-excluded-packages '(smartparens flyspell)
+   dotspacemacs-excluded-packages '(smartparens flyspell evil-jumper)
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
    ;; are declared in a layer which is not a member of
    ;; the list `dotspacemacs-configuration-layers'. (default t)
@@ -246,6 +250,39 @@ user code."
   (global-git-commit-mode t)
   )
 
+(defun mu4e-config ()
+  (setq mu4e-drafts-folder "/[Gmail]/.Drafts")
+  (setq mu4e-sent-folder   "/[Gmail]/.Sent Mail")
+  (setq mu4e-trash-folder  "/[Gmail]/.Trash")
+  (setq mu4e-sent-messages-behavior 'delete)
+
+  (setq mu4e-maildir-shortcuts
+        '( ("/Inbox"   . ?i)
+           ("/[Gmail]/.Sent Mail"    . ?s)
+           ("/[Gmail]/.Trash"   . ?t)
+           ("/[Gmail]/.All Mail" . ?a)))
+
+  (setq mu4e-get-mail-command "mbsync gmail")
+
+  (setq
+   user-mail-address "kjetil.orbekk@gmail.com"
+   user-full-name  "Kjetil Ørbekk"
+   mu4e-compose-signature
+   (concat "KJ\n"))
+
+  (require 'smtpmail)
+  (setq message-send-mail-function 'smtpmail-send-it
+        starttls-use-gnutls t
+        smtpmail-starttls-credentials '(("smtp.gmail.com" 587 nil nil))
+        smtpmail-auth-credentials
+        '(("smtp.gmail.com" 587 "kjetil.orbekk@gmail.com" nil))
+        smtpmail-default-smtp-server "smtp.gmail.com"
+        smtpmail-smtp-server "smtp.gmail.com"
+           smtpmail-smtp-service 587)
+
+  (setq message-kill-buffer-on-exit t)
+  )
+
 (defun dotspacemacs/user-config ()
   "Configuration function for user code.
  This function is called at the very end of Spacemacs initialization after
@@ -263,4 +300,5 @@ layers configuration. You are free to put any user code."
   (global-fci-mode 1)
   ;; I have been warned about magit stealing my files:
   (setq magit-last-seen-setup-instructions "1.4.0")
+  (mu4e-config)
   )
