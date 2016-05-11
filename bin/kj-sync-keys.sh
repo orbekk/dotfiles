@@ -12,9 +12,8 @@ declare -r tmpdir=$(mktemp -d /tmp/kj_sync_authorized_keys.XXXXX)
 
 targets=(
   root@orbekk.osl.trygveandre.net
-  tesuji.6.orbekk.com
-  sabaki.6.orbekk.com
-  dragon.6.orbekk.com
+  sabaki.kk.orbekk.com
+  dragon.kk.orbekk.com
   login.pvv.ntnu.no
   gote.orbekk.com
 )
