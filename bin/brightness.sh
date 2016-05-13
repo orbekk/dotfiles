@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 readonly XBACKLIGHT=xbacklight
 
 current_level=$($XBACKLIGHT)

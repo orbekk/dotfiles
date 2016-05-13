@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #
 # This script syncs authorized keys (found in the $authorized_keys_file below)
 # to a list of remote hosts. It does not touch existing keys unless overwrite

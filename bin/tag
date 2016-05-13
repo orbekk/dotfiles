@@ -1,2 +1,2 @@
-#!/bin/bash
+#!/usr/bin/env bash
 awk '/TAG/ {tag++; sub("TAG", tag);} { print };'
