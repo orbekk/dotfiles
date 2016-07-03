@@ -56,11 +56,13 @@ for binary in dotfiles/bin/*; do
   create_symlink "../dotfiles/bin/${binary}" "bin/${binary}"
 done
 
-if [[ "${SHELL}" = *zsh* ]]; then
-  create_symlink dotfiles/zshrc .zshrc
-else
-  printf "${orange}[SKIPPED]${none} shell is not zsh :-(.\n"
-fi
+mkdir -p .config/fish/functions
+create_symlink ../../dotfiles/config/fish/config.fish .config/fish/config.fish
+for f in dotfiles/config/fish/functions/*.fish; do
+  create_symlink ../../../$f .config/fish/functions/$(basename $f)
+done
+
+create_symlink dotfiles/zshrc .zshrc
 
 mkdir -p .ssh
 create_symlink ../dotfiles/ssh/config .ssh/config

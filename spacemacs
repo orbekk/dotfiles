@@ -41,21 +41,25 @@ values."
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
-     spell-checking
+     ;; spell-checking
      ;; syntax-checking
-     ;; version-control
+     version-control
+     gnus
+     mu4e
+     (mu4e :variables
+           mu4e-installation-path "/usr/share/emacs/site-lisp")
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages then consider to create a layer, you can also put the
    ;; configuration in `dotspacemacs/config'.
-   dotspacemacs-additional-packages '(nyan-mode)
+   dotspacemacs-additional-packages '()
    ;; A list of packages and/or extensions that will not be install and loaded.
-   dotspacemacs-excluded-packages '(smartparens)
+   dotspacemacs-excluded-packages '(smartparens flyspell evil-jumper)
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
    ;; are declared in a layer which is not a member of
    ;; the list `dotspacemacs-configuration-layers'. (default t)
-   dotspacemacs-delete-orphan-packages t))
+   dotspacemacs-delete-orphan-packages nil))
 
 (defun dotspacemacs/init ()
   "Initialization function.
@@ -210,7 +214,8 @@ user code."
     (if (region-active-p)
         (kill-region (region-beginning) (region-end))
       (backward-kill-word arg)))
-  )
+  (setq-default git-magit-status-fullscreen t)
+)
 
 (defun kj-bindings ()
   "Set up my custom bindings."
@@ -221,22 +226,59 @@ user code."
   (evil-leader/set-key "ora" #'org-agenda)
   (evil-leader/set-key "ot"
     (lambda () (interactive) (org-capture nil "t")))
-
-  ;; (evil-leader/set-key-for-mode
-  ;;   'org-mode "mh" 'org-up-element)
   )
 
 (defun kj-org-config ()
   "Org configuration."
   (setq-default
+   ;; nxml is unbearably slow :(
+   rng-nxml-auto-validate-flag nil
+
    org-todo-keywords
    '((sequence "TODO(t)" "WAIT(w@/!)" "|" "DONE(d!)" "CANCELED(c@)"))
    org-directory "~/org"
    org-support-shift-select t
+   ;; org-capture-templates
+   ;; '(("t" "Todo" entry (file+headline "~/org/in.org" "Tasks")
+   ;;    "* TODO %?\n  %i\n  %a")))
    org-capture-templates
    '(("t" "Todo" entry (file+headline "~/org/in.org" "Tasks")
-      "* TODO %?\n  %i\n  %a")))
+      "* TODO %?")))
   (eval-after-load "org" '(require 'ox-md nil t))
+  (global-git-commit-mode t)
+  )
+
+(defun mu4e-config ()
+  (setq mu4e-drafts-folder "/[Gmail]/.Drafts")
+  (setq mu4e-sent-folder   "/[Gmail]/.Sent Mail")
+  (setq mu4e-trash-folder  "/[Gmail]/.Trash")
+  (setq mu4e-sent-messages-behavior 'delete)
+
+  (setq mu4e-maildir-shortcuts
+        '( ("/Inbox"   . ?i)
+           ("/[Gmail]/.Sent Mail"    . ?s)
+           ("/[Gmail]/.Trash"   . ?t)
+           ("/[Gmail]/.All Mail" . ?a)))
+
+  (setq mu4e-get-mail-command "mbsync gmail")
+
+  (setq
+   user-mail-address "kjetil.orbekk@gmail.com"
+   user-full-name  "Kjetil Ørbekk"
+   mu4e-compose-signature
+   (concat "KJ\n"))
+
+  (require 'smtpmail)
+  (setq message-send-mail-function 'smtpmail-send-it
+        starttls-use-gnutls t
+        smtpmail-starttls-credentials '(("smtp.gmail.com" 587 nil nil))
+        smtpmail-auth-credentials
+        '(("smtp.gmail.com" 587 "kjetil.orbekk@gmail.com" nil))
+        smtpmail-default-smtp-server "smtp.gmail.com"
+        smtpmail-smtp-server "smtp.gmail.com"
+           smtpmail-smtp-service 587)
+
+  (setq message-kill-buffer-on-exit t)
   )
 
 (defun dotspacemacs/user-config ()
@@ -251,6 +293,12 @@ layers configuration. You are free to put any user code."
   (kj-bindings)
   (kj-org-config)
   (load-file "~/.spacemacs.local")
+  ;; Show 80-column marker
+  (define-globalized-minor-mode global-fci-mode fci-mode (lambda () (fci-mode 1)))
+  (global-fci-mode 1)
+  ;; I have been warned about magit stealing my files:
+  (setq magit-last-seen-setup-instructions "1.4.0")
+  (mu4e-config)
   )
 (custom-set-variables
  ;; custom-set-variables was added by Custom.

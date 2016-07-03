@@ -1,0 +1,65 @@
+IMAPAccount gmail
+PipelineDepth 200
+Host imap.gmail.com
+User kjetil.orbekk@gmail.com
+PassCmd "pass show sites/gmail-app-password"
+SSLType IMAPS
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+IMAPStore gmail-remote
+Account gmail
+
+MaildirStore gmail-local
+Path ~/Maildir/
+Inbox ~/Maildir/Inbox
+
+# Channel sync-gmail-inbox
+# Master :gmail-remote:"Inbox"
+# Slave :gmail-local:inbox
+# Create Slave
+# 
+# Channel sync-gmail-sent
+# Master :gmail-remote:"[Gmail]/Sent Mail"
+# Slave :gmail-local:sent
+# Create Slave
+# 
+# Channel sync-gmail-drafts
+# Master :gmail-remote:"[Gmail]/Drafts"
+# Slave :gmail-local:drafts
+# Create Slave
+# 
+# Channel sync-gmail-trash
+# Master :gmail-remote:"[Gmail]/Trash"
+# Slave :gmail-local:trash
+# Create Slave
+# 
+# Channel sync-gmail-spam
+# Master :gmail-remote:"[Gmail]/Spam"
+# Slave :gmail-local:spam
+# Create Slave
+# 
+# Channel sync-gmail-starred
+# Master :gmail-remote:"[Gmail]/Starred"
+# Slave :gmail-local:starred
+# Create Slave
+# 
+# Channel sync-gmail-archive
+# Master :gmail-remote:"[Gmail]/All Mail"
+# Slave :gmail-local:archive
+# Create Slave
+# 
+# Group gmail
+# Channel sync-gmail-inbox
+# Channel sync-gmail-sent
+# Channel sync-gmail-trash
+# Channel sync-gmail-spam
+# Channel sync-gmail-starred
+# Channel sync-gmail-archive
+
+Channel gmail
+Master :gmail-remote:
+Slave :gmail-local:
+Patterns INBOX ![Gmail]* "[Gmail]/Sent Mail" "[Gmail]/Starred" "[Gmail]/All Mail" "[Gmail]/Spam" "[Gmail]/Drafts" "[Gmail]/Sent"
+Create Both
+SyncState *
+
