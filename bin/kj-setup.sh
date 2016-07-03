@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 red='\e[0;31m'
 orange='\e[0;33m'
@@ -65,14 +65,15 @@ fi
 mkdir -p .ssh
 create_symlink ../dotfiles/ssh/config .ssh/config
 
-if which i3 >/dev/null; then
-  mkdir -p .i3
-  create_symlink ../dotfiles/i3/config .i3/config
-  create_symlink dotfiles/i3status.conf .i3status.conf
-  create_symlink dotfiles/i3blocks.conf .i3blocks.conf
-else
-  printf "${orange}[SKIPPED]${none} i3 not installed.\n"
-fi
+mkdir -p .xmonad
+create_symlink ../dotfiles/xmonad/xmonad.hs .xmonad/xmonad.hs
+create_symlink ../dotfiles/xmonad/xmobar.hs .xmonad/xmobar.hs
+create_symlink dotfiles/xsession .xsession
+
+mkdir -p .i3
+create_symlink ../dotfiles/i3/config .i3/config
+create_symlink dotfiles/i3status.conf .i3status.conf
+create_symlink dotfiles/i3blocks.conf .i3blocks.conf
 
 create_symlink dotfiles/vimrc .vimrc
 if [[ -e .vim/bundle/Vundle.vim ]]; then
