@@ -14,20 +14,20 @@ Config { font = "xft:Source Code Pro:size=8:bold:antialias=true" -- "-*-Fixed-Bo
          , Run Cpu ["-L","3","-H","50","--normal","green","--high","red"] 10
          , Run Volume "default" "Master" [] 10
          , Run Brightness ["-t", "<fc=#ffffff><percent>%</fc>"] 10
-         , Run Memory ["-t","Mem: <usedratio>%"] 10
+         , Run Memory ["-t","Mem: <usedratio>%"] 600
          -- , Run Swap [] 10
          , Run Date "%a %b %_d %l:%M" "date" 10
          , Run DiskU [("/", "/: <used>/<size>")]
                ["-L", "20", "-H", "50", "-m", "1", "-p", "3"] 1000
          , Run StdinReader
-         , Run DynNetwork     [
-                "--template" , "<dev>: <tx>kB/s|<rx>kB/s"
-               , "--Low"      , "1000"       -- units: kB/s
-               , "--High"     , "5000"       -- units: kB/s
-               , "--low"      , "green"
-               , "--normal"   , "orange"
-               , "--high"     , "red"
-               ] 100
+         -- , Run DynNetwork     [
+         --        "--template" , "<dev>: <tx>kB/s|<rx>kB/s"
+         --       , "--Low"      , "1000"       -- units: kB/s
+         --       , "--High"     , "5000"       -- units: kB/s
+         --       , "--low"      , "green"
+         --       , "--normal"   , "orange"
+         --       , "--high"     , "red"
+         --       ] 100
          , Run BatteryP ["BAT0"] [
                 "--template" , "Batt: <acstatus>"
                , "--Low"      , "10"        -- units: %
@@ -46,7 +46,7 @@ Config { font = "xft:Source Code Pro:size=8:bold:antialias=true" -- "-*-Fixed-Bo
          ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% }{ %default:Master% %bright% %battery% | %dynnetwork% | %disku% | %cpu% | %memory% <fc=lightblue>%date%</fc> | %KNYC%"
+       , template = "%StdinReader% }{ %default:Master% | %bright% | %battery% | %disku% %memory% | <fc=lightblue>%date%</fc> | %KNYC%"
        }
 
 -- Config {
