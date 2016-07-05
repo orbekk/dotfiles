@@ -9,10 +9,11 @@ import System.IO
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 import System.Exit
+import XMonad.Hooks.EwmhDesktops
 
 main = do
   xmproc <- spawnPipe "/usr/bin/env xmobar /home/orbekk/.xmonad/xmobar.hs"
-  xmonad $ desktopConfig
+  xmonad $ ewmh desktopConfig
       { manageHook = manageDocks <+> manageHook defaultConfig
       , layoutHook = smartBorders . avoidStruts $  layoutHook defaultConfig
       , logHook = dynamicLogWithPP xmobarPP
@@ -33,7 +34,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     [ ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
 
     -- launch dmenu
-    , ((modm,               xK_p     ), spawn "dmenu_run")
+    , ((modm,               xK_d     ), spawn "dmenu_run")
 
     -- launch gmrun
     , ((modm .|. shiftMask, xK_p     ), spawn "gmrun")
