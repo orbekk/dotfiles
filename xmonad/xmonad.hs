@@ -12,7 +12,7 @@ import System.Exit
 import XMonad.Hooks.EwmhDesktops
 
 main = do
-  xmproc <- spawnPipe "/usr/bin/env xmobar /home/orbekk/.xmonad/xmobar.hs"
+  xmproc <- spawnPipe "/usr/bin/env xmobar $HOME/.xmonad/xmobar.hs"
   xmonad $ ewmh desktopConfig
       { manageHook = manageDocks <+> manageHook defaultConfig
       , layoutHook = smartBorders . avoidStruts $  layoutHook defaultConfig
@@ -22,7 +22,7 @@ main = do
                       }
       , keys = myKeys
       , modMask = mod4Mask
-      , terminal = "termite"
+      , terminal = "$TERMINAL"
       , borderWidth = 2
       } `additionalKeys`
       [ ((mod4Mask .|. shiftMask, xK_z), spawn "xscreensaver-command -lock")

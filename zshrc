@@ -79,6 +79,3 @@ function get-parent-dir() {
 }
 zle -N get-parent-dir
 bindkey "^[u" get-parent-dir
-
-alias sudo="sudo -A"
-export SUDO_ASKPASS="$HOME/bin/askpass.sh"
