@@ -46,7 +46,7 @@ Config { font = "xft:Source Code Pro:size=8:bold:antialias=true" -- "-*-Fixed-Bo
          ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% }{ %default:Master% | %bright% | %battery% | %disku% %memory% | <fc=lightblue>%date%</fc> | %KNYC%"
+       , template = "%StdinReader% }{ %default:Master% : %bright% : %battery% : %disku% %memory% : <fc=lightblue>%date%</fc> : %KNYC%"
        }
 
 -- Config {
