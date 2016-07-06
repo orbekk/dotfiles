@@ -16,7 +16,7 @@ main = do
 
 myConfig =
   ewmh desktopConfig
-    { layoutHook = smartBorders $ layoutHook defaultConfig
+    { layoutHook = smartBorders $ layoutHook desktopConfig
     , keys = myKeys
     , modMask = mod4Mask
     , terminal = "$TERMINAL"
