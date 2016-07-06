@@ -13,4 +13,5 @@ $HOME/bin/keyboard_setup.sh
 /usr/bin/env pasystray &
 /usr/bin/env xsetroot -solid midnightblue
 /usr/bin/env trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 100 --widthtype pixel --transparent true --alpha 0 --tint 0x000000 --height 18 &
+redshift -l 40:-70 -r -t 5500:3700 &
 exec xmonad
