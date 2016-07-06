@@ -245,7 +245,7 @@ user code."
    '(("t" "Todo" entry (file+headline "~/org/in.org" "Tasks")
       "* TODO %?")))
   (eval-after-load "org" '(require 'ox-md nil t))
-  (global-git-commit-mode t)
+  ; (global-git-commit-mode t)
   )
 
 (defun mu4e-config ()
