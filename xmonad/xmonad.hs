@@ -3,7 +3,6 @@ import XMonad.Config.Desktop
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Util.Run (spawnPipe)
-import XMonad.Util.EZConfig (additionalKeys)
 import XMonad.Layout.NoBorders
 import System.IO
 import qualified XMonad.StackSet as W
@@ -12,21 +11,17 @@ import System.Exit
 import XMonad.Hooks.EwmhDesktops
 
 main = do
-  xmproc <- spawnPipe "/usr/bin/env xmobar $HOME/.xmonad/xmobar.hs"
-  xmonad $ ewmh desktopConfig
-      { manageHook = manageDocks <+> manageHook defaultConfig
-      , layoutHook = smartBorders . avoidStruts $  layoutHook defaultConfig
-      , logHook = dynamicLogWithPP xmobarPP
-                      { ppOutput = hPutStrLn xmproc
-                      , ppTitle = xmobarColor "green" "" . shorten 50
-                      }
-      , keys = myKeys
-      , modMask = mod4Mask
-      , terminal = "$TERMINAL"
-      , borderWidth = 2
-      } `additionalKeys`
-      [ ((mod4Mask .|. shiftMask, xK_z), spawn "xscreensaver-command -lock")
-      ]
+  config <- xmobar myConfig
+  xmonad config
+
+myConfig =
+  ewmh desktopConfig
+    { layoutHook = smartBorders $ layoutHook defaultConfig
+    , keys = myKeys
+    , modMask = mod4Mask
+    , terminal = "$TERMINAL"
+    , borderWidth = 2
+    }
 
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
@@ -35,9 +30,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- launch dmenu
     , ((modm,               xK_d     ), spawn "dmenu_run")
-
-    -- launch gmrun
-    , ((modm .|. shiftMask, xK_p     ), spawn "gmrun")
 
     -- close focused window
     , ((modm .|. shiftMask, xK_c     ), kill)
@@ -89,11 +81,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- , ((modm              , xK_period), sendMessage (IncMasterN (-1)))
     , ((modm .|. shiftMask, xK_Tab ), sendMessage (IncMasterN (-1)))
 
-    -- Toggle the status bar gap
-    -- Use this binding with avoidStruts from Hooks.ManageDocks.
-    -- See also the statusBar function from Hooks.DynamicLog.
-    --
-    , ((modm              , xK_b     ), sendMessage ToggleStruts)
+    -- This is redundant because it's added by the statusBar function.
+    -- , ((modm              , xK_b     ), sendMessage ToggleStruts)
 
     -- Quit xmonad
     -- , ((modm .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
