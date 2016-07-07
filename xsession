@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-export TERMINAL=terminus
-command -v terminus || TERMINAL=gnome-terminal
+export TERMINAL=termite
+command -v $TERMINAL || TERMINAL=gnome-terminal
 
 xrdb -merge $HOME/.Xresources
 setxkbmap us -variant dvorak -option compose:ralt -option caps:ctrl_modifier
