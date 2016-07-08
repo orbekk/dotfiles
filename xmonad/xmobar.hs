@@ -8,16 +8,17 @@ Config { font = "xft:Source Code Pro:size=8:bold:antialias=true" -- "-*-Fixed-Bo
        , commands = [
            --  Run Weather "EGPF" ["-t","<skyCondition> <tempC>°C","-L","64","-H","77","--normal","green","--high","red","--low","lightblue"] 36000
            Run Weather "KNYC"
-                     ["-t", "NYC: <skyCondition> <tempC>°C <rh>%"
+                     ["-t", "<fc=lightblue>NYC</fc> <tempC>°C <skyCondition> <rh>%"
                      , "-L", "15", "-H", "25", "--normal", "green"
                      , "--high", "red", "--low", "lightblue"] 36000
          , Run Cpu ["-L","3","-H","50","--normal","green","--high","red"] 10
-         , Run Volume "default" "Master" [] 10
-         , Run Brightness ["-t", "<fc=#ffffff><percent>%</fc>"] 10
-         , Run Memory ["-t","Mem: <usedratio>%"] 600
+         , Run Volume "default" "Master" [
+                "-t", "♪ <volume> <status>"] 10
+         , Run Brightness ["-t", "☼<percent>%"] 10
+         -- , Run Memory ["-t","Mem: <usedratio>%"] 600
          -- , Run Swap [] 10
-         , Run Date "%a %b %_d %l:%M" "date" 10
-         , Run DiskU [("/", "/: <used>/<size>")]
+         , Run Date "%a %b %_d <fc=darkorange>%H:%M:%S</fc>" "date" 10
+         , Run DiskU [("/", "<fc=#eeeeee>/</fc> <used>/<size>")]
                ["-L", "20", "-H", "50", "-m", "1", "-p", "3"] 1000
          , Run StdinReader
          -- , Run DynNetwork     [
@@ -29,7 +30,7 @@ Config { font = "xft:Source Code Pro:size=8:bold:antialias=true" -- "-*-Fixed-Bo
          --       , "--high"     , "red"
          --       ] 100
          , Run BatteryP ["BAT0"] [
-                "--template" , "Batt: <acstatus>"
+                "--template" , "⚡ <acstatus>"
                , "--Low"      , "10"        -- units: %
                , "--High"     , "80"        -- units: %
                , "--low"      , "darkred"
@@ -46,7 +47,7 @@ Config { font = "xft:Source Code Pro:size=8:bold:antialias=true" -- "-*-Fixed-Bo
          ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% }{ %default:Master% : %bright% : %battery% : %disku% %memory% : <fc=lightblue>%date%</fc> : %KNYC%"
+       , template = "%StdinReader% }{ %default:Master%   %bright%   %battery%   %disku% %date%   %KNYC%"
        }
 
 -- Config {
