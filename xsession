@@ -15,5 +15,6 @@ $HOME/bin/keyboard_setup.sh
 /usr/bin/env trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 100 --widthtype pixel --transparent true --alpha 0 --tint 0x000000 --height 18 &
 [[ $(hostname) == kikashi ]] && \
   xinput set-prop "TPPS/2 IBM TrackPoint" "Device Accel Constant Deceleration" 0.5
-redshift -l 40:-70 -r -t 5500:3700 &
+[[ -f /etc/nixos/configuration.nix ]] || \
+  redshift -l 40:-70 -r -t 5500:3700 &
 exec xmonad
