@@ -9,6 +9,7 @@ import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 import System.Exit
 import XMonad.Hooks.EwmhDesktops
+import Control.Applicative ((<$>), pure)
 
 main = do
   config <- xmobar myConfig
@@ -21,6 +22,7 @@ myConfig =
     , modMask = mod4Mask
     , terminal = "$TERMINAL"
     , borderWidth = 2
+    , workspaces = pure <$> "\"<>PYAOEU"
     }
 
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
