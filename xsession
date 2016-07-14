@@ -17,5 +17,4 @@ trayer --edge top --align right --SetDockType true --SetPartialStrut true --expa
   xinput set-prop "TPPS/2 IBM TrackPoint" "Device Accel Constant Deceleration" 0.5
 [[ -f /etc/nixos/configuration.nix ]] || \
   redshift -l 40:-70 -r -t 5500:3700 &
->>>>>>> 6b008fdd447ba2ce12af6fe39d5697155aa5a8a2
 exec xmonad
