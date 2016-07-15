@@ -61,12 +61,16 @@
     geeqie
     inkscape
     silver-searcher
-    termite
     rofi
     wireshark
+    trayer
 
-    haskellPackages.xmonad
-    haskellPackages.xmonad-contrib
+    # fonts
+    source-code-pro
+    inconsolata
+
+    # haskellPackages.xmonad
+    # haskellPackages.xmonad-contrib
     haskellPackages.xmobar
   ];
 
@@ -86,6 +90,8 @@
   services.xserver.enable = true;
   services.xserver.windowManager.xmonad.enable = true;
   services.xserver.windowManager.xmonad.enableContribAndExtras = true;
+  services.xserver.windowManager.xmonad.extraPackages = haskellPackages: [
+      haskellPackages.xmobar ];
 
   services.xserver.layout = "us";
   services.xserver.xkbVariant = "dvorak";
