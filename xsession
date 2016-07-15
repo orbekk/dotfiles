@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-export TERMINAL=termite
+export TERMINAL=urxvt
+command -v $TERMINAL || TERMINAL=termite
 command -v $TERMINAL || TERMINAL=gnome-terminal
 
 xrdb -merge $HOME/.Xresources
