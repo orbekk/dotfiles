@@ -6,27 +6,8 @@
   hardware.pulseaudio.package = pkgs.pulseaudioFull;
   hardware.enableAllFirmware = true;
 
-  # Use the gummiboot efi boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.timeout = 0;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.initrd.luks.devices = [
-    {
-      device = "/dev/sda2";
-      name = "crypt";
-      preLVM = true;
-      allowDiscards = true;
-    }
-  ];
-  boot.kernelModules = ["tp_smapi" "thinkpad_acpi" "fbcon" "i915"];
-  boot.kernelParams = ["quiet" "acpi_osi=\"!Windows 2012\""];
-  boot.extraModulePackages = [config.boot.kernelPackages.tp_smapi];
-  boot.extraModprobeConfig = ''
-    options i915 enable_rc6=1
-  '';
   boot.cleanTmpDir = true;
 
-  networking.hostName = "aji";
   networking.wireless.enable = true;
   networking.firewall.enable = true;
 
@@ -39,16 +20,6 @@
   #   consoleKeyMap = "us";
   #   defaultLocale = "en_US.UTF-8";
   # };
-
-  fileSystems."/" = {
-    mountPoint = "/";
-    device = "/dev/mapper/cryptvg-root";
-    fsType = "btrfs";
-    options = ["subvol=aji-root" "discard" "compress=lzo"];
-  };
-  swapDevices =
-    [ { device = "/dev/mapper/cryptvg-swap"; }
-    ];
 
   # Set your time zone.
   time.timeZone = "America/New_York";
@@ -111,29 +82,13 @@
     extraOptions = ["-r"];
   };
 
-  services.tlp.enable = true;
-  services.tlp.extraConfig = ''
-    SATA_LINKPWR_ON_BAT=max_performance
-  '';
-
   # Enable the X11 windowing system.
   services.xserver.enable = true;
   services.xserver.windowManager.xmonad.enable = true;
   services.xserver.windowManager.xmonad.enableContribAndExtras = true;
-  #services.xserver.windowManager.xmonad.extraPackages =
-  #haskellPackages: [
-  #  haskellPackages.xmonad-contrib];
-  # services.xserver.windowManager.awesome.enable = true;
-  # services.xserver.windowManager.i3.enable = true;
-  # services.xserver.displayManager.slim = {
-  #   enable = true;
-  #   autoLogin = true;
-  #   defaultUser = "orbekk";
-  # };
 
   services.xserver.layout = "us";
   services.xserver.xkbVariant = "dvorak";
-  services.xserver.xkbModel = "thinkpad60";
 
   users = {
     defaultUserShell = "/run/current-system/sw/bin/fish";
@@ -146,9 +101,6 @@
       shell = "/run/current-system/sw/bin/fish";
     };
   };
-
-  # The NixOS release to be compatible with for stateful data such as databases.
-  system.stateVersion = "16.03";
 
   nix.maxJobs = 4;
   nix.buildCores = 4;
