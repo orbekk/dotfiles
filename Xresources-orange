@@ -17,11 +17,14 @@ URxvt.letterSpace: -1
 URxvt.scrollBar: false
 URxvt.saveLines: 40000
 
-URxvt.perl-ext-common: resize-font
+URxvt.perl-ext-common: default,matcher,resize-font
 URxvt.resize-font.smaller: C-Down
 URxvt.resize-font.bigger: C-Up
 URxvt.iso14755: false
 URxvt.iso14755_52: false
+
+URxvt.url-launcher: /usr/bin/xdg-open
+URxvt.matcher.button: 1
 
 !urxvt*foreground: white
 !urxvt*background: black
