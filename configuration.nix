@@ -95,6 +95,7 @@
     wireshark
 
     haskellPackages.xmonad
+    haskellPackages.xmonad-contrib
     haskellPackages.xmobar
   ];
 
@@ -118,9 +119,10 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
   services.xserver.windowManager.xmonad.enable = true;
-  services.xserver.windowManager.xmonad.extraPackages =
-  haskellPackages: [
-    haskellPackages.xmonad-contrib];
+  services.xserver.windowManager.xmonad.enableContribAndExtras = true;
+  #services.xserver.windowManager.xmonad.extraPackages =
+  #haskellPackages: [
+  #  haskellPackages.xmonad-contrib];
   # services.xserver.windowManager.awesome.enable = true;
   # services.xserver.windowManager.i3.enable = true;
   # services.xserver.displayManager.slim = {
