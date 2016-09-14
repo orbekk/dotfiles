@@ -22,8 +22,13 @@ myConfig =
     , modMask = mod4Mask
     , terminal = "$TERMINAL"
     , borderWidth = 2
+    , normalBorderColor = "#000000"
     , workspaces = pure <$> "\"<>PYAOEU"
     }
+
+muteCommand = "pactl set-sink-mute @DEFAULT_SINK@ toggle"
+increaseVolumeCommand = "sh -c \"pactl set-sink-mute 0 false ; pactl set-sink-volume @DEFAULT_SINK@ +5%\""
+decreaseVolumeCommand = "sh -c \"pactl set-sink-mute 0 false ; pactl set-sink-volume @DEFAULT_SINK@ -- -5%\""
 
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
@@ -83,6 +88,10 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- , ((modm              , xK_period), sendMessage (IncMasterN (-1)))
     , ((modm .|. shiftMask, xK_Tab ), sendMessage (IncMasterN (-1)))
 
+    , ((modm              , xK_w ), spawn muteCommand)
+    , ((modm              , xK_v ), spawn decreaseVolumeCommand)
+    , ((modm              , xK_z ), spawn increaseVolumeCommand)
+
     -- This is redundant because it's added by the statusBar function.
     -- , ((modm              , xK_b     ), sendMessage ToggleStruts)
 
@@ -101,10 +110,10 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- mod-[1..9], Switch to workspace N
     -- mod-shift-[1..9], Move client to workspace N
     --
-    [((m .|. modm, k), windows $ f i)
-        | (i, k) <- zip (XMonad.workspaces conf) [xK_1 .. xK_9]
-        , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
-    ++
+    -- [((m .|. modm, k), windows $ f i)
+    --     | (i, k) <- zip (XMonad.workspaces conf) [xK_1 .. xK_9]
+    --     , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
+    -- ++
 
     [((m .|. modm, k), windows $ f i)
         | (i, k) <- zip (XMonad.workspaces conf) [
@@ -113,10 +122,12 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
                     , xK_period
                     , xK_p
                     , xK_y
+                    , xK_f
                     , xK_a
                     , xK_o
                     , xK_e
-                    , xK_u]
+                    , xK_u
+                    , xK_i]
         , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
     ++
 
