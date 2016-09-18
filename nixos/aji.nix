@@ -43,6 +43,7 @@
   '';
 
   services.xserver.xkbModel = "thinkpad60";
+  services.xserver.synaptics.enable = true;
 
   # The NixOS release to be compatible with for stateful data such as databases.
   system.stateVersion = "16.03";
