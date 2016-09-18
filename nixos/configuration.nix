@@ -64,6 +64,8 @@
     rofi
     wireshark
     trayer
+    rxvt_unicode-with-plugins
+    xsel
 
     # fonts
     source-code-pro
