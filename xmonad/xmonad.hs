@@ -23,7 +23,7 @@ myConfig =
     , terminal = "$TERMINAL"
     , borderWidth = 2
     , normalBorderColor = "#000000"
-    , workspaces = pure <$> "\"<>PYAOEU"
+    , workspaces = pure <$> "\"<>PYFAOEU"
     }
 
 muteCommand = "pactl set-sink-mute @DEFAULT_SINK@ toggle"
