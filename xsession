@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 export TERMINAL=urxvt
+export MPD_HOST=sabaki.kk.orbekk.com
 command -v $TERMINAL || TERMINAL=termite
 command -v $TERMINAL || TERMINAL=gnome-terminal
 
