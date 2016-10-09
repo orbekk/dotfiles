@@ -33,6 +33,7 @@
     myArduino = pkgs.stdenv.lib.overrideDerivation pkgs.arduino (o: {
       withGUI = true;
     });
+    myWine = pkgs.wine.override { wineBuild = "wine32"; };
   in [
     neovim
     rustc
@@ -64,6 +65,10 @@
     rofi
     wireshark
     trayer
+    myWine
+    iperf
+    telnet
+    pass
 
     # fonts
     source-code-pro

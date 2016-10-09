@@ -1,6 +1,7 @@
 urxvt*font: xft:dejavu sans mono:size=13:antialias=true
 !urxvt*font: xft:inconsolata:size=14:antialias=true
 urxvt*scrollBar: false
+URxvt*termName: xterm-256color
 
 urxvt*foreground: white
 urxvt*background: black

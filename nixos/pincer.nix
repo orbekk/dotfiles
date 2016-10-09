@@ -6,6 +6,7 @@
   ];
   networking.hostName = "pincer";
 
+  hardware.opengl.driSupport32Bit = true;
   boot.loader.systemd-boot.enable = true;
   boot.loader.timeout = 0;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -34,6 +35,12 @@
       device = "/dev/mapper/cryptroot";
       fsType = "btrfs";
       options = ["subvol=active/nixos-root" "discard" "compress=lzo"];
+    };
+    "/btrfs" = {
+      mountPoint = "/btrfs";
+      device = "/dev/mapper/cryptroot";
+      fsType = "btrfs";
+      options = ["discard" "compress=lzo"];
     };
   };
 
