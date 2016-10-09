@@ -8,7 +8,8 @@
 
   boot.cleanTmpDir = true;
 
-  networking.wireless.enable = true;
+  networking.networkmanager.enable = true;
+  # networking.wireless.enable = true;
   networking.firewall.enable = true;
 
   programs.zsh.enable = true;
@@ -99,9 +100,15 @@
   services.xserver.windowManager.xmonad.enableContribAndExtras = true;
   services.xserver.windowManager.xmonad.extraPackages = haskellPackages: [
       haskellPackages.xmobar ];
+  services.xserver.desktopManager.gnome3.enable = true;
 
   services.xserver.layout = "us";
   services.xserver.xkbVariant = "dvorak";
+
+  services.xserver.synaptics = {
+    enable = true;
+    twoFingerScroll = true;
+  };
 
   users = {
     defaultUserShell = "/run/current-system/sw/bin/fish";
