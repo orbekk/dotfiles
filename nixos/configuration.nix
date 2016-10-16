@@ -54,7 +54,7 @@
     pavucontrol
     powertop
     kde4.digikam
-    emacs25pre
+    emacs25
     sshfsFuse
     xorg.xbacklight
     rtorrent
@@ -72,6 +72,7 @@
     pass
     rxvt_unicode-with-plugins
     xsel
+    gnupg
 
     # fonts
     source-code-pro
@@ -100,7 +101,7 @@
   services.xserver.windowManager.xmonad.enableContribAndExtras = true;
   services.xserver.windowManager.xmonad.extraPackages = haskellPackages: [
       haskellPackages.xmobar ];
-  services.xserver.desktopManager.gnome3.enable = true;
+  services.xserver.desktopManager.xfce.enable = true;
 
   services.xserver.layout = "us";
   services.xserver.xkbVariant = "dvorak";
@@ -119,6 +120,13 @@
       description = "KJ";
       extraGroups = ["wheel" "networkmanager" "dialout" "uucp"];
       shell = "/run/current-system/sw/bin/fish";
+    };
+    extraUsers.guest = {
+      isNormalUser = true;
+      home = "/home/guest";
+      uid = 10001;
+      description = "Guest";
+      extraGroups = ["networkmanager"];
     };
   };
 
