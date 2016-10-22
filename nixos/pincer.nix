@@ -5,7 +5,10 @@
     ./configuration.nix
   ];
   networking.hostName = "pincer";
+  networking.firewall.allowedTCPPorts = [5201];
+  networking.firewall.allowedUDPPorts = [5201];
 
+  hardware.opengl.driSupport32Bit = true;
   boot.loader.systemd-boot.enable = true;
   boot.loader.timeout = 0;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -16,8 +19,10 @@
       allowDiscards = true;
     }
   ];
-  boot.kernelModules = ["tp_smapi" "thinkpad_acpi" "fbcon" "i915"];
-  boot.extraModulePackages = [config.boot.kernelPackages.tp_smapi];
+  # boot.kernelPackages = pkgs.linuxPackages_4_7;
+  boot.kernelModules = ["tp_smapi" "thinkpad_acpi" "fbcon" "i915" "acpi_call"];
+  boot.extraModulePackages = with config.boot.kernelPackages;
+      [tp_smapi acpi_call];
   boot.extraModprobeConfig = ''
     options iwlwifi swcrypto=1
   '';
@@ -34,6 +39,12 @@
       device = "/dev/mapper/cryptroot";
       fsType = "btrfs";
       options = ["subvol=active/nixos-root" "discard" "compress=lzo"];
+    };
+    "/btrfs" = {
+      mountPoint = "/btrfs";
+      device = "/dev/mapper/cryptroot";
+      fsType = "btrfs";
+      options = ["discard" "compress=lzo"];
     };
   };
 

@@ -8,7 +8,8 @@
 
   boot.cleanTmpDir = true;
 
-  networking.wireless.enable = true;
+  networking.networkmanager.enable = true;
+  # networking.wireless.enable = true;
   networking.firewall.enable = true;
 
   programs.zsh.enable = true;
@@ -33,6 +34,7 @@
     myArduino = pkgs.stdenv.lib.overrideDerivation pkgs.arduino (o: {
       withGUI = true;
     });
+    myWine = pkgs.wine.override { wineBuild = "wine32"; };
   in [
     neovim
     rustc
@@ -52,7 +54,7 @@
     pavucontrol
     powertop
     kde4.digikam
-    emacs25pre
+    emacs25
     sshfsFuse
     xorg.xbacklight
     rtorrent
@@ -64,9 +66,14 @@
     rofi
     wireshark
     trayer
+    myWine
+    iperf
+    telnet
+    pass
     rxvt_unicode-with-plugins
     xsel
     geeqie
+    gnupg
 
     # fonts
     source-code-pro
@@ -95,11 +102,19 @@
   services.xserver.windowManager.xmonad.enableContribAndExtras = true;
   services.xserver.windowManager.xmonad.extraPackages = haskellPackages: [
       haskellPackages.xmobar ];
+  services.xserver.desktopManager.xfce.enable = true;
 
   services.xserver.layout = "us";
   services.xserver.xkbVariant = "dvorak";
 
+<<<<<<< HEAD
   services.cron.enable = true;
+=======
+  services.xserver.synaptics = {
+    enable = true;
+    twoFingerScroll = true;
+  };
+>>>>>>> 27ee6b1aaf71715da579633f2f8e1a7baa0224c8
 
   users = {
     defaultUserShell = "/run/current-system/sw/bin/fish";
@@ -110,6 +125,13 @@
       description = "KJ";
       extraGroups = ["wheel" "networkmanager" "dialout" "uucp"];
       shell = "/run/current-system/sw/bin/fish";
+    };
+    extraUsers.guest = {
+      isNormalUser = true;
+      home = "/home/guest";
+      uid = 10001;
+      description = "Guest";
+      extraGroups = ["networkmanager"];
     };
   };
 
