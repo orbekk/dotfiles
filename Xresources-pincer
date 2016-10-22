@@ -2,6 +2,7 @@ urxvt*font: xft:dejavu sans mono:size=13:antialias=true
 !urxvt*font: xft:inconsolata:size=14:antialias=true
 urxvt*scrollBar: false
 URxvt*termName: xterm-256color
+Xterm*termName: xterm-256color
 
 urxvt*foreground: white
 urxvt*background: black
@@ -22,3 +23,16 @@ urxvt*background: black
 *color13: #AD7FA8
 *color14: #fcaf3e
 *color15: #EEEEEC
+
+URxvt.keysym.M-c:   perl:clipboard:copy
+URxvt.keysym.M-v:   perl:clipboard:paste
+URxvt.saveLines: 40000
+
+URxvt.perl-ext-common: default,matcher,resize-font,clipboard
+URxvt.clipboard.autocopy: true
+URxvt.resize-font.smaller: C-Down
+URxvt.resize-font.bigger: C-Up
+URxvt.iso14755: false
+URxvt.iso14755_52: false
+URxvt.url-launcher: /usr/bin/xdg-open
+URxvt.matcher.button: 1
