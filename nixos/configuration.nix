@@ -73,6 +73,7 @@
     rxvt_unicode-with-plugins
     xsel
     gnupg
+    wdfs
 
     # fonts
     source-code-pro
