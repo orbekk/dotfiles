@@ -66,6 +66,7 @@
     trayer
     rxvt_unicode-with-plugins
     xsel
+    geeqie
 
     # fonts
     source-code-pro
@@ -97,6 +98,8 @@
 
   services.xserver.layout = "us";
   services.xserver.xkbVariant = "dvorak";
+
+  services.cron.enable = true;
 
   users = {
     defaultUserShell = "/run/current-system/sw/bin/fish";
