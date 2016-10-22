@@ -75,6 +75,8 @@
     geeqie
     gnupg
     myWine
+    minecraft
+    mumble
 
     # fonts
     source-code-pro
