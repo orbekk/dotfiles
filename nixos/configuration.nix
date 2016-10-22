@@ -74,6 +74,7 @@
     xsel
     geeqie
     gnupg
+    myWine
 
     # fonts
     source-code-pro
@@ -107,14 +108,11 @@
   services.xserver.layout = "us";
   services.xserver.xkbVariant = "dvorak";
 
-<<<<<<< HEAD
   services.cron.enable = true;
-=======
   services.xserver.synaptics = {
     enable = true;
     twoFingerScroll = true;
   };
->>>>>>> 27ee6b1aaf71715da579633f2f8e1a7baa0224c8
 
   users = {
     defaultUserShell = "/run/current-system/sw/bin/fish";
