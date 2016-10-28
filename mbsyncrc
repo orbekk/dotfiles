@@ -2,7 +2,7 @@ IMAPAccount gmail
 PipelineDepth 200
 Host imap.gmail.com
 User kjetil.orbekk@gmail.com
-PassCmd "pass show sites/gmail-app-password"
+PassCmd "cat /home/orbekk/.gmail-password"
 SSLType IMAPS
 CertificateFile /etc/ssl/certs/ca-certificates.crt
 

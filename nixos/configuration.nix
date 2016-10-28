@@ -72,7 +72,10 @@
     pass
     rxvt_unicode-with-plugins
     xsel
+    geeqie
     gnupg
+    myWine
+    mumble
     wdfs
 
     # fonts
@@ -107,6 +110,7 @@
   services.xserver.layout = "us";
   services.xserver.xkbVariant = "dvorak";
 
+  services.cron.enable = true;
   services.xserver.synaptics = {
     enable = true;
     twoFingerScroll = true;

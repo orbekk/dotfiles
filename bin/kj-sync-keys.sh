@@ -12,8 +12,9 @@ declare -r tmpdir=$(mktemp -d /tmp/kj_sync_authorized_keys.XXXXX)
 
 targets=(
   root@orbekk.osl.trygveandre.net
-  sabaki.kk.orbekk.com
-  dragon.kk.orbekk.com
+  sabaki
+  semeai
+  dragon
   login.pvv.ntnu.no
   gote.orbekk.com
 )
@@ -45,9 +46,9 @@ for target in ${targets[@]}; do
   tmp="${tmpdir}/${target}"
   touch ${tmp}
   if [[ $overwrite != true ]]; then
-    ssh ${target} 'cat .ssh/authorized_keys || echo -n' > ${tmp}
+    ssh ${target} 'bash -c "cat .ssh/authorized_keys || echo -n"' > ${tmp}
   fi
   add_keys_to_file "${tmp}"
   ssh ${target} 'mkdir -p .ssh'
-  cat "${tmp}" | ssh ${target} 'cat > .ssh/authorized_keys.tmp && mv .ssh/authorized_keys{.tmp,}'
+  cat "${tmp}" | ssh ${target} ' bash -c "cat > .ssh/authorized_keys.tmp && mv .ssh/authorized_keys{.tmp,}"'
 done
