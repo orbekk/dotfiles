@@ -48,6 +48,13 @@
     };
   };
 
+  environment.systemPackages = with pkgs;
+    let
+      myMinecraft = minecraft.override {
+        jre = oraclejre8;
+      };
+    in [ myMinecraft ];
+
   services.tlp.enable = true;
   services.tlp.extraConfig = ''
     # Needed for either SSD or btrfs.
