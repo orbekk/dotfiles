@@ -25,6 +25,11 @@
   # Set your time zone.
   time.timeZone = "America/New_York";
 
+  # security.grsecurity.enable = true;
+  # security.grsecurity.lockTunables = false;
+  # # Needed when using chromium with grsecurity.
+  # security.chromiumSuidSandbox.enable = true;
+
   nixpkgs.config.allowUnfree = true;
 
   # List packages installed in system profile. To search by name, run:
@@ -53,7 +58,7 @@
     pasystray
     pavucontrol
     powertop
-    kde4.digikam
+    # kde4.digikam
     emacs25
     sshfsFuse
     xorg.xbacklight
@@ -77,10 +82,36 @@
     myWine
     mumble
     wdfs
-
+    dnsutils
     # fonts
     source-code-pro
     inconsolata
+    wirelesstools
+    xbindkeys
+    imagemagick
+    ghc
+    net_snmp
+    #rxvt-unicode-with-perl-with-unicode3-with-plugins
+    unzip
+    linssid
+    lxc
+    gnupg1
+    nix-repl
+    youtube-dl
+    vlc
+    unrar
+    mosh
+    tldr
+    fira-code
+    haskellPackages.hledger
+    haskellPackages.hledger-ui
+    haskellPackages.hledger-web
+    haskellPackages.hledger-vty
+    moreutils
+
+    #temporary
+    debootstrap
+    wget
 
     # haskellPackages.xmonad
     # haskellPackages.xmonad-contrib
