@@ -18,8 +18,8 @@ trayer --edge top --align right --SetDockType true --SetPartialStrut true --expa
 [[ $(hostname) == kikashi ]] && \
   xinput set-prop "TPPS/2 IBM TrackPoint" "Device Accel Constant Deceleration" 0.5
 if [[ $(hostname) == pincer ]]; then
-  xinput set-prop "TPPS/2 IBM TrackPoint" "Device Accel Constant Deceleration" 0.5
-  xinput set-prop "SynPS/2 Synaptics TouchPad" "Device Accel Constant Deceleration" 0.5
+  # xinput set-prop "TPPS/2 IBM TrackPoint" "Device Accel Constant Deceleration" 0.5
+  # xinput set-prop "SynPS/2 Synaptics TouchPad" "Device Accel Constant Deceleration" 0.5
 fi
 [[ -f /etc/nixos/configuration.nix ]] || \
   redshift -l 40:-70 -r -t 5500:3700 &
