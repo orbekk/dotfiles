@@ -53,7 +53,7 @@
     pasystray
     pavucontrol
     powertop
-    kde4.digikam
+    # kde4.digikam
     emacs25
     sshfsFuse
     xorg.xbacklight
@@ -77,6 +77,9 @@
     myWine
     minecraft
     mumble
+    wdfs
+    whois
+    dhcpcd
 
     # fonts
     source-code-pro
