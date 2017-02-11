@@ -4,6 +4,8 @@
   hardware.bluetooth.enable = true;
   hardware.pulseaudio.enable = true;
   hardware.pulseaudio.package = pkgs.pulseaudioFull;
+  hardware.pulseaudio.tcp.enable = true;
+  hardware.pulseaudio.tcp.anonymousClients.allowAll = true;
   hardware.enableAllFirmware = true;
 
   boot.cleanTmpDir = true;
@@ -95,7 +97,6 @@
     unzip
     linssid
     lxc
-    gnupg1
     nix-repl
     youtube-dl
     vlc
@@ -106,8 +107,14 @@
     haskellPackages.hledger
     haskellPackages.hledger-ui
     haskellPackages.hledger-web
-    haskellPackages.hledger-vty
+    haskellPackages.hledger-iadd
     moreutils
+    ledger
+    xorg.xhost
+    binutils
+    pandoc
+
+    # (callPackage ./stardew-valley.nix {})    
 
     #temporary
     debootstrap
