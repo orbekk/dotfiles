@@ -10,6 +10,7 @@ import qualified Data.Map        as M
 import System.Exit
 import XMonad.Hooks.EwmhDesktops
 import Control.Applicative ((<$>), pure)
+import XMonad.Hooks.SetWMName
 
 main = do
   config <- xmobar myConfig
@@ -24,6 +25,7 @@ myConfig =
     , borderWidth = 2
     , normalBorderColor = "#000000"
     , workspaces = pure <$> "\"<>PYFAOEU"
+    , startupHook = setWMName "LG3D"
     }
 
 muteCommand = "pactl set-sink-mute @DEFAULT_SINK@ toggle"

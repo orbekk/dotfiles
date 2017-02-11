@@ -84,6 +84,9 @@
     myWine
     mumble
     wdfs
+    whois
+    dhcpcd
+
     dnsutils
     # fonts
     source-code-pro
