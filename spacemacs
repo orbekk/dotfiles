@@ -35,6 +35,7 @@ values."
      markdown
      haskell
      git
+     idris
      finance
      rust
      markdown
@@ -211,6 +212,8 @@ user code."
   ;; bind ctrl-w to backwards-kill-word when no region is selected
   (global-set-key (kbd "C-w") 'backward-kill-word-or-kill-region)
 
+  (setq-default exec-path-from-shell-variables '())
+
   (defun backward-kill-word-or-kill-region (&optional arg)
     (interactive "p")
     (if (region-active-p)
@@ -309,7 +312,7 @@ layers configuration. You are free to put any user code."
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (ledger-mode toml-mode racer rust-mode smeargle orgit magit-gitflow helm-gitignore request gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger evil-magit magit magit-popup git-commit with-editor xterm-color ws-butler window-numbering web-mode web-beautify volatile-highlights vi-tilde-fringe toc-org tern tagedit spacemacs-theme spaceline powerline smooth-scrolling slim-mode shm shell-pop scss-mode sass-mode restart-emacs rainbow-delimiters popwin persp-mode pcre2el paradox hydra spinner page-break-lines org-repo-todo org-present org-pomodoro alert log4e gntp org-plus-contrib org-bullets open-junk-file nyan-mode neotree multi-term move-text mmm-mode markdown-toc markdown-mode macrostep lorem-ipsum linum-relative leuven-theme less-css-mode json-mode json-snatcher json-reformat js2-refactor multiple-cursors s js2-mode js-doc jade-mode info+ indent-guide ido-vertical-mode hungry-delete htmlize hl-todo hindent highlight-parentheses highlight-numbers parent-mode highlight-indentation help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flyspell helm-flx helm-descbinds helm-css-scss helm-ag haskell-snippets yasnippet haml-mode google-translate golden-ratio gnuplot ghc haskell-mode gh-md flx-ido flx fill-column-indicator fancy-battery expand-region exec-path-from-shell evil-visualstar evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-args evil-anzu anzu eval-sexp-fu highlight eshell-prompt-extras esh-help emmet-mode elisp-slime-nav disaster define-word coffee-mode cmm-mode cmake-mode clean-aindent-mode clang-format buffer-move bracketed-paste auto-highlight-symbol auto-dictionary auto-compile packed dash aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async quelpa package-build use-package which-key bind-key bind-map evil monokai-theme))))
+    (idris-mode prop-menu ledger-mode toml-mode racer rust-mode smeargle orgit magit-gitflow helm-gitignore request gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger evil-magit magit magit-popup git-commit with-editor xterm-color ws-butler window-numbering web-mode web-beautify volatile-highlights vi-tilde-fringe toc-org tern tagedit spacemacs-theme spaceline powerline smooth-scrolling slim-mode shm shell-pop scss-mode sass-mode restart-emacs rainbow-delimiters popwin persp-mode pcre2el paradox hydra spinner page-break-lines org-repo-todo org-present org-pomodoro alert log4e gntp org-plus-contrib org-bullets open-junk-file nyan-mode neotree multi-term move-text mmm-mode markdown-toc markdown-mode macrostep lorem-ipsum linum-relative leuven-theme less-css-mode json-mode json-snatcher json-reformat js2-refactor multiple-cursors s js2-mode js-doc jade-mode info+ indent-guide ido-vertical-mode hungry-delete htmlize hl-todo hindent highlight-parentheses highlight-numbers parent-mode highlight-indentation help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flyspell helm-flx helm-descbinds helm-css-scss helm-ag haskell-snippets yasnippet haml-mode google-translate golden-ratio gnuplot ghc haskell-mode gh-md flx-ido flx fill-column-indicator fancy-battery expand-region exec-path-from-shell evil-visualstar evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-args evil-anzu anzu eval-sexp-fu highlight eshell-prompt-extras esh-help emmet-mode elisp-slime-nav disaster define-word coffee-mode cmm-mode cmake-mode clean-aindent-mode clang-format buffer-move bracketed-paste auto-highlight-symbol auto-dictionary auto-compile packed dash aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async quelpa package-build use-package which-key bind-key bind-map evil monokai-theme))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
