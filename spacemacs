@@ -93,9 +93,8 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(wheatgrass
+   dotspacemacs-themes '(spacemacs-dark wheatgrass
                          monokai
-                         spacemacs-dark
                          base16-bright-dark
                          spacemacs-light
                          solarized-light
@@ -106,7 +105,7 @@ values."
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
-   dotspacemacs-default-font '("Inconsolata"
+   dotspacemacs-default-font '("Fira Code"
                                :size 20
                                :weight normal
                                :width normal
