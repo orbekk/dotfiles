@@ -92,6 +92,7 @@
     wdfs
     whois
     dhcpcd
+    haskellPackages.idris
 
     dnsutils
     # fonts
