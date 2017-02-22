@@ -75,11 +75,6 @@ set guioptions-=M
 set guioptions-=T
 set guioptions-=r
 set guioptions-=L
-if &t_Co > 255 || has('gui_running')
-  set background=dark
-  let base16colorspace=256
-  colorscheme base16-tomorrow
-endif
 
 set colorcolumn=81
 

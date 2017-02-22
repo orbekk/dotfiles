@@ -79,3 +79,7 @@ function get-parent-dir() {
 }
 zle -N get-parent-dir
 bindkey "^[u" get-parent-dir
+
+fpath=($HOME/.zsh-functions $fpath)
+autoload -Uz compinit
+compinit
