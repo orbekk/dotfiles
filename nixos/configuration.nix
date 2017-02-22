@@ -4,6 +4,8 @@
   hardware.bluetooth.enable = true;
   hardware.pulseaudio.enable = true;
   hardware.pulseaudio.package = pkgs.pulseaudioFull;
+  hardware.pulseaudio.tcp.enable = true;
+  hardware.pulseaudio.tcp.anonymousClients.allowAll = true;
   hardware.enableAllFirmware = true;
 
   boot.cleanTmpDir = true;
@@ -25,7 +27,18 @@
   # Set your time zone.
   time.timeZone = "America/New_York";
 
+  # security.grsecurity.enable = true;
+  # security.grsecurity.lockTunables = false;
+  # # Needed when using chromium with grsecurity.
+  # security.chromiumSuidSandbox.enable = true;
+
   nixpkgs.config.allowUnfree = true;
+
+  fonts = {
+    fonts = with pkgs; [
+     fira-code 
+    ];
+  };
 
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
@@ -53,7 +66,7 @@
     pasystray
     pavucontrol
     powertop
-    kde4.digikam
+    # kde4.digikam
     emacs25
     sshfsFuse
     xorg.xbacklight
@@ -77,10 +90,45 @@
     myWine
     mumble
     wdfs
+    whois
+    dhcpcd
+    haskellPackages.idris
 
+    dnsutils
     # fonts
     source-code-pro
     inconsolata
+    wirelesstools
+    xbindkeys
+    imagemagick
+    ghc
+    net_snmp
+    #rxvt-unicode-with-perl-with-unicode3-with-plugins
+    unzip
+    linssid
+    lxc
+    nix-repl
+    youtube-dl
+    vlc
+    unrar
+    mosh
+    tldr
+    fira-code
+    haskellPackages.hledger
+    haskellPackages.hledger-ui
+    haskellPackages.hledger-web
+    haskellPackages.hledger-iadd
+    moreutils
+    ledger
+    xorg.xhost
+    binutils
+    pandoc
+
+    # (callPackage ./stardew-valley.nix {})    
+
+    #temporary
+    debootstrap
+    wget
 
     # haskellPackages.xmonad
     # haskellPackages.xmonad-contrib

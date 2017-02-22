@@ -1,110 +1,69 @@
-# vim: set ft=sh:
+function fish_prompt --description 'Write out the prompt'
+	set -l last_status $status
 
-# Pure
-# by Rafael Rinaldi
-# https://github.com/rafaelrinaldi/pure
-# MIT License
+	# Just calculate this once, to save a few cycles when displaying the prompt
+	if not set -q __fish_prompt_hostname
+		set -g __fish_prompt_hostname (hostname|cut -d . -f 1)
+	end
 
-# Whether or not is a fresh session
-set -g fresh_session 1
+	set -l normal (set_color normal)
 
-# Symbols
+	# Hack; fish_config only copies the fish_prompt function (see #736)
+	if not set -q -g __fish_classic_git_functions_defined
+		set -g __fish_classic_git_functions_defined
 
-set -g symbol_prompt "❯"
-set -g symbol_git_down_arrow "⇣"
-set -g symbol_git_up_arrow "⇡"
-set -g symbol_git_dirty "*"
-set -g symbol_horizontal_bar "—"
+		function __fish_repaint_user --on-variable fish_color_user --description "Event handler, repaint when fish_color_user changes"
+			if status --is-interactive
+				commandline -f repaint ^/dev/null
+			end
+		end
+		
+		function __fish_repaint_host --on-variable fish_color_host --description "Event handler, repaint when fish_color_host changes"
+			if status --is-interactive
+				commandline -f repaint ^/dev/null
+			end
+		end
+		
+		function __fish_repaint_status --on-variable fish_color_status --description "Event handler; repaint when fish_color_status changes"
+			if status --is-interactive
+				commandline -f repaint ^/dev/null
+			end
+		end
 
-# Colors
+		function __fish_repaint_bind_mode --on-variable fish_key_bindings --description "Event handler; repaint when fish_key_bindings changes"
+			if status --is-interactive
+				commandline -f repaint ^/dev/null
+			end
+		end
 
-set -g color_red (set_color red)
-set -g color_green (set_color green)
-set -g color_blue (set_color blue)
-set -g color_yellow (set_color yellow)
-set -g color_cyan (set_color cyan)
-set -g color_gray (set_color 93A1A1)
-set -g color_normal (set_color normal)
+		# initialize our new variables
+		if not set -q __fish_classic_git_prompt_initialized
+			set -qU fish_color_user; or set -U fish_color_user -o green
+			set -qU fish_color_host; or set -U fish_color_host -o cyan
+			set -qU fish_color_status; or set -U fish_color_status red
+			set -U __fish_classic_git_prompt_initialized
+		end
+	end
 
-function fish_prompt
-  # Save previous exit code
-  set -l exit_code $status
+	set -l color_cwd
+	set -l prefix
+	switch $USER
+	case root toor
+		if set -q fish_color_cwd_root
+			set color_cwd $fish_color_cwd_root
+		else
+			set color_cwd $fish_color_cwd
+		end
+		set suffix '#'
+	case '*'
+		set color_cwd $fish_color_cwd
+		set suffix '>'
+	end
 
-  # Set default color symbol to green meaning it's all good!
-  set -l color_symbol $color_green
+	set -l prompt_status
+	if test $last_status -ne 0
+		set prompt_status ' ' (set_color $fish_color_status) "[$last_status]" "$normal"
+	end
 
-  # Template
-
-  set -l current_folder (__parse_current_folder)
-  set -l git_branch_name ""
-  set -l git_dirty ""
-  set -l git_arrows ""
-  set -l command_duration ""
-  set -l prompt ""
-
-  # Do not add a line break to a brand new session
-  if test $fresh_session -eq 0
-    set prompt $prompt "\n"
-  end
-
-  # Prompt failed command execution duration
-  set command_duration (__format_time $CMD_DURATION)
-
-  # Format current folder on prompt output
-  set prompt $prompt "$color_yellow$command_duration$color_blue$current_folder$color_normal "
-
-  # Handle previous failed command
-  if test $exit_code -ne 0
-    # Symbol color is red when previous command fails
-    set color_symbol $color_red
-
-    set prompt $prompt "$color_yellow$command_duration$color_normal"
-  end
-
-  # Exit with code 1 if git is not available
-  if not which git >/dev/null
-    return 1
-  end
-
-  # Check if is on a Git repository
-  set -l is_git_repository (command git rev-parse --is-inside-work-tree ^/dev/null)
-
-  if test -n "$is_git_repository"
-    set git_branch_name (__parse_git_branch)
-
-    # Check if there are files to commit
-    set -l is_git_dirty (command git status --porcelain --ignore-submodules ^/dev/null)
-
-    if test -n "$is_git_dirty"
-      set git_dirty $symbol_git_dirty
-    end
-
-    # Check if there is an upstream configured
-    command git rev-parse --abbrev-ref '@{upstream}' >/dev/null ^&1; and set -l has_upstream
-    if set -q has_upstream
-      set -l git_status (command git rev-list --left-right --count 'HEAD...@{upstream}' | sed "s/[[:blank:]]/ /" ^/dev/null)
-
-      # Resolve Git arrows by treating `git_status` as an array
-      set -l git_arrow_left (command echo $git_status | cut -c 1 ^/dev/null)
-      set -l git_arrow_right (command echo $git_status | cut -c 3 ^/dev/null)
-
-    # If arrow is not "0", it means it's dirty
-      if test $git_arrow_left -ne "0"
-        set git_arrows $symbol_git_up_arrow
-      end
-
-      if test $git_arrow_right -ne "0"
-        set git_arrows $git_arrows$symbol_git_down_arrow
-      end
-    end
-
-    # Format Git prompt output
-    set prompt $prompt "$color_gray$git_branch_name$git_dirty$color_normal\t$color_cyan$git_arrows$color_normal"
-  end
-
-  set prompt $prompt "\n$color_symbol$symbol_prompt$color_normal "
-
-  echo -e -s $prompt
-
-  set fresh_session 0
+	echo -n -s (set_color $fish_color_user) "$USER" $normal @ (set_color $fish_color_host) "$__fish_prompt_hostname" $normal ' ' (set_color $color_cwd) (prompt_pwd) $normal (__fish_vcs_prompt) $normal $prompt_status "> "
 end

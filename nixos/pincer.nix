@@ -5,8 +5,8 @@
     ./configuration.nix
   ];
   networking.hostName = "pincer";
-  networking.firewall.allowedTCPPorts = [5201];
-  networking.firewall.allowedUDPPorts = [5201];
+  networking.firewall.allowedTCPPorts = [5201 34196 34197 5556 5558];
+  networking.firewall.allowedUDPPorts = [5201 34196 34197];
 
   hardware.opengl.driSupport32Bit = true;
   boot.loader.systemd-boot.enable = true;
@@ -53,7 +53,37 @@
       myMinecraft = minecraft.override {
         jre = oraclejre8;
       };
-    in [ myMinecraft ];
+      pwFactorio = factorio.override {
+        username = "kjetil.orbekk@gmail.com";
+        password = "6F[$~/v6I9HlGoiriI!q";
+        releaseType = "alpha";
+      };
+      myFactorio = pwFactorio.overrideDerivation (o: {
+        version = "0.14.20";
+        src = requireFile {
+          name = "factorio_alpha_x64_0.14.20.tar.gz";
+	        url = "test";
+          sha256 = "c7955fdb19895a38d02a536e0bb225ac3bbbc434fcf9c4968fbb4bd5c49329ae";
+        };
+      });
+    in [
+      myMinecraft
+      myFactorio
+      tpacpi-bat
+    ];
+
+  systemd.services.battery_threshold = {
+    description = "Set battery charging thresholds.";
+    path = [ pkgs.tpacpi-bat ];
+    after = [ "basic.target" ];
+    wantedBy = [ "multi-user.target" ];
+    script = ''
+      tpacpi-bat -s ST 1 39
+      tpacpi-bat -s ST 2 39
+      tpacpi-bat -s SP 1 80
+      tpacpi-bat -s SP 2 80
+    '';
+  };
 
   services.tlp.enable = true;
   services.tlp.extraConfig = ''
