@@ -8,6 +8,13 @@
   networking.firewall.allowedTCPPorts = [5201 34196 34197 5556 5558];
   networking.firewall.allowedUDPPorts = [5201 34196 34197];
 
+  # hardware.pulseaudio.systemWide = true;
+  # hardware.pulseaudio.enable = true;
+  # hardware.pulseaudio.tcp.enable = true;
+  # hardware.pulseaudio.tcp.anonymousClients.allowAll = true;
+  # hardware.pulseaudio.zeroconf.discovery.enable = true;
+  # hardware.pulseaudio.zeroconf.publish.enable = true;
+
   hardware.opengl.driSupport32Bit = true;
   boot.loader.systemd-boot.enable = true;
   boot.loader.timeout = 0;
@@ -90,6 +97,7 @@
     # Needed for either SSD or btrfs.
     SATA_LINKPWR_ON_BAT=max_performance
   '';
+
 
   services.xserver.xkbModel = "thinkpad60";
 

@@ -8,6 +8,7 @@
   hardware.pulseaudio.tcp.anonymousClients.allowAll = true;
   hardware.enableAllFirmware = true;
 
+  boot.earlyVconsoleSetup = true;
   boot.cleanTmpDir = true;
 
   networking.networkmanager.enable = true;
@@ -16,13 +17,6 @@
 
   programs.zsh.enable = true;
   programs.fish.enable = true;
-
-  # Select internationalisation properties.
-  # i18n = {
-  #   consoleFont = "Lat2-Terminus16";
-  #   consoleKeyMap = "us";
-  #   defaultLocale = "en_US.UTF-8";
-  # };
 
   # Set your time zone.
   time.timeZone = "America/New_York";
@@ -106,7 +100,6 @@
     #rxvt-unicode-with-perl-with-unicode3-with-plugins
     unzip
     linssid
-    lxc
     nix-repl
     youtube-dl
     vlc
@@ -148,6 +141,12 @@
   };
 
   # Enable the X11 windowing system.
+  services.xserver.displayManager.slim = {
+    enable = true;
+    autoLogin = true;
+    defaultUser = "orbekk";
+  };
+
   services.xserver.enable = true;
   services.xserver.windowManager.xmonad.enable = true;
   services.xserver.windowManager.xmonad.enableContribAndExtras = true;
@@ -157,6 +156,12 @@
 
   services.xserver.layout = "us";
   services.xserver.xkbVariant = "dvorak";
+
+  i18n = {
+    consoleFont = "ter-132n";
+    consoleKeyMap = "dvorak";
+    consolePackages = [ pkgs.terminus_font ];
+  };
 
   services.cron.enable = true;
   services.xserver.synaptics = {
