@@ -2,11 +2,15 @@
 
 {
   hardware.bluetooth.enable = true;
-  hardware.pulseaudio.enable = true;
-  hardware.pulseaudio.package = pkgs.pulseaudioFull;
-  hardware.pulseaudio.tcp.enable = true;
-  hardware.pulseaudio.tcp.anonymousClients.allowAll = true;
   hardware.enableAllFirmware = true;
+  hardware.pulseaudio = {
+    enable = true;
+    package = pkgs.pulseaudioFull;
+    tcp.enable = true;
+    tcp.anonymousClients.allowAll = true;
+    zeroconf.discovery.enable = true;
+    zeroconf.publish.enable = true;
+  };
 
   boot.earlyVconsoleSetup = true;
   boot.cleanTmpDir = true;
@@ -14,6 +18,8 @@
   networking.networkmanager.enable = true;
   # networking.wireless.enable = true;
   networking.firewall.enable = true;
+  networking.firewall.allowedUDPPorts = [1900];
+  networking.firewall.allowedTCPPorts = [8080 18080];
 
   programs.zsh.enable = true;
   programs.fish.enable = true;
@@ -188,7 +194,7 @@
     };
   };
 
-  nix.maxJobs = 4;
-  nix.buildCores = 4;
+  nix.maxJobs = 8;
+  nix.buildCores = 0;  # as many as I have CPUs
   nix.useSandbox = true;
 }
