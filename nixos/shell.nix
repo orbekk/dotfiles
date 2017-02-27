@@ -47,6 +47,7 @@ rec {
   };
   vlc-nightly = callPackage ./vlc-nightly.nix {};
   stardew-valley = callPackage ./stardew-valley.nix {};
+  the-long-dark = callPackage ./packages/the-long-dark {};
   pulseaudio-dlna = callPackage ./packages/pulseaudio-dlna {
     python27Packages = myPythonPackages;
   };
