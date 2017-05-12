@@ -15,6 +15,8 @@
   # hardware.pulseaudio.zeroconf.discovery.enable = true;
   # hardware.pulseaudio.zeroconf.publish.enable = true;
 
+  virtualisation.virtualbox.host.enable = true;
+
   hardware.opengl.driSupport32Bit = true;
   boot.loader.systemd-boot.enable = true;
   boot.loader.timeout = 0;
@@ -60,11 +62,6 @@
       myMinecraft = minecraft.override {
         jre = oraclejre8;
       };
-      pwFactorio = factorio.override {
-        username = "kjetil.orbekk@gmail.com";
-        password = "6F[$~/v6I9HlGoiriI!q";
-        releaseType = "alpha";
-      };
       myFactorio = pwFactorio.overrideDerivation (o: {
         version = "0.14.20";
         src = requireFile {
@@ -74,8 +71,8 @@
         };
       });
     in [
-      myMinecraft
-      myFactorio
+      # myMinecraft
+      # myFactorio
       tpacpi-bat
     ];
 
