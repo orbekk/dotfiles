@@ -303,6 +303,7 @@ layers configuration. You are free to put any user code."
   ;; I have been warned about magit stealing my files:
   (setq magit-last-seen-setup-instructions "1.4.0")
   (mu4e-config)
+  (add-to-list 'spacemacs-indent-sensitive-modes 'nix-mode)
   )
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
