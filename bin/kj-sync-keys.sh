@@ -11,11 +11,12 @@ declare -r overwrite=false
 declare -r tmpdir=$(mktemp -d /tmp/kj_sync_authorized_keys.XXXXX)
 
 targets=(
+  shape.orbekk.com
   root@orbekk.osl.trygveandre.net
   sabaki
   semeai
   dragon
-  login.pvv.ntnu.no
+  #login.pvv.ntnu.no
   gote.orbekk.com
 )
 authorized_keys_file=$HOME/dotfiles/authorized_keys
