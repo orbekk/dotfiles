@@ -20,9 +20,9 @@ for command in ${required_commands[@]}; do
   fi
 done
 
-cd ~/dotfiles
-git submodule update --init --recursive
-git submodule foreach git pull origin master
+# cd ~/dotfiles
+# git submodule update --init --recursive
+# git submodule foreach git pull origin master
 
 cd
 # Creates a symlink with target $1 at location $2.
@@ -56,13 +56,14 @@ for binary in dotfiles/bin/*; do
   create_symlink "../dotfiles/bin/${binary}" "bin/${binary}"
 done
 
-mkdir -p .config/fish/functions
-create_symlink ../../dotfiles/config/fish/config.fish .config/fish/config.fish
-for f in dotfiles/config/fish/functions/*.fish; do
-  create_symlink ../../../$f .config/fish/functions/$(basename $f)
-done
+# Don't use these on new machines.
+# mkdir -p .config/fish/functions
+# create_symlink ../../dotfiles/config/fish/config.fish .config/fish/config.fish
+# for f in dotfiles/config/fish/functions/*.fish; do
+#   create_symlink ../../../$f .config/fish/functions/$(basename $f)
+# done
 
-create_symlink dotfiles/zshrc .zshrc
+# create_symlink dotfiles/zshrc .zshrc
 
 mkdir -p .ssh
 create_symlink ../dotfiles/ssh/config .ssh/config
@@ -77,21 +78,22 @@ create_symlink ../dotfiles/i3/config .i3/config
 create_symlink dotfiles/i3status.conf .i3status.conf
 create_symlink dotfiles/i3blocks.conf .i3blocks.conf
 
-create_symlink dotfiles/vimrc .vimrc
-if [[ -e .vim/bundle/Vundle.vim ]]; then
-  printf "${orange}[SKIPPED]${none} Vundle.vim already installed\n"
-else
-  success=1
-  mkdir -p .vim/bundle
-  git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim \
-    || success=0
-fi
-vim +PluginInstall +qall || success=0
-if [[ "$success" == "1" ]]; then
-  printf "${green}[OK]${none} installed vim plugins\n"
-else
-  printf "${red}[WARNING]${none} failed to install vim plugins\n"
-fi
+# Don't use on new machines.
+# create_symlink dotfiles/vimrc .vimrc
+# if [[ -e .vim/bundle/Vundle.vim ]]; then
+#   printf "${orange}[SKIPPED]${none} Vundle.vim already installed\n"
+# else
+#   success=1
+#   mkdir -p .vim/bundle
+#   git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim \
+#     || success=0
+# fi
+# vim +PluginInstall +qall || success=0
+# if [[ "$success" == "1" ]]; then
+#   printf "${green}[OK]${none} installed vim plugins\n"
+# else
+#   printf "${red}[WARNING]${none} failed to install vim plugins\n"
+# fi
 
 if which emacs >/dev/null && [[ ! -d .emacs.d ]]; then
   git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
