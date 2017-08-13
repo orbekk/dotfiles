@@ -1,4 +1,4 @@
-urxvt*font: xft:dejavu sans mono:size=9:antialias=true
+urxvt*font: xft:dejavu sans mono:size=12:antialias=true
 !urxvt*font: xft:inconsolata:size=14:antialias=true
 urxvt*scrollBar: false
 
@@ -28,7 +28,8 @@ URxvt.matcher.button: 1
 urxvt*foreground: white
 urxvt*background: black
 
-*color0:  #2E3436
+! #2E3436
+*color0:  #000000
 *color1:  #a40000
 *color2:  #4E9A06
 *color3:  #C4A000
