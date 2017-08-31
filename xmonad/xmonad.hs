@@ -1,9 +1,15 @@
+import System.Posix.Unistd (nodeName, getSystemID)
+import System.Posix.Env (setEnv)
 import XMonad
 import XMonad.Config.Desktop
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Util.Run (spawnPipe)
+import XMonad.Layout
+import XMonad.Layout.OnHost
 import XMonad.Layout.NoBorders
+import XMonad.Layout.LayoutScreens
+import XMonad.Layout.TwoPane
 import System.IO
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
@@ -11,22 +17,31 @@ import System.Exit
 import XMonad.Hooks.EwmhDesktops
 import Control.Applicative ((<$>), pure)
 import XMonad.Hooks.SetWMName
+import Data.List.Split
+import Control.Monad
 
 main = do
-  config <- xmobar myConfig
+  host <- (head . splitOn "." . nodeName) <$> getSystemID
+  setEnv "HOST" host True
+  config <- xmobar (myConfig host)
   xmonad config
 
-myConfig =
+myConfig host =
   ewmh desktopConfig
-    { layoutHook = smartBorders $ layoutHook desktopConfig
+    { layoutHook = smartBorders $ myLayout
     , keys = myKeys
     , modMask = mod4Mask
     , terminal = "$TERMINAL"
     , borderWidth = 2
     , normalBorderColor = "#000000"
     , workspaces = pure <$> "\"<>PYFAOEU"
-    , startupHook = setWMName "LG3D"
+    , startupHook = do
+        setWMName "LG3D"
+        when (host == "orange") (layoutScreens 2 (TwoPane 0.5 0.5))
     }
+  where myLayout = onHost "orange" (verticalTiled ||| Full) $
+                   layoutHook defaultConfig
+        verticalTiled = Mirror (Tall 1 (5/100) (2/3))
 
 muteCommand = "pactl set-sink-mute @DEFAULT_SINK@ toggle"
 increaseVolumeCommand = "sh -c \"pactl set-sink-mute 0 false ; pactl set-sink-volume @DEFAULT_SINK@ +5%\""
@@ -130,7 +145,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
                     , xK_e
                     , xK_u
                     , xK_i]
-        , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
+        , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
     ++
 
     --
