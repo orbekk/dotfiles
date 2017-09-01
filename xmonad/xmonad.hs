@@ -42,9 +42,10 @@ myConfig host =
         when (host == "orange") (layoutScreens 2 (TwoPane 0.5 0.5))
     , manageHook = isDialog --> doF W.shiftMaster <+> doF W.swapDown
     }
-  where myLayout = onHost "orange" (verticalTiled ||| Full) $
+  where myLayout = onHost "orange" (verticalTiled ||| horizontalTiled ||| Full) $
                    layoutHook defaultConfig
         verticalTiled = Mirror (Tall 1 (5/100) (2/3))
+        horizontalTiled = Tall 0 (5/100) (2/3)
 
 muteCommand = "pactl set-sink-mute @DEFAULT_SINK@ toggle"
 increaseVolumeCommand = "sh -c \"pactl set-sink-mute 0 false ; pactl set-sink-volume @DEFAULT_SINK@ +5%\""
