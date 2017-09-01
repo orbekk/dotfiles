@@ -48,7 +48,7 @@ myConfig host =
 
 muteCommand = "pactl set-sink-mute @DEFAULT_SINK@ toggle"
 increaseVolumeCommand = "sh -c \"pactl set-sink-mute 0 false ; pactl set-sink-volume @DEFAULT_SINK@ +5%\""
-decreaseVolumeCommand = "sh -c \"pactl set-sink-mute 0 false ; pactl set-sink-volume @DEFAULT_SINK@ -- -5%\""
+decreaseVolumeCommand = "sh -c \"pactl set-sink-mute 0 false ; pactl set-sink-volume @DEFAULT_SINK@ -5%\""
 
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
