@@ -1,6 +1,7 @@
 import System.Posix.Unistd (nodeName, getSystemID)
 import System.Posix.Env (setEnv)
 import XMonad
+import XMonad.Actions.CycleWS
 import XMonad.Config.Desktop
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
@@ -17,6 +18,7 @@ import System.Exit
 import XMonad.Hooks.EwmhDesktops
 import Control.Applicative ((<$>), pure)
 import XMonad.Hooks.SetWMName
+import XMonad.Hooks.ManageHelpers
 import Data.List.Split
 import Control.Monad
 
@@ -38,6 +40,7 @@ myConfig host =
     , startupHook = do
         setWMName "LG3D"
         when (host == "orange") (layoutScreens 2 (TwoPane 0.5 0.5))
+    , manageHook = isDialog --> doF W.shiftMaster <+> doF W.swapDown
     }
   where myLayout = onHost "orange" (verticalTiled ||| Full) $
                    layoutHook defaultConfig
@@ -97,13 +100,14 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- Push window back into tiling
     , ((modm,               xK_t     ), withFocused $ windows . W.sink)
 
+    -- Next monitor
+    , ((modm              , xK_Tab ), nextScreen)
+    , ((modm .|. shiftMask, xK_Tab ), swapNextScreen)
+
     -- Increment the number of windows in the master area
     -- , ((modm              , xK_comma ), sendMessage (IncMasterN 1))
-    , ((modm              , xK_Tab ), sendMessage (IncMasterN 1))
-
-    -- Deincrement the number of windows in the master area
-    -- , ((modm              , xK_period), sendMessage (IncMasterN (-1)))
-    , ((modm .|. shiftMask, xK_Tab ), sendMessage (IncMasterN (-1)))
+    , ((modm              , xK_semicolon ), sendMessage (IncMasterN 1))
+    , ((modm              , xK_q ), sendMessage (IncMasterN (-1)))
 
     , ((modm              , xK_w ), spawn muteCommand)
     , ((modm              , xK_v ), spawn decreaseVolumeCommand)
@@ -146,13 +150,12 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
                     , xK_u
                     , xK_i]
         , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
-    ++
-
+    -- ++
     --
     -- mod-{w,e,r}, Switch to physical/Xinerama screens 1, 2, or 3
     -- mod-shift-{w,e,r}, Move client to screen 1, 2, or 3
     --
-    [((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
-        | (key, sc) <- zip [xK_semicolon, xK_q, xK_r] [0..]
-        , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
+    -- [((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
+    --     | (key, sc) <- zip [xK_semicolon, xK_q, xK_r] [0..]
+    --     , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
 
