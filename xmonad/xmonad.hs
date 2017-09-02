@@ -1,9 +1,16 @@
+import System.Posix.Unistd (nodeName, getSystemID)
+import System.Posix.Env (setEnv)
 import XMonad
+import XMonad.Actions.CycleWS
 import XMonad.Config.Desktop
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Util.Run (spawnPipe)
+import XMonad.Layout
+import XMonad.Layout.OnHost
 import XMonad.Layout.NoBorders
+import XMonad.Layout.LayoutScreens
+import XMonad.Layout.TwoPane
 import System.IO
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
@@ -11,26 +18,38 @@ import System.Exit
 import XMonad.Hooks.EwmhDesktops
 import Control.Applicative ((<$>), pure)
 import XMonad.Hooks.SetWMName
+import XMonad.Hooks.ManageHelpers
+import Data.List.Split
+import Control.Monad
 
 main = do
-  config <- xmobar myConfig
+  host <- (head . splitOn "." . nodeName) <$> getSystemID
+  setEnv "HOST" host True
+  config <- xmobar (myConfig host)
   xmonad config
 
-myConfig =
+myConfig host =
   ewmh desktopConfig
-    { layoutHook = smartBorders $ layoutHook desktopConfig
+    { layoutHook = smartBorders $ myLayout
     , keys = myKeys
     , modMask = mod4Mask
     , terminal = "$TERMINAL"
     , borderWidth = 2
     , normalBorderColor = "#000000"
     , workspaces = pure <$> "\"<>PYFAOEU"
-    , startupHook = setWMName "LG3D"
+    , startupHook = do
+        setWMName "LG3D"
+        when (host == "orange") (layoutScreens 2 (TwoPane 0.5 0.5))
+    , manageHook = isDialog --> doF W.shiftMaster <+> doF W.swapDown
     }
+  where myLayout = onHost "orange" (verticalTiled ||| horizontalTiled ||| Full) $
+                   layoutHook defaultConfig
+        verticalTiled = Mirror (Tall 1 (5/100) (2/3))
+        horizontalTiled = Tall 0 (5/100) (2/3)
 
 muteCommand = "pactl set-sink-mute @DEFAULT_SINK@ toggle"
 increaseVolumeCommand = "sh -c \"pactl set-sink-mute 0 false ; pactl set-sink-volume @DEFAULT_SINK@ +5%\""
-decreaseVolumeCommand = "sh -c \"pactl set-sink-mute 0 false ; pactl set-sink-volume @DEFAULT_SINK@ -- -5%\""
+decreaseVolumeCommand = "sh -c \"pactl set-sink-mute 0 false ; pactl set-sink-volume @DEFAULT_SINK@ -5%\""
 
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
@@ -82,13 +101,14 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- Push window back into tiling
     , ((modm,               xK_t     ), withFocused $ windows . W.sink)
 
+    -- Next monitor
+    , ((modm              , xK_Tab ), nextScreen)
+    , ((modm .|. shiftMask, xK_Tab ), swapNextScreen)
+
     -- Increment the number of windows in the master area
     -- , ((modm              , xK_comma ), sendMessage (IncMasterN 1))
-    , ((modm              , xK_Tab ), sendMessage (IncMasterN 1))
-
-    -- Deincrement the number of windows in the master area
-    -- , ((modm              , xK_period), sendMessage (IncMasterN (-1)))
-    , ((modm .|. shiftMask, xK_Tab ), sendMessage (IncMasterN (-1)))
+    , ((modm              , xK_semicolon ), sendMessage (IncMasterN 1))
+    , ((modm              , xK_q ), sendMessage (IncMasterN (-1)))
 
     , ((modm              , xK_w ), spawn muteCommand)
     , ((modm              , xK_v ), spawn decreaseVolumeCommand)
@@ -130,14 +150,13 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
                     , xK_e
                     , xK_u
                     , xK_i]
-        , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
-    ++
-
+        , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
+    -- ++
     --
     -- mod-{w,e,r}, Switch to physical/Xinerama screens 1, 2, or 3
     -- mod-shift-{w,e,r}, Move client to screen 1, 2, or 3
     --
-    [((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
-        | (key, sc) <- zip [xK_semicolon, xK_q, xK_r] [0..]
-        , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
+    -- [((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
+    --     | (key, sc) <- zip [xK_semicolon, xK_q, xK_r] [0..]
+    --     , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
 
