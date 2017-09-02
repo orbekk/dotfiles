@@ -1,4 +1,7 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+PATH=$PATH:$(nix-build '<nixpkgs>' -A wget)/bin
+PATH=$PATH:$(nix-build '<nixpkgs>' -A libxslt.bin)/bin
 
 # Copyright (C) 2010-2015 Christophe Delord
 # http://www.cdsoft.fr/pod
@@ -24,7 +27,7 @@ AUDIO=Audio
 VIDEO=Video
 
 # Default tempo factor for mp3 files
-TEMPO=1.5 # listen podcasts 1.5 x faster
+TEMPO=1 # listen podcasts 1.5 x faster
 
 # Database containing the already downloaded URLs
 DB=~/.poddb
@@ -41,58 +44,59 @@ mkdir -p $(dirname $CONF)
 cat <<EOF >$CONF
 # podcast name      tempo[^1]   URL
 
-#[1]: if tempo is not defined, $TEMPO is used as the default tempo
+SkepticsGuide                    http://www.theskepticsguide.org/feed
 
-01netTV                         http://feeds.feedburner.com/LaChaineTechno?format=xml
-12_Min                          http://feeds.feedburner.com/12minutesdemp3
-56Kast                          http://www.liberation.fr/podcast/40/
-AppLoad                         http://feeds2.feedburner.com/appload
-#Apprendre_l_anglais             http://www.anglaispod.com/apprendre.xml
-#Atelier_Numérique               http://podcast.bfmradio.fr/channel9/BFMchannel9.xml
-Bazingcast                      http://feeds.feedburner.com/bazingcast_mp3
-Ciel_et_Espace                  http://www.cieletespaceradio.fr/podcast.php
-CONTINENT_SCIENCES              http://radiofrance-podcast.net/podcast09/rss_16256.xml
-#Deconnecast                     http://www.deconnecast.fr/feed/
-De_quoi_je_me_mail              http://podcast.rmc.fr/channel35/RMCInfochannel35.xml
-Divergence_Numérique            http://podcasts.divergence-fm.org/divergencenumerique.xml
-#En_Flux_Libre                   http://enfluxlibre.tuxfamily.org/?feed=rss2
-En_quête_de_science             http://www.europe1.fr/podcasts/en-quete-de-science.xml
-FSPod                           http://rss.futura-sciences.com/fs/podcast
-Indesciences                    http://feeds.soundcloud.com/users/soundcloud:users:59221717/sounds.rss
-Info_sciences                   http://radiofrance-podcast.net/podcast09/rss_11074.xml
-La_folle_histoire_de_l_Univers  http://www.florenceporcel.com/podcast/lfhdu.xml
-La_Grotte_Du_Barbu              http://feeds.feedburner.com/lagrottedubarbu/bPUL
-LA_MARCHE_DES_SCIENCES          http://radiofrance-podcast.net/podcast09/rss_11193.xml
-L_apéro_du_Captain              http://feeds.feedburner.com/LaperoDuCaptain
-#La_revue_du_net                 http://www.europe1.fr/podcasts/c-est-pas-tres-net.xml
-La_science_en_question          http://radiofrance-podcast.net/podcast09/rss_10336.xml
-La_tête_au_carré                http://radiofrance-podcast.net/podcast09/rss_10212
-#La_voix_du_libre-capsule        http://feeds.feedburner.com/capsulemp3vdl?format=xml
-#La_voix_du_libre-entrevue       http://feeds.feedburner.com/entrevuesoggvdl?format=xml
-#La_voix_du_libre                http://feeds.feedburner.com/podcastoggvdl?format=xml
-#Le_7-9                          http://radiofrance-podcast.net/podcast09/rss_11992.xml
-#Le_bruit_du_net                 http://radiofrance-podcast.net/podcast09/rss_11064.xml
-L_écho_des_Gnous                http://www.chtinux.org/podcast/feed.xml
-L_éclectique_show               http://feeds.feedburner.com/eclectiqueshow
-Le_rendez-vous_Tech             http://feeds2.feedburner.com/lerendezvoustech
-#Libre_FM                        http://s.libre.fm/podcast.rss
-#L_innovation_du_jour            http://cdn-new-europe1.ladmedia.fr/var/exports/podcasts/sound/Innovation.xml
-NipDev                          http://feeds.feedburner.com/NipDev
-NipLife                         http://feeds.feedburner.com/NiptechPodcastNiplife
-NipSource                       http://feeds.feedburner.com/NipcastNipsource
-NipTech                         http://feeds.feedburner.com/niptechpodcast/
-Nouveau_monde                   http://radiofrance-podcast.net/podcast09/rss_18998.xml
-nouvo                           http://nouvo.ch/feeds/videos
-#Oh_La_Radio                     http://feeds.feedburner.com/OhLaRadio
-Parole_de_Tux                   http://www.captainposix.net/RSSPodcast/feeditunes.xml
-Podcast_Science                 http://feeds.feedburner.com/PodcastScience
-#Random_Radio                    http://fz-corp.net/podcast/podcast.xml
-#Revue_de_presque                http://www.europe1.fr/podcasts/revue-de-presque.xml
-Sang_libre               1      http://libre.tuxakadjseb.net/?feed=rss2
-SCIENCE_PUBLIQUE                http://radiofrance-podcast.net/podcast09/rss_10192.xml
-#Symbiose                        http://www.dogmazic.net/radio/groupePod.php?f=mp3&usr=&groupe=Symbiose
-#Un_jour_sur_la_toile            http://radiofrance-podcast.net/podcast09/rss_10274.xml
-Vie_artificielle                http://feeds.feedburner.com/vieartificielle
+#[1]: if tempo is not defined, $TEMPO is used as the default tempo
+#01netTV                         http://feeds.feedburner.com/LaChaineTechno?format=xml
+#12_Min                          http://feeds.feedburner.com/12minutesdemp3
+#56Kast                          http://www.liberation.fr/podcast/40/
+#AppLoad                         http://feeds2.feedburner.com/appload
+##Apprendre_l_anglais             http://www.anglaispod.com/apprendre.xml
+##Atelier_Numérique               http://podcast.bfmradio.fr/channel9/BFMchannel9.xml
+#Bazingcast                      http://feeds.feedburner.com/bazingcast_mp3
+#Ciel_et_Espace                  http://www.cieletespaceradio.fr/podcast.php
+#CONTINENT_SCIENCES              http://radiofrance-podcast.net/podcast09/rss_16256.xml
+##Deconnecast                     http://www.deconnecast.fr/feed/
+#De_quoi_je_me_mail              http://podcast.rmc.fr/channel35/RMCInfochannel35.xml
+#Divergence_Numérique            http://podcasts.divergence-fm.org/divergencenumerique.xml
+##En_Flux_Libre                   http://enfluxlibre.tuxfamily.org/?feed=rss2
+#En_quête_de_science             http://www.europe1.fr/podcasts/en-quete-de-science.xml
+#FSPod                           http://rss.futura-sciences.com/fs/podcast
+#Indesciences                    http://feeds.soundcloud.com/users/soundcloud:users:59221717/sounds.rss
+#Info_sciences                   http://radiofrance-podcast.net/podcast09/rss_11074.xml
+#La_folle_histoire_de_l_Univers  http://www.florenceporcel.com/podcast/lfhdu.xml
+#La_Grotte_Du_Barbu              http://feeds.feedburner.com/lagrottedubarbu/bPUL
+#LA_MARCHE_DES_SCIENCES          http://radiofrance-podcast.net/podcast09/rss_11193.xml
+#L_apéro_du_Captain              http://feeds.feedburner.com/LaperoDuCaptain
+##La_revue_du_net                 http://www.europe1.fr/podcasts/c-est-pas-tres-net.xml
+#La_science_en_question          http://radiofrance-podcast.net/podcast09/rss_10336.xml
+#La_tête_au_carré                http://radiofrance-podcast.net/podcast09/rss_10212
+##La_voix_du_libre-capsule        http://feeds.feedburner.com/capsulemp3vdl?format=xml
+##La_voix_du_libre-entrevue       http://feeds.feedburner.com/entrevuesoggvdl?format=xml
+##La_voix_du_libre                http://feeds.feedburner.com/podcastoggvdl?format=xml
+##Le_7-9                          http://radiofrance-podcast.net/podcast09/rss_11992.xml
+##Le_bruit_du_net                 http://radiofrance-podcast.net/podcast09/rss_11064.xml
+#L_écho_des_Gnous                http://www.chtinux.org/podcast/feed.xml
+#L_éclectique_show               http://feeds.feedburner.com/eclectiqueshow
+#Le_rendez-vous_Tech             http://feeds2.feedburner.com/lerendezvoustech
+##Libre_FM                        http://s.libre.fm/podcast.rss
+##L_innovation_du_jour            http://cdn-new-europe1.ladmedia.fr/var/exports/podcasts/sound/Innovation.xml
+#NipDev                          http://feeds.feedburner.com/NipDev
+#NipLife                         http://feeds.feedburner.com/NiptechPodcastNiplife
+#NipSource                       http://feeds.feedburner.com/NipcastNipsource
+#NipTech                         http://feeds.feedburner.com/niptechpodcast/
+#Nouveau_monde                   http://radiofrance-podcast.net/podcast09/rss_18998.xml
+#nouvo                           http://nouvo.ch/feeds/videos
+##Oh_La_Radio                     http://feeds.feedburner.com/OhLaRadio
+#Parole_de_Tux                   http://www.captainposix.net/RSSPodcast/feeditunes.xml
+#Podcast_Science                 http://feeds.feedburner.com/PodcastScience
+##Random_Radio                    http://fz-corp.net/podcast/podcast.xml
+##Revue_de_presque                http://www.europe1.fr/podcasts/revue-de-presque.xml
+#Sang_libre               1      http://libre.tuxakadjseb.net/?feed=rss2
+#SCIENCE_PUBLIQUE                http://radiofrance-podcast.net/podcast09/rss_10192.xml
+##Symbiose                        http://www.dogmazic.net/radio/groupePod.php?f=mp3&usr=&groupe=Symbiose
+##Un_jour_sur_la_toile            http://radiofrance-podcast.net/podcast09/rss_10274.xml
+#Vie_artificielle                http://feeds.feedburner.com/vieartificielle
 EOF
 
 PARSE=$PARTIAL/parse_enclosure.xsl
