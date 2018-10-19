@@ -5,6 +5,7 @@ import XMonad.Actions.CycleWS
 import XMonad.Config.Desktop
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.InsertPosition
 import XMonad.Util.Run (spawnPipe)
 import XMonad.Layout
 import XMonad.Layout.OnHost
@@ -28,6 +29,8 @@ main = do
   config <- xmobar (myConfig host)
   xmonad config
 
+layoutScreensHost = "unused" -- orange
+
 myConfig host =
   ewmh desktopConfig
     { layoutHook = smartBorders $ myLayout
@@ -35,14 +38,15 @@ myConfig host =
     , modMask = mod4Mask
     , terminal = "$TERMINAL"
     , borderWidth = 2
-    , normalBorderColor = "#000000"
+    , focusedBorderColor = "#ff0000"
+    , normalBorderColor = "#777778"
     , workspaces = pure <$> "\"<>PYFAOEU"
     , startupHook = do
         setWMName "LG3D"
-        when (host == "orange") (layoutScreens 2 (TwoPane 0.5 0.5))
-    , manageHook = isDialog --> doF W.shiftMaster <+> doF W.swapDown
+        -- when (host == layoutScreensHost) (layoutScreens 2 (TwoPane 0.5 0.5))
+    , manageHook = insertPosition Below Newer <+> (isDialog --> doF W.shiftMaster <+> doF W.swapDown)
     }
-  where myLayout = onHost "orange" (verticalTiled ||| horizontalTiled ||| Full) $
+  where myLayout = onHost layoutScreensHost (verticalTiled ||| horizontalTiled ||| Full) $
                    layoutHook defaultConfig
         verticalTiled = Mirror (Tall 1 (5/100) (2/3))
         horizontalTiled = Tall 0 (5/100) (2/3)
@@ -114,6 +118,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm              , xK_v ), spawn decreaseVolumeCommand)
     , ((modm              , xK_z ), spawn increaseVolumeCommand)
 
+    , ((modm              , xK_s ), (layoutScreens 2 (TwoPane 0.5 0.5)))
+    , ((modm .|. shiftMask, xK_s ), rescreen)
+
     -- This is redundant because it's added by the statusBar function.
     -- , ((modm              , xK_b     ), sendMessage ToggleStruts)
 
@@ -159,4 +166,3 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- [((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
     --     | (key, sc) <- zip [xK_semicolon, xK_q, xK_r] [0..]
     --     , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
-
