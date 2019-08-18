@@ -4,10 +4,10 @@ with stdenv.lib;
 
 stdenv.mkDerivation rec {
   name = "the-long-dark-${version}";
-  version = "2.7.0.8";
+  version = "2.9.0.11";
   src = requireFile {
     name = "gog_the_long_dark_${version}.sh";
-    sha256 = "3496e8799a9604dcd5a1704269e222189d439a094bc528a43b0a997ea10fafb7";
+    sha256 = "3bb5feaa921334dfca28ad42ff6c87980fa445dd4d2547fc97e9e3adbcea1725";
     url = "https://gog.com";
   };
 

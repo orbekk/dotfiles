@@ -11,10 +11,11 @@ declare -r overwrite=false
 declare -r tmpdir=$(mktemp -d /tmp/kj_sync_authorized_keys.XXXXX)
 
 targets=(
-  root@orbekk.osl.trygveandre.net
+  shape
   sabaki
   semeai
   dragon
+  root@orbekk.osl.trygveandre.net
   #login.pvv.ntnu.no
   gote.orbekk.com
 )
