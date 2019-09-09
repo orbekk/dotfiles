@@ -78,6 +78,9 @@ create_symlink ../dotfiles/i3/config .i3/config
 create_symlink dotfiles/i3status.conf .i3status.conf
 create_symlink dotfiles/i3blocks.conf .i3blocks.conf
 
+mkdir -p .urxvt/ext
+create_symlink ../../dotfiles/urxvt/ext/resize-font .urxvt/ext/resize-font
+
 # Don't use on new machines.
 # create_symlink dotfiles/vimrc .vimrc
 # if [[ -e .vim/bundle/Vundle.vim ]]; then

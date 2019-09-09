@@ -1,4 +1,4 @@
-urxvt*font: xft:dejavu sans mono:size=12:antialias=true
+urxvt*font: xft:dejavu sans mono:size=10:antialias=true
 !urxvt*font: xft:inconsolata:size=14:antialias=true
 urxvt*scrollBar: false
 
@@ -12,6 +12,7 @@ Xft.rgba:       rgb
 Xft.hinting:    true
 Xft.hintstyle:  hintslight
 
+URxvt.perl-lib: /home/orbekk/.urxvt/ext
 URxvt.keysym.M-c:   perl:clipboard:copy
 URxvt.keysym.M-v:   perl:clipboard:paste
 URxvt.scrollBar: false

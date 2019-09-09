@@ -51,6 +51,7 @@ values."
      gnus
      mu4e
      nixos
+     ess
      (mu4e :variables
            mu4e-installation-path "/usr/share/emacs/site-lisp")
      )
@@ -58,7 +59,7 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages then consider to create a layer, you can also put the
    ;; configuration in `dotspacemacs/config'.
-   dotspacemacs-additional-packages '()
+   dotspacemacs-additional-packages '(hledger-mode)
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '(smartparens flyspell evil-jumper)
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
@@ -231,6 +232,7 @@ user code."
   (evil-leader/set-key "ort" #'org-agenda-file-to-front)
   (evil-leader/set-key "orl" #'org-store-link)
   (evil-leader/set-key "ora" #'org-agenda)
+  (evil-leader/set-key "ol" #'hledger-jentry)
   (evil-leader/set-key "ot"
     (lambda () (interactive) (org-capture nil "t")))
   )
@@ -301,6 +303,10 @@ user code."
 layers configuration. You are free to put any user code."
   (setq custom-file "~/.spacemacs.local")
   (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
+  (add-hook 'ess-mode-hook
+            (lambda ()
+              (ess-toggle-underscore nil))) 
+  (add-to-list 'auto-mode-alist '("\\.journal\\'" . hledger-mode))
   (setq-default
    vc-follow-symlinks nil
    web-mode-code-indent-offset 2)
