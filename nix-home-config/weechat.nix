@@ -1,17 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  programs.home-manager.enable = true;
-  programs.neovim.enable = true;
-
-  home.stateVersion = "19.03";
-
-  home.sessionVariables = {
-    EDITOR = "nvim";
-  };
-
   systemd.user.startServices = true;
-
   systemd.user.services = {
     weechat = {
       Unit = {
