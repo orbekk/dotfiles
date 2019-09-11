@@ -19,6 +19,7 @@
     rPackages.viridis
     emacs
     hledger
+    hledger-ui
     ledger
     bwm_ng
   ];
