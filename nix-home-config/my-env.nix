@@ -22,5 +22,7 @@
     hledger-ui
     ledger
     bwm_ng
+    signal-desktop
+    nix-index
   ];
 }
