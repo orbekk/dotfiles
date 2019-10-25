@@ -27,6 +27,7 @@ values."
      ;; ----------------------------------------------------------------
      ;; auto-completion
      ;; better-defaults
+     ivy
      emacs-lisp
      shell
      c-c++
@@ -97,14 +98,7 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(spacemacs-dark wheatgrass
-                         monokai
-                         base16-bright-dark
-                         spacemacs-light
-                         solarized-light
-                         solarized-dark
-                         leuven
-                         zenburn)
+   dotspacemacs-themes '(spacemacs-dark spacemacs-light)
    ;; If non nil the cursor color matches the state color.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
@@ -214,22 +208,30 @@ It is called immediately after `dotspacemacs/init'.  You are free to put any
 user code."
   ;; bind ctrl-w to backwards-kill-word when no region is selected
   (global-set-key (kbd "C-w") 'backward-kill-word-or-kill-region)
-
-  (setq-default exec-path-from-shell-variables '())
-
   (defun backward-kill-word-or-kill-region (&optional arg)
     (interactive "p")
     (if (region-active-p)
         (kill-region (region-beginning) (region-end))
       (backward-kill-word arg)))
+
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((emacs-lisp . nil)
+     (R . t)))
+  (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
+  (autoload 'org-mks "org-macs")
+  (autoload 'org-show-all "org")
+  (autoload 'org-line-number-display-width "org-compat")
+  (autoload 'org-set-local "org-element")
+  (autoload 'org-element-block-name-alist "org-element")
+
+  (setq-default exec-path-from-shell-variables '())
+
   (setq-default git-magit-status-fullscreen t)
 )
 
 (defun kj-bindings ()
   "Set up my custom bindings."
-  (evil-leader/set-key "on" #'nohlsearch)
-  (evil-leader/set-key "of" #'auto-fill-mode)
-  (evil-leader/set-key "ort" #'org-agenda-file-to-front)
   (evil-leader/set-key "orl" #'org-store-link)
   (evil-leader/set-key "ora" #'org-agenda)
   (evil-leader/set-key "ol" #'hledger-jentry)
@@ -242,6 +244,9 @@ user code."
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((R . t)))
+
+  (setq my-running-journal "~/www/running-2019.org")
+
   (setq-default
    ;; nxml is unbearably slow :(
    rng-nxml-auto-validate-flag nil
@@ -252,49 +257,39 @@ user code."
    org-support-shift-select t
    ;; '(("t" "Todo" entry (file+headline "~/org/in.org" "Tasks")
    ;;    "* TODO %?\n  %i\n  %a")))
-   org-capture-templates
-   '(("t" "Todo" entry (file+headline "~/org/in.org" "Tasks")
-      "* TODO %?")
-     ("r" "Run" entry (file+datetree "~/projects/www/running-new.org")
-      "* Test Run\n %?")
-     )
-   org-agenda-files '("~/org")
+   org-agenda-files '("~/org/todo.org")
    )
-  (eval-after-load "org" '(require 'ox-md nil t))
   ; (global-git-commit-mode t)
-  )
 
-(defun mu4e-config ()
-  (setq mu4e-drafts-folder "/[Gmail]/.Drafts")
-  (setq mu4e-sent-folder   "/[Gmail]/.Sent Mail")
-  (setq mu4e-trash-folder  "/[Gmail]/.Trash")
-  (setq mu4e-sent-messages-behavior 'delete)
-
-  (setq mu4e-maildir-shortcuts
-        '( ("/Inbox"   . ?i)
-           ("/[Gmail]/.Sent Mail"    . ?s)
-           ("/[Gmail]/.Trash"   . ?t)
-           ("/[Gmail]/.All Mail" . ?a)))
-
-  (setq mu4e-get-mail-command "mbsync gmail")
-
-  (setq
-   user-mail-address "kjetil.orbekk@gmail.com"
-   user-full-name  "Kjetil Ørbekk"
-   mu4e-compose-signature
-   (concat "KJ\n"))
-
-  (require 'smtpmail)
-  (setq message-send-mail-function 'smtpmail-send-it
-        starttls-use-gnutls t
-        smtpmail-starttls-credentials '(("smtp.gmail.com" 587 nil nil))
-        smtpmail-auth-credentials
-        '(("smtp.gmail.com" 587 "kjetil.orbekk@gmail.com" nil))
-        smtpmail-default-smtp-server "smtp.gmail.com"
-        smtpmail-smtp-server "smtp.gmail.com"
-           smtpmail-smtp-service 587)
-
-  (setq message-kill-buffer-on-exit t)
+  (setq org-capture-templates
+        `(
+          ("r" "Run" entry (file+olp+datetree ,my-running-journal "Running")
+           ,(string-join '(
+                           "* Run"
+                           ":PROPERTIES:"
+                           ":DistanceMiles:"
+                           ":ElapsedTime:"
+                           ":Shoes:"
+                           ":Effort:"
+                           ":RunType:"
+                           ":StartTime:"
+                           ":Category: Run"
+                           ":END:"
+                           "%t"
+                           "%?"
+                           ) "\n")
+           :tree-type week
+           )
+          ("w" "Log weight" entry (file+olp+datetree ,my-running-journal "Weight")
+           ,(string-join '(
+                           "* Weight"
+                           ":PROPERTIES:"
+                           ":Weight: %^{Weight}"
+                           ":END:"
+                           "%t"
+                           ) "\n")
+           :tree-type week
+           )))
   )
 
 (defun dotspacemacs/user-config ()
@@ -318,7 +313,6 @@ layers configuration. You are free to put any user code."
   (global-fci-mode 1)
   ;; I have been warned about magit stealing my files:
   (setq magit-last-seen-setup-instructions "1.4.0")
-  (mu4e-config)
   (add-to-list 'spacemacs-indent-sensitive-modes 'nix-mode)
   (setq dns-mode-soa-auto-increment-serial nil)
   (add-to-list 'org-structure-template-alist
@@ -338,7 +332,7 @@ layers configuration. You are free to put any user code."
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (ess-smart-equals ess-R-data-view ctable ess julia-mode nix-mode helm-nixos-options nixos-options winum uuidgen pug-mode org-projectile org-category-capture org-mime org-download mu4e-maildirs-extension mu4e-alert ht livid-mode skewer-mode simple-httpd link-hint intero flycheck hlint-refactor helm-hoogle git-link eyebrowse evil-visual-mark-mode evil-unimpaired evil-ediff eshell-z dumb-jump f company-ghci company-ghc company column-enforce-mode cargo idris-mode prop-menu ledger-mode toml-mode racer rust-mode smeargle orgit magit-gitflow helm-gitignore request gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger evil-magit magit magit-popup git-commit with-editor xterm-color ws-butler window-numbering web-mode web-beautify volatile-highlights vi-tilde-fringe toc-org tern tagedit spacemacs-theme spaceline powerline smooth-scrolling slim-mode shm shell-pop scss-mode sass-mode restart-emacs rainbow-delimiters popwin persp-mode pcre2el paradox hydra spinner page-break-lines org-repo-todo org-present org-pomodoro alert log4e gntp org-plus-contrib org-bullets open-junk-file nyan-mode neotree multi-term move-text mmm-mode markdown-toc markdown-mode macrostep lorem-ipsum linum-relative leuven-theme less-css-mode json-mode json-snatcher json-reformat js2-refactor multiple-cursors s js2-mode js-doc jade-mode info+ indent-guide ido-vertical-mode hungry-delete htmlize hl-todo hindent highlight-parentheses highlight-numbers parent-mode highlight-indentation help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flyspell helm-flx helm-descbinds helm-css-scss helm-ag haskell-snippets yasnippet haml-mode google-translate golden-ratio gnuplot ghc haskell-mode gh-md flx-ido flx fill-column-indicator fancy-battery expand-region exec-path-from-shell evil-visualstar evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-args evil-anzu anzu eval-sexp-fu highlight eshell-prompt-extras esh-help emmet-mode elisp-slime-nav disaster define-word coffee-mode cmm-mode cmake-mode clean-aindent-mode clang-format buffer-move bracketed-paste auto-highlight-symbol auto-dictionary auto-compile packed dash aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async quelpa package-build use-package which-key bind-key bind-map evil monokai-theme))))
+    (pos-tip git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter transient goto-chg undo-tree diminish diff-hl csv-mode wgrep smex ivy-hydra lv counsel-projectile counsel swiper ivy ess-smart-equals ess-R-data-view ctable ess julia-mode nix-mode helm-nixos-options nixos-options winum uuidgen pug-mode org-projectile org-category-capture org-mime org-download mu4e-maildirs-extension mu4e-alert ht livid-mode skewer-mode simple-httpd link-hint intero flycheck hlint-refactor helm-hoogle git-link eyebrowse evil-visual-mark-mode evil-unimpaired evil-ediff eshell-z dumb-jump f company-ghci company-ghc company column-enforce-mode cargo idris-mode prop-menu ledger-mode toml-mode racer rust-mode smeargle orgit magit-gitflow helm-gitignore request gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger evil-magit magit magit-popup git-commit with-editor xterm-color ws-butler window-numbering web-mode web-beautify volatile-highlights vi-tilde-fringe toc-org tern tagedit spacemacs-theme spaceline powerline smooth-scrolling slim-mode shm shell-pop scss-mode sass-mode restart-emacs rainbow-delimiters popwin persp-mode pcre2el paradox hydra spinner page-break-lines org-repo-todo org-present org-pomodoro alert log4e gntp org-plus-contrib org-bullets open-junk-file nyan-mode neotree multi-term move-text mmm-mode markdown-toc markdown-mode macrostep lorem-ipsum linum-relative leuven-theme less-css-mode json-mode json-snatcher json-reformat js2-refactor multiple-cursors s js2-mode js-doc jade-mode info+ indent-guide ido-vertical-mode hungry-delete htmlize hl-todo hindent highlight-parentheses highlight-numbers parent-mode highlight-indentation help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flyspell helm-flx helm-descbinds helm-css-scss helm-ag haskell-snippets yasnippet haml-mode google-translate golden-ratio gnuplot ghc haskell-mode gh-md flx-ido flx fill-column-indicator fancy-battery expand-region exec-path-from-shell evil-visualstar evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-args evil-anzu anzu eval-sexp-fu highlight eshell-prompt-extras esh-help emmet-mode elisp-slime-nav disaster define-word coffee-mode cmm-mode cmake-mode clean-aindent-mode clang-format buffer-move bracketed-paste auto-highlight-symbol auto-dictionary auto-compile packed dash aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async quelpa package-build use-package which-key bind-key bind-map evil monokai-theme))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
