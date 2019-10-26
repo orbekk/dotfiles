@@ -15,5 +15,5 @@ if [[ $extension == "m4b" ]]; then
   extension=m4a
 fi
 
-ffmpeg -i "${input_file}" -metadata title="%03d" -c copy -f segment -segment_time $max_duration \
+ffmpeg -i "${input_file}" -c copy -f segment -segment_time $max_duration \
        "${base}-%03d.${extension}"
