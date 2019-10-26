@@ -24,5 +24,7 @@
     bwm_ng
     signal-desktop
     nix-index
+    ffmpeg
+    vlc
   ];
 }

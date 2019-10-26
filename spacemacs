@@ -244,6 +244,12 @@ user code."
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((R . t)))
+  (with-eval-after-load 'org
+    (autoload 'org-babel-execute:emacs-lisp "ob-emacs-lisp")
+    (org-babel-do-load-languages
+     'org-babel-load-languages
+     '((R . t)
+       (emacs-lisp . t))))
 
   (setq my-running-journal "~/www/running-2019.org")
 
