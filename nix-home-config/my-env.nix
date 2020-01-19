@@ -26,5 +26,7 @@
     nix-index
     ffmpeg
     vlc
+    rustup
+    synergy
   ];
 }
