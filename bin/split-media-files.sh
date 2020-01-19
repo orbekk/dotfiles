@@ -1,5 +1,3 @@
-#!bash
-
 max_duration=$((4*3600))
 
 if [[ $# -ne 1 ]]; then
@@ -10,10 +8,8 @@ fi
 input_file="$1"
 
 base="$(basename $input_file | perl -pe 's/(.*)\.([^.]*)$/$1/')"
-extension="$(echo $input_file | perl -pe 's/(.*)\.([^.]*)$/$2/')"
-if [[ $extension == "m4b" ]]; then
-  extension=m4a
-fi
 
-ffmpeg -i "${input_file}" -c copy -f segment -segment_time $max_duration \
-       "${base}-%03d.${extension}"
+ffmpeg -i "${input_file}" \
+       -f segment -segment_time $max_duration -segment_start_number 1 \
+       -segment_format mp3 -qscale:a 5 \
+       "${base}-%02d.mp3"

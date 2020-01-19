@@ -12,11 +12,15 @@
     htop
     iw
     wirelesstools
-    R
-    rPackages.data_table
-    rPackages.ggplot2
-    rPackages.hms
-    rPackages.viridis
+    (rWrapper.override {
+      packages = with rPackages; [
+        data_table
+        ggplot2
+        hms
+        viridis
+        lubridate
+      ];
+    })
     emacs
     hledger
     hledger-ui

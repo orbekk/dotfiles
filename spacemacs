@@ -208,22 +208,27 @@ It is called immediately after `dotspacemacs/init'.  You are free to put any
 user code."
   ;; bind ctrl-w to backwards-kill-word when no region is selected
   (global-set-key (kbd "C-w") 'backward-kill-word-or-kill-region)
+
+  (spacemacs|use-package-add-hook org
+    :pre-init
+    (package-initialize))
+
   (defun backward-kill-word-or-kill-region (&optional arg)
     (interactive "p")
     (if (region-active-p)
         (kill-region (region-beginning) (region-end))
       (backward-kill-word arg)))
 
-  (org-babel-do-load-languages
-   'org-babel-load-languages
-   '((emacs-lisp . nil)
-     (R . t)))
+  ;; (org-babel-do-load-languages
+  ;;  'org-babel-load-languages
+  ;;  '((emacs-lisp . nil)
+  ;;    (R . t)))
   (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
-  (autoload 'org-mks "org-macs")
-  (autoload 'org-show-all "org")
-  (autoload 'org-line-number-display-width "org-compat")
-  (autoload 'org-set-local "org-element")
-  (autoload 'org-element-block-name-alist "org-element")
+  ;; (autoload 'org-mks "org-macs")
+  ;; (autoload 'org-show-all "org")
+  ;; (autoload 'org-line-number-display-width "org-compat")
+  ;; (autoload 'org-set-local "org-element")
+  ;; (autoload 'org-element-block-name-alist "org-element")
 
   (setq-default exec-path-from-shell-variables '())
 
@@ -241,10 +246,10 @@ user code."
 
 (defun kj-org-config ()
   "Org configuration."
-  (org-babel-do-load-languages
-   'org-babel-load-languages
-   '((R . t)))
   (with-eval-after-load 'org
+    (org-babel-do-load-languages
+     'org-babel-load-languages
+     '((R . t)))
     (autoload 'org-babel-execute:emacs-lisp "ob-emacs-lisp")
     (org-babel-do-load-languages
      'org-babel-load-languages
@@ -265,7 +270,7 @@ user code."
    ;;    "* TODO %?\n  %i\n  %a")))
    org-agenda-files '("~/org/todo.org")
    )
-  ; (global-git-commit-mode t)
+                                        ; (global-git-commit-mode t)
 
   (setq org-capture-templates
         `(
