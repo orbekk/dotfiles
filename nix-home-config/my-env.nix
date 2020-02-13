@@ -3,12 +3,18 @@
 {
   programs.home-manager.enable = true;
   programs.neovim.enable = true;
+  services.lorri.enable = true;
 
   home.sessionVariables = {
     EDITOR = "nvim";
   };
 
+  home.file.".zshrc-nix-hook".text = ''
+    eval "$(direnv hook zsh)"
+  '';
+
   home.packages = with pkgs; [
+    direnv
     htop
     iw
     wirelesstools
