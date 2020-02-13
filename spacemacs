@@ -17,7 +17,7 @@ values."
    ;; List of configuration layers to load. If it is the symbol `all' instead
    ;; of a list then all discovered layers will be installed.
    dotspacemacs-configuration-layers
-   '(
+   '(sql
      csv
      finance
      ;; ----------------------------------------------------------------
@@ -326,12 +326,6 @@ layers configuration. You are free to put any user code."
   (setq magit-last-seen-setup-instructions "1.4.0")
   (add-to-list 'spacemacs-indent-sensitive-modes 'nix-mode)
   (setq dns-mode-soa-auto-increment-serial nil)
-  (add-to-list 'org-structure-template-alist
-               `("r" ,(string-join '("** Untitled Run"
-                                     "  :PROPERTIES:"
-                                     "  :dist: "
-                                     "  :date: %t"
-                                     "  :END:") "\n")))
   (setq
    ledger-binary-path "hledger"
    ledger-post-amount-alignment-column 50)

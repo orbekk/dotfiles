@@ -64,6 +64,7 @@ done
 # done
 
 # create_symlink dotfiles/zshrc .zshrc
+create_symlink dotfiles/zshenv .zshenv
 
 mkdir -p .ssh
 create_symlink ../dotfiles/ssh/config .ssh/config

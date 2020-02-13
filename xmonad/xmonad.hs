@@ -40,7 +40,7 @@ myConfig host =
     , borderWidth = 2
     , focusedBorderColor = "#ff0000"
     , normalBorderColor = "#777778"
-    , workspaces = pure <$> "\"<>PYFAOEU"
+    , workspaces = pure <$> "\"<>PYFAOEUI"
     , startupHook = do
         setWMName "LG3D"
         -- when (host == layoutScreensHost) (layoutScreens 2 (TwoPane 0.5 0.5))
@@ -131,7 +131,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- , ((modm              , xK_q     ), spawn "xmonad --recompile; xmonad --restart")
 
     -- Lock screen
-    , ((modm .|. shiftMask, xK_z), spawn "xscreensaver-command -lock")
+    , ((modm .|. shiftMask, xK_z), spawn "mate-screensaver-command --lock")
     ]
     ++
 

@@ -1,0 +1,2 @@
+EDITOR=nvim
+PATH=$PATH:$HOME/bin
