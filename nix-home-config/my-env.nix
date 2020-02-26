@@ -16,8 +16,6 @@
   home.packages = with pkgs; [
     direnv
     htop
-    iw
-    wirelesstools
     (rWrapper.override {
       packages = with rPackages; [
         data_table
@@ -29,14 +27,9 @@
     })
     emacs
     hledger
-    hledger-ui
     ledger
     bwm_ng
-    signal-desktop
     nix-index
-    ffmpeg
-    vlc
     rustup
-    synergy
   ];
 }

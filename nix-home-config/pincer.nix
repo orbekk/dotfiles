@@ -3,6 +3,7 @@
 {
   imports = [
     ./my-env.nix
+    ./desktop.nix
     ./synergy-client.nix
   ];
 
