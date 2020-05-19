@@ -54,4 +54,7 @@
 (after! smartparens
   (smartparens-global-mode -1))
 
-(load-file ".doom.d/config.local.el")
+(after! mu4e-maildirs-extension
+  (mu4e-maildirs-extension))
+
+(load-file "~/.doom.d/config.local.el")
