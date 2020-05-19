@@ -80,6 +80,7 @@ create_symlink dotfiles/i3blocks.conf .i3blocks.conf
 
 mkdir -p .urxvt/ext
 create_symlink ../../dotfiles/urxvt/ext/resize-font .urxvt/ext/resize-font
+create_symlink ../../dotfiles/urxvt/ext/clipboard .urxvt/ext/clipboard
 
 # Don't use on new machines.
 # create_symlink dotfiles/vimrc .vimrc
