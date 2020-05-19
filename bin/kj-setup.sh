@@ -50,6 +50,13 @@ create_symlink dotfiles/spacemacs .spacemacs
 create_symlink /dev/null .vimrc.local
 create_symlink dotfiles/livestreamerrc .livestreamerrc
 
+mkdir -p .doom.d
+for f in dotfiles/doom.d/*; do
+  f=$(basename "${f}")
+  create_symlink "../dotfiles/doom.d/${f}" ".doom.d/${f}"
+done
+touch .doom.d/{config,init,packages}.local.el
+
 mkdir -p bin
 for binary in dotfiles/bin/*; do
   binary=$(basename "${binary}")
