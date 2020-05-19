@@ -24,11 +24,45 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-one)
+(setq doom-theme 'doom-laserwave)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/org/")
+(setq org-roam-directory "~/org/")
+(use-package! org
+  :config
+  (setq org-todo-keywords
+        '((sequence
+          "TODO(t)" "ACTIVE(a!)" "WAIT(w@/!)" "|" "DONE(d!)" "CANCELED(c@)")))
+  (setq org-refile-use-outline-path nil)
+  (setq org-refile-targets '((nil . (:maxlevel . 2)))))
+
+(use-package! org-agenda
+  :config
+  (setq org-agenda-ndays 14)
+  (setq org-agenda-include-diary 1)
+  (setq org-agenda-todo-ignore-with-date 1)
+  (setq org-agenda-todo-ignore-scheduled 1)
+  (setq org-agenda-start-with-log-mode 1)
+  (setq org-agenda-window-setup 'current-window)
+  (setq org-agenda-custom-commands
+        '(("g" "Google agenda"
+           ((agenda "")
+            (todo "ACTIVE")
+            (alltodo))
+           )))
+  (setq org-capture-templates
+        `(
+          ("t" "Todo" entry (file+headline "~/org/todo.org" "Inbox")
+           "* TODO %?\n  %i\n  %a")
+          ("d" "Daily review" entry (file+olp+datetree "~/org/review.org" "Daily")
+           (file "~/org/templates/daily-review.org") :tree-type week :jump-to-captured t)
+          ("w" "Weekly review" entry (file+olp+datetree "~/org/review.org" "Weekly")
+           (file "~/org/templates/weekly-review.org") :tree-type week :jump-to-captured t)
+          ("j" "Journal entry" entry (file+olp+datetree "~/org/journal.org" "Journal")
+           "* Journal entry\n%t\n\n%?" :tree-type week :jump-to-captured t)
+          )))
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
