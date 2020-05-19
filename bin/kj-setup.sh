@@ -64,6 +64,7 @@ done
 # done
 
 # create_symlink dotfiles/zshrc .zshrc
+create_symlink dotfiles/zshenv .zshenv
 
 mkdir -p .ssh
 create_symlink ../dotfiles/ssh/config .ssh/config
@@ -71,7 +72,7 @@ create_symlink ../dotfiles/ssh/config .ssh/config
 mkdir -p .xmonad
 create_symlink ../dotfiles/xmonad/xmonad.hs .xmonad/xmonad.hs
 create_symlink dotfiles/xmonad/xmobar.hs .xmobarrc
-create_symlink dotfiles/xsession .xsession
+#create_symlink dotfiles/xsession .xsession
 
 mkdir -p .i3
 create_symlink ../dotfiles/i3/config .i3/config

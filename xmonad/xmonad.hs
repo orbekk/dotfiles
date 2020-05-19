@@ -26,28 +26,26 @@ import Control.Monad
 main = do
   host <- (head . splitOn "." . nodeName) <$> getSystemID
   setEnv "HOST" host True
-  config <- xmobar (myConfig host)
+  -- config <- xmobar (myConfig host)
+  let config = myConfig host
   xmonad config
 
 layoutScreensHost = "unused" -- orange
 
 myConfig host =
-  ewmh desktopConfig
+  (docks . ewmh) $ desktopConfig
     { layoutHook = smartBorders $ myLayout
     , keys = myKeys
     , modMask = mod4Mask
-    , terminal = "$TERMINAL"
+    , terminal = "urxvt"
     , borderWidth = 2
     , focusedBorderColor = "#ff0000"
     , normalBorderColor = "#777778"
-    , workspaces = pure <$> "\"<>PYFAOEU"
-    , startupHook = do
-        setWMName "LG3D"
-        -- when (host == layoutScreensHost) (layoutScreens 2 (TwoPane 0.5 0.5))
+    , workspaces = pure <$> "\"<>PYFAOEUI"
     , manageHook = insertPosition Below Newer <+> (isDialog --> doF W.shiftMaster <+> doF W.swapDown)
     }
   where myLayout = onHost layoutScreensHost (verticalTiled ||| horizontalTiled ||| Full) $
-                   layoutHook defaultConfig
+                   layoutHook desktopConfig
         verticalTiled = Mirror (Tall 1 (5/100) (2/3))
         horizontalTiled = Tall 0 (5/100) (2/3)
 
@@ -122,7 +120,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm .|. shiftMask, xK_s ), rescreen)
 
     -- This is redundant because it's added by the statusBar function.
-    -- , ((modm              , xK_b     ), sendMessage ToggleStruts)
+    , ((modm              , xK_b     ), sendMessage ToggleStruts)
 
     -- Quit xmonad
     -- , ((modm .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
@@ -131,7 +129,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- , ((modm              , xK_q     ), spawn "xmonad --recompile; xmonad --restart")
 
     -- Lock screen
-    , ((modm .|. shiftMask, xK_z), spawn "xscreensaver-command -lock")
+    , ((modm .|. shiftMask, xK_z), spawn "mate-screensaver-command --lock")
     ]
     ++
 
