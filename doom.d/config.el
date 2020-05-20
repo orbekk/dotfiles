@@ -29,7 +29,6 @@
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/org/")
-(setq org-roam-directory "~/org/")
 (use-package! org
   :config
   (setq org-todo-keywords
@@ -63,6 +62,19 @@
           ("j" "Journal entry" entry (file+olp+datetree "~/org/journal.org" "Journal")
            "* Journal entry\n%t\n\n%?" :tree-type week :jump-to-captured t)
           )))
+
+(use-package! org)
+(use-package! org-roam
+  :after org
+  :init
+  (setq org-roam-directory "~/org/roam")
+  (setq org-roam-capture-templates '(("d" "default" plain (function org-roam-capture--get-point)
+     "%?"
+     :file-name "%<%Y%m%d%H%M%S>-${slug}"
+     :head "#+TITLE: ${title}\n"
+     :unnarrowed t))))
+
+(setq deft-directory "~/org/")
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.

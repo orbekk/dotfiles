@@ -32,5 +32,10 @@
     nix-index
     rustup
     gitFull
+
+    ripgrep
+    coreutils
+    fd
+    clang
   ];
 }
