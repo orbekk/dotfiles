@@ -68,13 +68,17 @@
   :after org
   :init
   (setq org-roam-directory "~/org/roam")
-  (setq org-roam-capture-templates '(("d" "default" plain (function org-roam-capture--get-point)
-     "%?"
-     :file-name "%<%Y%m%d%H%M%S>-${slug}"
-     :head "#+TITLE: ${title}\n"
-     :unnarrowed t))))
+  (setq org-roam-capture-templates
+        '(
+          ("d" "default" plain (function org-roam-capture--get-point)
+           "%?"
+           :file-name "%<%Y%m%d%H%M%S>-${slug}"
+           :head "#+TITLE: ${title}\n- tags :: [[file:%<%Y-W%W>.org][%<%Y-W%W>]]"
+           :unnarrowed t)
+          )))
 
 (setq deft-directory "~/org/")
+(setq deft-recursive t)
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
