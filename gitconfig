@@ -1,6 +1,6 @@
 [user]
 	name = Kjetil Orbekk
-	email = kjetil.orbekk@gmail.com
+	email = kj@orbekk.com
 [color]
         diff = auto
         status = auto
@@ -8,3 +8,8 @@
         ui = true
 [push]
 	default = simple
+[sendemail]
+	smtpencryption = tls
+	smtpserver = mail.messagingengine.com
+	smtpuser = kj@orbekk.com
+	smtpserverport = 587

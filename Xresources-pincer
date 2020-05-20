@@ -9,6 +9,8 @@ urxvt*scrollBar: false
 URxvt*termName: xterm-256color
 Xterm*termName: xterm-256color
 
+Xcursor.size: 24
+
 Xft.lcdfilter: lcddefault
 Xft.dpi:        96
 Xft.antialias:  true

@@ -2,6 +2,7 @@ import System.Posix.Unistd (nodeName, getSystemID)
 import System.Posix.Env (setEnv)
 import XMonad
 import XMonad.Actions.CycleWS
+import XMonad.Config.Kde
 import XMonad.Config.Desktop
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
@@ -33,7 +34,7 @@ main = do
 layoutScreensHost = "unused" -- orange
 
 myConfig host =
-  (docks . ewmh) $ desktopConfig
+  (docks . ewmh) $ kdeConfig
     { layoutHook = smartBorders $ myLayout
     , keys = myKeys
     , modMask = mod4Mask
@@ -42,7 +43,7 @@ myConfig host =
     , focusedBorderColor = "#ff0000"
     , normalBorderColor = "#777778"
     , workspaces = pure <$> "\"<>PYFAOEUI"
-    , manageHook = insertPosition Below Newer <+> (isDialog --> doF W.shiftMaster <+> doF W.swapDown)
+    , manageHook = manageHook kdeConfig <+> insertPosition Below Newer <+> (isDialog --> doF W.shiftMaster <+> doF W.swapDown)
     }
   where myLayout = onHost layoutScreensHost (verticalTiled ||| horizontalTiled ||| Full) $
                    layoutHook desktopConfig

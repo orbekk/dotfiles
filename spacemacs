@@ -208,6 +208,38 @@ It is called immediately after `dotspacemacs/init'.  You are free to put any
 user code."
   ;; bind ctrl-w to backwards-kill-word when no region is selected
   (global-set-key (kbd "C-w") 'backward-kill-word-or-kill-region)
+  (setq tab-width 8)
+
+  (defun c-lineup-arglist-tabs-only (ignored)
+    "Line up argument lists by tabs, not spaces"
+    (let* ((anchor (c-langelem-pos c-syntactic-element))
+           (column (c-langelem-2nd-pos c-syntactic-element))
+           (offset (- (1+ column) anchor))
+           (steps (floor offset c-basic-offset)))
+      (* (max steps 1)
+         c-basic-offset)))
+
+  (add-hook 'c-mode-common-hook
+            (lambda ()
+              ;; Add kernel style
+              (c-add-style
+               "linux-tabs-only"
+               '("linux" (c-offsets-alist
+                          (arglist-cont-nonempty
+                           c-lineup-gcc-asm-reg
+                           c-lineup-arglist-tabs-only))))))
+
+  (add-hook 'c-mode-hook
+            (lambda ()
+              (let ((filename (buffer-file-name)))
+                ;; Enable kernel mode for the appropriate files
+                (when (and filename
+                           (string-match (expand-file-name "~/projects/linux")
+                                         filename))
+                  (setq indent-tabs-mode t)
+                  (setq tab-width 8)
+                  (setq show-trailing-whitespace t)
+                  (c-set-style "linux-tabs-only")))))
 
   (spacemacs|use-package-add-hook org
     :pre-init
@@ -337,7 +369,7 @@ layers configuration. You are free to put any user code."
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (pos-tip git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter transient goto-chg undo-tree diminish diff-hl csv-mode wgrep smex ivy-hydra lv counsel-projectile counsel swiper ivy ess-smart-equals ess-R-data-view ctable ess julia-mode nix-mode helm-nixos-options nixos-options winum uuidgen pug-mode org-projectile org-category-capture org-mime org-download mu4e-maildirs-extension mu4e-alert ht livid-mode skewer-mode simple-httpd link-hint intero flycheck hlint-refactor helm-hoogle git-link eyebrowse evil-visual-mark-mode evil-unimpaired evil-ediff eshell-z dumb-jump f company-ghci company-ghc company column-enforce-mode cargo idris-mode prop-menu ledger-mode toml-mode racer rust-mode smeargle orgit magit-gitflow helm-gitignore request gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger evil-magit magit magit-popup git-commit with-editor xterm-color ws-butler window-numbering web-mode web-beautify volatile-highlights vi-tilde-fringe toc-org tern tagedit spacemacs-theme spaceline powerline smooth-scrolling slim-mode shm shell-pop scss-mode sass-mode restart-emacs rainbow-delimiters popwin persp-mode pcre2el paradox hydra spinner page-break-lines org-repo-todo org-present org-pomodoro alert log4e gntp org-plus-contrib org-bullets open-junk-file nyan-mode neotree multi-term move-text mmm-mode markdown-toc markdown-mode macrostep lorem-ipsum linum-relative leuven-theme less-css-mode json-mode json-snatcher json-reformat js2-refactor multiple-cursors s js2-mode js-doc jade-mode info+ indent-guide ido-vertical-mode hungry-delete htmlize hl-todo hindent highlight-parentheses highlight-numbers parent-mode highlight-indentation help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flyspell helm-flx helm-descbinds helm-css-scss helm-ag haskell-snippets yasnippet haml-mode google-translate golden-ratio gnuplot ghc haskell-mode gh-md flx-ido flx fill-column-indicator fancy-battery expand-region exec-path-from-shell evil-visualstar evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-args evil-anzu anzu eval-sexp-fu highlight eshell-prompt-extras esh-help emmet-mode elisp-slime-nav disaster define-word coffee-mode cmm-mode cmake-mode clean-aindent-mode clang-format buffer-move bracketed-paste auto-highlight-symbol auto-dictionary auto-compile packed dash aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async quelpa package-build use-package which-key bind-key bind-map evil monokai-theme))))
+    (sql-indent pos-tip git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter transient goto-chg undo-tree diminish diff-hl csv-mode wgrep smex ivy-hydra lv counsel-projectile counsel swiper ivy ess-smart-equals ess-R-data-view ctable ess julia-mode nix-mode helm-nixos-options nixos-options winum uuidgen pug-mode org-projectile org-category-capture org-mime org-download mu4e-maildirs-extension mu4e-alert ht livid-mode skewer-mode simple-httpd link-hint intero flycheck hlint-refactor helm-hoogle git-link eyebrowse evil-visual-mark-mode evil-unimpaired evil-ediff eshell-z dumb-jump f company-ghci company-ghc company column-enforce-mode cargo idris-mode prop-menu ledger-mode toml-mode racer rust-mode smeargle orgit magit-gitflow helm-gitignore request gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger evil-magit magit magit-popup git-commit with-editor xterm-color ws-butler window-numbering web-mode web-beautify volatile-highlights vi-tilde-fringe toc-org tern tagedit spacemacs-theme spaceline powerline smooth-scrolling slim-mode shm shell-pop scss-mode sass-mode restart-emacs rainbow-delimiters popwin persp-mode pcre2el paradox hydra spinner page-break-lines org-repo-todo org-present org-pomodoro alert log4e gntp org-plus-contrib org-bullets open-junk-file nyan-mode neotree multi-term move-text mmm-mode markdown-toc markdown-mode macrostep lorem-ipsum linum-relative leuven-theme less-css-mode json-mode json-snatcher json-reformat js2-refactor multiple-cursors s js2-mode js-doc jade-mode info+ indent-guide ido-vertical-mode hungry-delete htmlize hl-todo hindent highlight-parentheses highlight-numbers parent-mode highlight-indentation help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flyspell helm-flx helm-descbinds helm-css-scss helm-ag haskell-snippets yasnippet haml-mode google-translate golden-ratio gnuplot ghc haskell-mode gh-md flx-ido flx fill-column-indicator fancy-battery expand-region exec-path-from-shell evil-visualstar evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-args evil-anzu anzu eval-sexp-fu highlight eshell-prompt-extras esh-help emmet-mode elisp-slime-nav disaster define-word coffee-mode cmm-mode cmake-mode clean-aindent-mode clang-format buffer-move bracketed-paste auto-highlight-symbol auto-dictionary auto-compile packed dash aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async quelpa package-build use-package which-key bind-key bind-map evil monokai-theme))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

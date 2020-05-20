@@ -31,5 +31,6 @@
     bwm_ng
     nix-index
     rustup
+    gitFull
   ];
 }

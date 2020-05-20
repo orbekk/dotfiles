@@ -110,3 +110,8 @@ create_symlink ../../dotfiles/urxvt/ext/clipboard .urxvt/ext/clipboard
 if which emacs >/dev/null && [[ ! -d .emacs.d ]]; then
   git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
 fi
+
+if which xfconf-query; then
+  echo "disable xfce ssh-agent"
+  xfconf-query -c xfce4-session -p /startup/ssh-agent/enabled -n -t bool -s false
+fi
