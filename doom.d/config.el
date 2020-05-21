@@ -107,4 +107,43 @@
 (after! mu4e-maildirs-extension
   (mu4e-maildirs-extension))
 
+(setq hledger-jfile "~/.hledger.journal")
+
+(use-package! hledger-mode
+  :defer t
+  :mode ("\\.journal\\'" "\\.hledger\\'")
+  :commands hledger-enable-reporting
+  :preface
+  (defun hledger/next-entry ()
+    "Move to next entry and pulse."
+    (interactive)
+    (hledger-next-or-new-entry)
+    (hledger-pulse-momentary-current-entry))
+
+  (defface hledger-warning-face
+    '((((background dark))
+       :background "Red" :foreground "White")
+      (((background light))
+       :background "Red" :foreground "White")
+      (t :inverse-video t))
+    "Face for warning"
+    :group 'hledger)
+
+  (defun hledger/prev-entry ()
+    "Move to last entry and pulse."
+    (interactive)
+    (hledger-backward-entry)
+    (hledger-pulse-momentary-current-entry))
+
+  :config
+  (set-company-backend! 'hledger-mode '(hledger-company))
+
+  (map! :map hledger-mode-map
+        "M-p" #'hledger/prev-entry
+        "M-n" #'hledger/next-entry
+        :localleader
+        "e" #'hledger-jentry
+        "j" #'hledger-run-command)
+  )
+
 (load-file "~/.doom.d/config.local.el")
