@@ -53,7 +53,7 @@
            )))
   (setq org-capture-templates
         `(
-          ("t" "Todo" entry (file+headline "~/org/todo.org" "Inbox")
+          ("t" "Todo" entry (file+headline "~/org/roam/todo.org" "Inbox")
            "* TODO %?\n  %i\n  %a")
           ("d" "Daily review" entry (file+olp+datetree "~/org/review.org" "Daily")
            (file "~/org/templates/daily-review.org") :tree-type week :jump-to-captured t)
