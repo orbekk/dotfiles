@@ -37,6 +37,10 @@
   (setq org-refile-use-outline-path nil)
   (setq org-refile-targets '((nil . (:maxlevel . 2)))))
 
+(setq org-log-into-drawer t)
+(setq org-agenda-log-mode-items '(closed clock state))
+(setq org-agenda-files '("~/org/roam/todo.org"))
+
 (use-package! org-agenda
   :config
   (setq org-agenda-ndays 14)
@@ -106,6 +110,8 @@
 
 (after! mu4e-maildirs-extension
   (mu4e-maildirs-extension))
+(after! mu4e
+  (remove-hook 'mu4e-compose-mode-hook #'org-mu4e-compose-org-mode))
 
 (setq hledger-jfile "~/.hledger.journal")
 
