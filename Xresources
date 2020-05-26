@@ -1,0 +1,99 @@
+*customization: -color
+! urxvt*font: xft:dejavu sans mono:pixelsize=22:antialias=true
+!urxvt*font: xft:DejaVu Sans Mono:pixelsize=20:antialias=true:hinting=true
+urxvt*font: xft:fira code:pixelsize=16:antialias=true:hinting=true
+!urxvt*letterSpace: -5
+!urxvt*font: xft:fira code:pixelsize=22:antialias=true
+!urxvt*font: xft:inconsolata:size=18:antialias=true
+urxvt*scrollBar: false
+URxvt*termName: xterm-256color
+Xterm*termName: xterm-256color
+
+Xft.lcdfilter: lcddefault
+Xft.dpi:        96
+Xft.antialias:  true
+Xft.rgba:       rgb
+Xft.hinting:    true
+Xft.hintstyle:  hintslight
+
+
+URxvt.keysym.M-c:   perl:clipboard:copy
+URxvt.keysym.M-v:   perl:clipboard:paste
+URxvt.saveLines: 40000
+
+URxvt.perl-ext-common: default,matcher,resize-font,clipboard
+URxvt.clipboard.autocopy: true
+URxvt.resize-font.smaller: C-Down
+URxvt.resize-font.bigger: C-Up
+URxvt.iso14755: false
+URxvt.iso14755_52: false
+URxvt.url-launcher: /usr/bin/xdg-open
+URxvt.matcher.button: 1
+
+urxvt*foreground: white
+urxvt*background: black
+
+*color0:  #2E3436
+*color1:  #a40000
+*color2:  #4E9A06
+*color3:  #C4A000
+*color4:  #3465A4
+*color5:  #75507B
+*color6:  #ce5c00
+*color7:  #babdb9
+*color8:  #555753
+*color9:  #EF2929
+*color10: #8AE234
+*color11: #FCE94F
+*color12: #729FCF
+*color13: #AD7FA8
+*color14: #fcaf3e
+*color15: #EEEEEC
+
+! #define base00 #272822
+! #define base01 #383830
+! #define base02 #49483e
+! #define base03 #75715e
+! #define base04 #a59f85
+! #define base05 #f8f8f2
+! #define base06 #f5f4f1
+! #define base07 #f9f8f5
+! #define base08 #f92672
+! #define base09 #fd971f
+! #define base0A #f4bf75
+! #define base0B #a6e22e
+! #define base0C #a1efe4
+! #define base0D #66d9ef
+! #define base0E #ae81ff
+! #define base0F #cc6633
+! 
+! *.foreground:   base05
+! *.background:   base00
+! *.cursorColor:  base05
+! 
+! *.color0:       base00
+! *.color1:       base08
+! *.color2:       base0B
+! *.color3:       base0A
+! *.color4:       base0D
+! *.color5:       base0E
+! *.color6:       base0C
+! *.color7:       base05
+! 
+! *.color8:       base03
+! *.color9:       base08
+! *.color10:      base0B
+! *.color11:      base0A
+! *.color12:      base0D
+! *.color13:      base0E
+! *.color14:      base0C
+! *.color15:      base07
+! 
+! ! Note: colors beyond 15 might not be loaded (e.g., xterm, urxvt),
+! ! use 'shell' template to set these if necessary
+! *.color16:      base09
+! *.color17:      base0F
+! *.color18:      base01
+! *.color19:      base02
+! *.color20:      base04
+! *.color21:      base06

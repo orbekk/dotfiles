@@ -1,0 +1,71 @@
+*customization: -color
+! urxvt*font: xft:dejavu sans mono:pixelsize=22:antialias=true
+!urxvt*font: xft:DejaVu Sans Mono:pixelsize=20:antialias=true:hinting=true
+urxvt*font: xft:fira code:pixelsize=16:antialias=true:hinting=true
+!urxvt*letterSpace: -5
+!urxvt*font: xft:fira code:pixelsize=22:antialias=true
+!urxvt*font: xft:inconsolata:size=18:antialias=true
+urxvt*scrollBar: false
+URxvt*termName: xterm-256color
+Xterm*termName: xterm-256color
+
+Xft.lcdfilter: lcddefault
+Xft.dpi:        96
+Xft.antialias:  true
+Xft.rgba:       rgb
+Xft.hinting:    true
+Xft.hintstyle:  hintslight
+
+
+URxvt.keysym.M-c:   perl:clipboard:copy
+URxvt.keysym.M-v:   perl:clipboard:paste
+URxvt.saveLines: 40000
+
+URxvt.perl-ext-common: default,matcher,resize-font,clipboard
+URxvt.clipboard.autocopy: true
+URxvt.resize-font.smaller: C-Down
+URxvt.resize-font.bigger: C-Up
+URxvt.iso14755: false
+URxvt.iso14755_52: false
+URxvt.url-launcher: /usr/bin/xdg-open
+URxvt.matcher.button: 1
+
+#define nord0 #2E3440
+#define nord1 #3B4252
+#define nord2 #434C5E
+#define nord3 #4C566A
+#define nord4 #D8DEE9
+#define nord5 #E5E9F0
+#define nord6 #ECEFF4
+#define nord7 #8FBCBB
+#define nord8 #88C0D0
+#define nord9 #81A1C1
+#define nord10 #5E81AC
+#define nord11 #BF616A
+#define nord12 #D08770
+#define nord13 #EBCB8B
+#define nord14 #A3BE8C
+#define nord15 #B48EAD
+
+*.foreground:   nord4
+*.background:   nord0
+*.cursorColor:  nord4
+*fading: 35
+*fadeColor: nord3
+
+*.color0: nord1
+*.color1: nord11
+*.color2: nord14
+*.color3: nord13
+*.color4: nord9
+*.color5: nord15
+*.color6: nord8
+*.color7: nord5
+*.color8: nord3
+*.color9: nord11
+*.color10: nord14
+*.color11: nord13
+*.color12: nord9
+*.color13: nord15
+*.color14: nord7
+*.color15: nord6
