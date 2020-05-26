@@ -43,12 +43,20 @@ create_symlink() {
   fi
 }
 
+mkdir -p .config
+
+create_symlink dotfiles/Xresources .Xresources
 create_symlink dotfiles/gitconfig .gitconfig
 create_symlink dotfiles/taskrc .taskrc
 create_symlink dotfiles/tmux.conf .tmux.conf
 create_symlink dotfiles/spacemacs .spacemacs
 create_symlink /dev/null .vimrc.local
 create_symlink dotfiles/livestreamerrc .livestreamerrc
+
+if which fc-cache; then
+  create_symlink dotfiles/fonts .fonts
+  fc-cache -f -v
+fi
 
 mkdir -p .doom.d
 for f in dotfiles/doom.d/*; do
