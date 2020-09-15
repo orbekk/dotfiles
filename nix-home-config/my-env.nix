@@ -26,12 +26,14 @@
       ];
     })
     emacs
+    sqlite
     hledger
     ledger
     bwm_ng
     nix-index
     rustup
     gitFull
+    gargoyle
 
     ripgrep
     coreutils

@@ -3,6 +3,7 @@
 {
   home.packages = with pkgs; [
     iw
+    anki
     wirelesstools
     hledger
     hledger-ui

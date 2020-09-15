@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 let
   my_steam = pkgs.steam.override {
-    # nativeOnly = true;
+    nativeOnly = true;
     withJava = true;
     extraPkgs = p: [
       pkgs.openldap

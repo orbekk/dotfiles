@@ -46,6 +46,6 @@
 ;; our package manager can't deal with; see raxod502/straight.el#279)
 ;(package! builtin-package :recipe (:branch "develop"))
 
-(package! hledger-mode)
+;; (package! hledger-mode)
 
 (load-file "~/.doom.d/packages.local.el")
