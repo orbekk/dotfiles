@@ -56,6 +56,8 @@ in
       cd ~orbekk
       cp -r ${dotfiles} dotfiles
       # git clone ${dotfiles} dotfiles
+      cd dotfiles
+      ./setup.sh
     '';
     serviceConfig = {
       User = "orbekk";

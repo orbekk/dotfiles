@@ -2,5 +2,5 @@
 	path = zgen
 	url = https://github.com/tarjoilija/zgen.git
 [submodule "zsh/zsh/pure"]
-	path = zsh/zsh/pure
+	path = zsh/.zsh/pure
 	url = https://github.com/sindresorhus/pure.git

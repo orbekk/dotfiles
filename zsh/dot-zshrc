@@ -3,6 +3,8 @@
 
 bindkey -e
 
+fpath+=$HOME/.zsh/pure
+
 autoload -Uz compinit; compinit
 autoload -Uz promptinit; promptinit
 
@@ -11,3 +13,5 @@ zstyle ':completion::complete:*' gain-privileges 1
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
 setopt append_history share_history histignorealldups
+
+prompt pure
