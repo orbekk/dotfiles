@@ -34,6 +34,7 @@
     rustup
     gitFull
     gargoyle
+    stow
 
     ripgrep
     coreutils
