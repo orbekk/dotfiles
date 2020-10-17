@@ -61,7 +61,10 @@ in
     '';
     serviceConfig = {
       User = "orbekk";
+      Type = "oneshot";
+      RemainAfterExit = true;
     };
-    wantedBy = ["default.target" "display-manager.service"];
+    requiredBy = ["default.target" ];
+    before = ["display-manager.service"];
   };
 }

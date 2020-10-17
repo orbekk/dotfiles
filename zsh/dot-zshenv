@@ -1,5 +1,0 @@
-export EDITOR=nvim
-export TERMINAL=urxvt
-
-typeset -U path PATH
-path=("$HOME/bin" "$path[@]")
