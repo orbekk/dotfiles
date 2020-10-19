@@ -13,3 +13,5 @@
 	smtpserver = mail.messagingengine.com
 	smtpuser = kj@orbekk.com
 	smtpserverport = 587
+[pull]
+	rebase = true
