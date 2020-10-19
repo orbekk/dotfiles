@@ -4,6 +4,3 @@
 [submodule "zsh/zsh/pure"]
 	path = zsh/.zsh/pure
 	url = https://github.com/sindresorhus/pure.git
-[submodule "emacs/.emacs.d"]
-	path = emacs/.emacs.d
-	url = https://github.com/hlissner/doom-emacs
