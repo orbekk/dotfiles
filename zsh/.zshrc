@@ -14,7 +14,9 @@ zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
 setopt append_history share_history histignorealldups
 
+# cd to a directory used as a commant
+setopt autocd
+
 PURE_GIT_PULL=0
 PURE_GIT_UNTRACKED_DIRTY=0
-
 prompt pure
