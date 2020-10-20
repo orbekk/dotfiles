@@ -47,6 +47,7 @@ in
     xscreensaver
     xsel
     xss-lock
+    tmux
   ];
 
   systemd.services.orbekk-setup = {
@@ -57,7 +58,7 @@ in
       cp -r ${dotfiles} dotfiles
       # git clone ${dotfiles} dotfiles
       cd dotfiles
-      ./setup.sh
+      ./setup.sh fast
     '';
     serviceConfig = {
       User = "orbekk";
