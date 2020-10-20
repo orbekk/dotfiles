@@ -1,7 +1,8 @@
 # nix-build '<nixpkgs/nixos>' -A vm -I nixos-config ./test-vm.nix
 { config, lib, pkgs, ... }:
 let
-  dotfiles = ./.;
+  # dotfiles = ./.;
+  dotfiles = builtins.fetchGit "https://github.com/orbekk/dotfiles.git";
 in
 {
   fonts = {
@@ -23,6 +24,7 @@ in
   };
 
   virtualisation.memorySize = 1024;
+  virtualization.diskSize = 8196;
   #virtualisation.qemu.options = [ "-full-screen -sdl" ];
 
   programs.zsh.enable = true;
