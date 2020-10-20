@@ -13,7 +13,7 @@
 ;;
 ;;      Alternatively, press 'gd' (or 'C-c g d') on a module to browse its
 ;;      directory (for easy access to its source code).
-(load-file "~/.doom.d/init.local.el")
+(load "~/.doom.d/init.local.el" t)
 
 (doom! :input
        ;;chinese

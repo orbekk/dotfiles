@@ -154,4 +154,4 @@
 
 (add-to-list 'auto-mode-alist '("\\.journal\\'" . ledger-mode))
 
-(load-file "~/.doom.d/config.local.el")
+(load "~/.doom.d/config.local.el" t)
