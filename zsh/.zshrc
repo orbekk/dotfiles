@@ -20,3 +20,5 @@ setopt autocd
 PURE_GIT_PULL=0
 PURE_GIT_UNTRACKED_DIRTY=0
 prompt pure
+
+source ~/.zshrc.local
