@@ -30,4 +30,10 @@ prompt pure
 
 alias ls="ls --color"
 
+source ~/.zsh/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+if [[ ! -f ~/.zsh/fast-syntax-highlighting/current_theme.zsh ]]; then
+  fpath+=$HOME/.zsh/fast-syntax-highlighting
+  fast-theme clean
+fi
+
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
