@@ -12,6 +12,9 @@ zstyle ':completion:*' menu select
 zstyle ':completion::complete:*' gain-privileges 1
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
+# Don't skip over symbols, e.g., when deleting a word from a path.
+WORDCHARS=''
+
 # History settings
 HISTFILE=~/.zsh_history
 HISTSIZE=1000000
