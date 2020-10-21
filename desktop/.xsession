@@ -18,6 +18,9 @@ xset -b
 trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 100 --widthtype pixel --transparent true --alpha 0 --tint 0x000000 --height 18 &
 [[ -f /etc/nixos/configuration.nix ]] || \
   redshift -l 40:-70 -r -t 5500:3700 &
+
+if which autorandr >/dev/null; then
+  autorandr --change
+fi
+
 exec xmonad
-
-

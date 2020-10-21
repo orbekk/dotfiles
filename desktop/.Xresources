@@ -1,7 +1,8 @@
 *customization: -color
-urxvt*font: xft:dejavu sans mono:pixelsize=22:antialias=true:hinting=true
+!urxvt*font: xft:dejavu sans mono:pixelsize=22:antialias=true:hinting=true
 !urxvt*font: xft:DejaVu Sans Mono:pixelsize=20:antialias=true:hinting=true
 ! urxvt*font: xft:fira code:pixelsize=22:antialias=true:hinting=true
+urxvt*font: xft:iosevka term:size=14,xft:dejavu sans mono:size=14
 !urxvt*letterSpace: -5
 !urxvt*font: xft:fira code:pixelsize=22:antialias=true
 !urxvt*font: xft:inconsolata:size=18:antialias=true
