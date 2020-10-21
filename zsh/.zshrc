@@ -30,4 +30,4 @@ prompt pure
 
 alias ls="ls --color"
 
-source ~/.zshrc.local
+[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
