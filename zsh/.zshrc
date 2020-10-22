@@ -31,6 +31,9 @@ source ~/.zsh/powerlevel10k/powerlevel10k.zsh-theme
 # cd to a directory used as a commant
 setopt autocd
 
+# commands starting with # are treated as comments
+setopt interactivecomments
+
 alias ls="ls --color"
 
 alias e="emacsclient -n"
