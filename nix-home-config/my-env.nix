@@ -35,6 +35,9 @@
     gitFull
     gargoyle
     stow
+    exa
+    fzf
+    zoxide
 
     ripgrep
     coreutils

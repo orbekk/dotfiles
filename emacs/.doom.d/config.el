@@ -152,6 +152,9 @@
 ;;         "j" #'hledger-run-command)
 ;;   )
 
+(server-start)
+(remove-hook 'doom-first-buffer-hook #'smartparens-global-mode)
+
 (add-to-list 'auto-mode-alist '("\\.journal\\'" . ledger-mode))
 
 (load "~/.doom.d/config.local.el" t)

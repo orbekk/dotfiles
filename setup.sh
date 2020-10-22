@@ -12,6 +12,8 @@ source $HOME/.zshenv
 
 if which xmonad >/dev/null; then
     $STOW desktop
+    touch ~/.Xresources.local
+    xrdb -I$HOME -merge ~/.Xresources
     xmonad --recompile
 fi
 
@@ -27,3 +29,20 @@ if which emacs >/dev/null; then
     fi
     doom sync  # Too slow!
 fi
+
+fc-cache || true
+
+tools=(
+    rg 
+    fzf
+    bat
+    exa
+    most
+    emacs
+    git
+    )
+for tool in "${tools[@]}"; do
+    if ! type "$tool" &>/dev/null; then
+        echo "Missing: $tool"
+    fi
+done
