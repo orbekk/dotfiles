@@ -65,6 +65,24 @@ if [[ ! -f ~/.zsh/fast-syntax-highlighting/current_theme.zsh ]]; then
   fast-theme clean
 fi
 
+# allow editing of command line
+autoload -U edit-command-line
+zle -N edit-command-line
+bindkey "^V" edit-command-line
+
+function get-parent-dir() {
+  words=(${(z)LBUFFER})
+  if [[ "${words[${#words}]}" = /* ]]; then
+    # There is already a path thing here.
+    words[${#words}]="${words[${#words}]:h}/"  # Parent directory.
+  else
+    words=($words $PWD)
+  fi
+  LBUFFER="${words[@]}"
+}
+zle -N get-parent-dir
+bindkey "^[u" get-parent-dir
+
 source ~/.zshrc.local
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
