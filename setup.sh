@@ -4,7 +4,7 @@ set -euo pipefail
 STOW="stow -R --no-folding -v"
 
 cd "$(dirname $0)"
-git submodule update --init --recursive
+git submodule update --init --recursive --depth 1
 
 $STOW common
 $STOW zsh

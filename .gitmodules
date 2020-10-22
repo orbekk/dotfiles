@@ -1,9 +1,9 @@
 [submodule "zgen"]
 	path = old/zgen
 	url = https://github.com/tarjoilija/zgen.git
-[submodule "zsh/zsh/pure"]
-	path = zsh/.zsh/pure
-	url = https://github.com/sindresorhus/pure.git
 [submodule "zsh/.zsh/fast-syntax-highlighting"]
 	path = zsh/.zsh/fast-syntax-highlighting
 	url = https://github.com/zdharma/fast-syntax-highlighting
+[submodule "zsh/.zsh/powerlevel10k"]
+	path = zsh/.zsh/powerlevel10k
+	url = https://github.com/romkatv/powerlevel10k.git

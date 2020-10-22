@@ -1,9 +1,14 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # Resources:
 # https://github.com/mika/zsh-pony
 
 bindkey -e
-
-fpath+=$HOME/.zsh/pure
 
 autoload -Uz compinit; compinit
 autoload -Uz promptinit; promptinit
@@ -21,12 +26,10 @@ HISTSIZE=1000000
 SAVEHIST=$HISTSIZE
 setopt append_history share_history histignorealldups
 
+source ~/.zsh/powerlevel10k/powerlevel10k.zsh-theme
+
 # cd to a directory used as a commant
 setopt autocd
-
-PURE_GIT_PULL=0
-PURE_GIT_UNTRACKED_DIRTY=0
-prompt pure
 
 alias ls="ls --color"
 
@@ -47,7 +50,7 @@ if (( $+commands[fzf] )); then
 fi
 
 if (( $+commands[zoxide] )); then
-  eval "$(zoxide init zsh)"
+ eval "$(zoxide init zsh)"
 fi
 
 source ~/.zsh/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
@@ -57,3 +60,6 @@ if [[ ! -f ~/.zsh/fast-syntax-highlighting/current_theme.zsh ]]; then
 fi
 
 source ~/.zshrc.local
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.zsh/p10k.zsh ]] || source ~/.zsh/p10k.zsh
