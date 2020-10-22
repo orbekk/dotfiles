@@ -38,6 +38,8 @@
     exa
     fzf
     zoxide
+    bat
+    most
 
     ripgrep
     coreutils

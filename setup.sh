@@ -8,6 +8,7 @@ git submodule update --init --recursive
 
 $STOW common
 $STOW zsh
+touch $HOME/.zshrc.local
 source $HOME/.zshenv
 
 if which xmonad >/dev/null; then
