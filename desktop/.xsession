@@ -4,7 +4,7 @@ set -euo pipefail
 SETUP_MARKER=$HOME/.local/share/__kj.dotfiles__
 if [[ ! -e "$SETUP_MARKER" ]]; then
     echo running setup
-    urxvt -e sh -c "$HOME/dotfiles/setup.sh; zsh"
+    urxvt -e sh -c "$HOME/dotfiles/setup.sh"
     touch "$SETUP_MARKER"
 fi
 
@@ -23,4 +23,9 @@ if which autorandr >/dev/null; then
   autorandr --change
 fi
 
-exec xmonad
+if [[ $(hostname) == "firelink" ]]; then
+  export DESKTOP_SESSION=plasma
+  exec startplasma-x11
+else
+  exec xmonad
+fi
