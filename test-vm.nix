@@ -66,7 +66,7 @@ in
     script = ''
       cd ~orbekk
       # cp -r ${dotfiles} dotfiles
-      git clone ${dotfiles} dotfiles
+      git clone https://github.com/orbekk/dotfiles.git dotfiles
       ./dotfiles/setup.sh fast
     '';
     serviceConfig = {
