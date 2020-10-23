@@ -1,8 +1,8 @@
 # nix-build '<nixpkgs/nixos>' -A vm -I nixos-config ./test-vm.nix
 { config, lib, pkgs, ... }:
 let
-  # dotfiles = ./.;
-  dotfiles = builtins.fetchGit "https://github.com/orbekk/dotfiles.git";
+  dotfiles = ./.;
+  # dotfiles = builtins.fetchGit "https://github.com/orbekk/dotfiles.git";
 in
 {
   fonts = {
@@ -24,7 +24,7 @@ in
   };
 
   virtualisation.memorySize = 1024;
-  virtualization.diskSize = 8196;
+  virtualisation.diskSize = 8196;
   #virtualisation.qemu.options = [ "-full-screen -sdl" ];
 
   programs.zsh.enable = true;
@@ -39,6 +39,11 @@ in
   environment.systemPackages = with pkgs; [
     git
     stow
+    exa
+    fzf
+    zoxide
+    bat
+    most
     dmenu
     emacs
     rxvt_unicode-with-plugins
@@ -50,6 +55,9 @@ in
     xsel
     xss-lock
     tmux
+    ripgrep
+    coreutils
+    fd
   ];
 
   systemd.services.orbekk-setup = {
@@ -57,17 +65,18 @@ in
     path = config.environment.systemPackages;
     script = ''
       cd ~orbekk
-      cp -r ${dotfiles} dotfiles
-      # git clone ${dotfiles} dotfiles
-      cd dotfiles
-      ./setup.sh fast
+      # cp -r ${dotfiles} dotfiles
+      git clone ${dotfiles} dotfiles
+      ./dotfiles/setup.sh fast
     '';
     serviceConfig = {
       User = "orbekk";
       Type = "oneshot";
       RemainAfterExit = true;
     };
+    wantedBy = ["multi-user.target"];
     requiredBy = ["default.target" ];
     before = ["display-manager.service"];
+    after = ["networking-online.target"];
   };
 }
