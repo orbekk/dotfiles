@@ -59,11 +59,13 @@ if (( $+commands[zoxide] )); then
  eval "$(zoxide init zsh)"
 fi
 
-source ~/.zsh/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
-if [[ ! -f ~/.zsh/fast-syntax-highlighting/current_theme.zsh ]]; then
-  fpath+=$HOME/.zsh/fast-syntax-highlighting
-  fast-theme clean
-fi
+# Issues when typing 'ssh root@' with fast syntax hilighting.
+source ~/.zsh/syntax-highlighting/zsh-syntax-highlighting.zsh
+# source ~/.zsh/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+# if [[ ! -f ~/.zsh/fast-syntax-highlighting/current_theme.zsh ]]; then
+#   fpath+=$HOME/.zsh/fast-syntax-highlighting
+#   fast-theme clean
+# fi
 
 # allow editing of command line
 autoload -U edit-command-line
