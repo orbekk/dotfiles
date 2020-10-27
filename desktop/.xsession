@@ -23,9 +23,4 @@ if which autorandr >/dev/null; then
   autorandr --change
 fi
 
-if [[ $(hostname) == "firelink" ]]; then
-  export DESKTOP_SESSION=plasma
-  exec startplasma-x11
-else
-  exec xmonad
-fi
+exec xmonad

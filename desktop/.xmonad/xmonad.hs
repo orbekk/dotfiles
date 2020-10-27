@@ -1,3 +1,5 @@
+{-# LANGUAGE FlexibleContexts, PatternGuards #-}
+
 import System.Posix.Unistd (nodeName, getSystemID)
 import System.Posix.Env (setEnv)
 import XMonad
@@ -12,6 +14,7 @@ import XMonad.Layout
 import XMonad.Layout.OnHost
 import XMonad.Layout.NoBorders
 import XMonad.Layout.LayoutScreens
+import XMonad.Layout.LayoutModifier
 import XMonad.Layout.TwoPane
 import System.IO
 import qualified XMonad.StackSet as W
@@ -24,11 +27,17 @@ import XMonad.Hooks.ManageHelpers
 import Data.List.Split
 import Control.Monad
 
+xmobarCmd = "xmobar -v $HOME/.xmonad/xmobarrc"
+
+bar :: LayoutClass l Window => XConfig l -> IO (XConfig (ModifiedLayout AvoidStruts l))
+bar = statusBar xmobarCmd xmobarPP toggleStrutsKey
+  where toggleStrutsKey XConfig{modMask = modm} = (modm, xK_b)
+
 main = do
   host <- (head . splitOn "." . nodeName) <$> getSystemID
   setEnv "HOST" host True
-  -- config <- xmobar (myConfig host)
-  let config = myConfig host
+  config <- bar (myConfig host)
+  -- let config = myConfig host
   xmonad config
 
 layoutScreensHost = "unused" -- orange

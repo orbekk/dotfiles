@@ -1,0 +1,130 @@
+    Config {
+
+        -- Appearance
+          font = "xft:OpenSans:size=9:antialias=true"
+        , bgColor = "#282828"
+        , fgColor = "#ebdbb2"
+        , position = TopW L 93   -- Leave space for Trayer
+
+        -- Layout
+        , sepChar = "%"     -- delineator between plugin names and straight text
+        , alignSep = "}{"   -- separator between left-right alignment
+        , template = "%StdinReader% } { %date%"
+
+        -- Behaviour
+        , lowerOnStart = False       -- send to bottom of window stack on start
+        , pickBroadest = False       -- choose widest display (multi-monitor)
+        , overrideRedirect = False   -- set the Override Redirect flag (Xlib)
+
+        --Plugins
+        , commands =
+            -- Battery Monitor
+            --, Run BatteryP ["BAT"]        [ "--template" , "BAT: <acstatus>"
+            --                     , "--Low"      , "10"        -- units: %
+            --                     , "--High"     , "80"        -- units: %
+            --                     , "--low"      , "#fb4934"
+            --                     , "--normal"   , "#ebdbb2"
+            --                     , "--high"     , "#b8bb26"
+
+            --                     , "--" -- battery specific options
+            --                               -- discharging status
+            --                               , "-o"   , "<left>% (<timeleft>)"
+            --                               -- AC "on" status
+            --                               , "-O" , "<fc=#b8bb26>Charging</fc>"
+            --                               -- charged status
+            --                               , "-i"   , "<fc=#b8bb26>Charged</fc>"
+            --                     ] 50
+
+            -- Read from STDIN
+            [ Run StdinReader
+
+            -- Display the current Wireless SSID
+            -- , Run Wireless "wlp1s0" [ "-t", "<essid>" ] 10
+
+            -- Weather Monitor
+            , Run Weather "YBRK" [ "--template" , " <skyCondition>  <tempC>C  <rh>%  <pressure> hPa"
+                                 , "--Low"      , "10"
+                                 , "--High"     , "35"
+                                 , "--low"      , "#b8bb26"
+                                 , "--normal"   , "#ebdbb2"
+                                 , "--high"     , "#fb4934"
+                                 ] 36000
+
+            -- Time and Date Display
+            , Run Date           "<fc=#b8bb26>%a %b %_d %H:%M</fc>" "date" 10
+
+            -- Display the current UV
+            , Run UVMeter "Brisbane" [ "-H"     , "3"
+                                     , "-L"     , "3"
+                                     , "--low"  , "#ebdbb2"
+                                     , "--high" , "#fb4934"
+                                     ] 900
+
+            -- MPD status
+            , Run MPD ["-t","<artist> - <title> (<album>) <statei> ","--", "-P", ">>", "-Z", "|", "-S", "><"] 10
+
+            , Run Swap [] 10
+            , Run DynNetwork [ "--template" , "<dev>: <tx>kB/s"
+                , "--Low"      , "50000"   -- units: B/s
+                , "--High"     , "500000"   -- units: B/s
+                , "--low"      , "#b8bb26"
+                , "--normal"   , "#ebdbb2"
+                , "--high"     , "fb4934"
+                ] 10
+            ]
+    }
+
+-- Config { font = "xft:Source Code Pro:size=8:bold:antialias=true" -- "-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*"
+--        , lowerOnStart = True
+--        , overrideRedirect = True
+--        , persistent = False
+--        , bgColor = "black"
+--        , fgColor = "grey"
+--        , position = TopP 0 100 -- TopW L 95
+--        , commands = [
+--            --  Run Weather "EGPF" ["-t","<skyCondition> <tempC>°C","-L","64","-H","77","--normal","green","--high","red","--low","lightblue"] 36000
+--            Run Weather "KNYC"
+--                      ["-t", "<fc=lightblue>NYC</fc> <tempC>°C <skyCondition> <rh>%"
+--                      , "-L", "15", "-H", "25", "--normal", "green"
+--                      , "--high", "red", "--low", "lightblue"] 36000
+--  	 , Run MPD ["-t",
+--           "<artist> - <title> <track>/<plength> <statei> [<flags>]",
+--           "--", "-P", ">>", "-Z", "|", "-S", "><"] 30
+--          , Run Cpu ["-L","3","-H","50","--normal","green","--high","red"] 10
+--          , Run Volume "default" "Master" [
+--                 "-t", "♪ <volume> <status>"] 10
+--          , Run Brightness ["-t", "☼<percent>%"] 10
+--          -- , Run Memory ["-t","Mem: <usedratio>%"] 600
+--          -- , Run Swap [] 10
+--          , Run Date "%a %b %_d <fc=darkorange>%H:%M:%S</fc>" "date" 10
+--          , Run DiskU [("/", "<fc=#eeeeee>/</fc> <used>/<size>")]
+--                ["-L", "20", "-H", "50", "-m", "1", "-p", "3"] 1000
+--          , Run StdinReader
+--          -- , Run DynNetwork     [
+--          --        "--template" , "<dev>: <tx>kB/s|<rx>kB/s"
+--          --       , "--Low"      , "1000"       -- units: kB/s
+--          --       , "--High"     , "5000"       -- units: kB/s
+--          --       , "--low"      , "green"
+--          --       , "--normal"   , "orange"
+--          --       , "--high"     , "red"
+--          --       ] 100
+--          , Run BatteryP ["BAT0"] [
+--                 "--template" , "⚡ <acstatus>"
+--                , "--Low"      , "10"        -- units: %
+--                , "--High"     , "80"        -- units: %
+--                , "--low"      , "darkred"
+--                , "--normal"   , "darkorange"
+--                , "--high"     , "darkgreen"
+--                , "--" -- battery specific options
+--                       -- discharging status
+--                , "-o"	, "<left>% (<timeleft>)"
+--                -- AC "on" status
+--                , "-O"	, "<fc=#ee9a00>Charging</fc>"
+--                -- charged status
+--                , "-i"	, "<fc=#00ff00>Charged</fc>"
+--                ] 50
+--          ]
+--        , sepChar = "%"
+--        , alignSep = "}{"
+--        , template = "%StdinReader% }{ %mpd%   %default:Master%   %bright%   %battery%   %disku% %date%   %KNYC%"
+--        }
