@@ -38,7 +38,6 @@ alias ls="ls --color"
 
 alias e="emacsclient -n"
 (( $+commands[exa] )) && alias ls="exa"
-(( $+commands[bat] )) && alias cat="bat"
 # if (( $+commands[most] )); then
 #     alias less="most"
 #     export PAGER="most"
