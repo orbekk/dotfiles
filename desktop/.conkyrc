@@ -1,0 +1,14 @@
+conky.config = {
+      background = false
+    , out_to_console = true
+    , out_to_x = false
+    , update_interval = 1.0
+    , total_run_times = 0
+    , use_spacer = none
+}
+
+-- ${if_pa_sink_muted}OFF$else${pa_sink_volume}%$endif
+
+conky.text = [[
+${if_up wlp39s0}wlan ${wireless_essid wlp39s0}${endif} \
+^fg()${time %a %b %d %I:%M%P}]]
