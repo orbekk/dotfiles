@@ -27,17 +27,37 @@ import XMonad.Hooks.ManageHelpers
 import Data.List.Split
 import Control.Monad
 
-xmobarCmd = "xmobar -v $HOME/.xmonad/xmobarrc"
+cViolet = "#68217A"
+cDark = "#252526"
+cBlue = "#237AD3"
+  
+myDzenPP = def { ppCurrent  = dzenColor "white" cBlue . pad
+               , ppVisible  = dzenColor "white" cDark . pad
+               , ppHidden   = dzenColor "white" cViolet . pad
+               , ppHiddenNoWindows = const ""
+               , ppUrgent   = dzenColor "red" "yellow" . pad
+               , ppWsSep    = ""
+               , ppSep      = ""
+               , ppLayout   = dzenColor cBlue cDark .
+                               (\ x -> pad $ case x of
+                                       "TilePrime Horizontal" -> "TTT"
+                                       "TilePrime Vertical"   -> "[]="
+                                       "Hinted Full"          -> "[ ]"
+                                       _                      -> x
+                               )
+               , ppTitle    = (("^p(10)^bg(" ++ cDark ++ ") ") ++) . dzenEscape
+               } 
+
+dzenCommand = "dzen2 -dock -x 0 -y 0 -h 24 -fn \"DejaVu Sans:bold:pixelsize=16\" -ta l -bg '" ++ cDark ++ "' -fg '#f4f4f4'"
 
 bar :: LayoutClass l Window => XConfig l -> IO (XConfig (ModifiedLayout AvoidStruts l))
-bar = statusBar xmobarCmd xmobarPP toggleStrutsKey
+bar = statusBar dzenCommand myDzenPP toggleStrutsKey
   where toggleStrutsKey XConfig{modMask = modm} = (modm, xK_b)
 
 main = do
   host <- (head . splitOn "." . nodeName) <$> getSystemID
   setEnv "HOST" host True
   config <- bar (myConfig host)
-  -- let config = myConfig host
   xmonad config
 
 layoutScreensHost = "unused" -- orange
@@ -49,8 +69,8 @@ myConfig host =
     , modMask = mod4Mask
     , terminal = "urxvt"
     , borderWidth = 2
-    , focusedBorderColor = "#ff0000"
-    , normalBorderColor = "#777778"
+    , focusedBorderColor = cBlue
+    , normalBorderColor = cDark
     , workspaces = pure <$> "\"<>PYFAOEUI"
     , manageHook = manageHook kdeConfig <+> insertPosition Below Newer <+> (isDialog --> doF W.shiftMaster <+> doF W.swapDown)
     }
