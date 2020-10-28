@@ -15,7 +15,8 @@ xsetroot -solid "#2A3462"
 pasystray &
 xss-lock -- /usr/bin/env xscreensaver-command --lock &
 xset -b
-trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 100 --widthtype pixel --transparent true --alpha 0 --tint 0x000000 --height 18 &
+dzen2 -dock -x 0 -h 24 -e 'onstart=lower' -bg '#252526' -p &
+trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 100 --widthtype pixel --transparent true --height 24 --tint 0x252526  --alpha 0 &
 [[ -f /etc/nixos/configuration.nix ]] || \
   redshift -l 40:-70 -r -t 5500:3700 &
 

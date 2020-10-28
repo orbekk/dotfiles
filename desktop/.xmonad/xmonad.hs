@@ -48,7 +48,7 @@ myDzenPP = def { ppCurrent  = dzenColor "white" cBlue . pad
                , ppTitle    = (("^p(10)^bg(" ++ cDark ++ ") ") ++) . dzenEscape
                } 
 
-dzenCommand = "dzen2 -dock -x 0 -y 0 -h 24 -fn \"DejaVu Sans:bold:pixelsize=16\" -ta l -bg '" ++ cDark ++ "' -fg '#f4f4f4'"
+dzenCommand = "dzen2 -dock -x 0 -y 0 -h 24 -expand right -fn \"DejaVu Sans:pixelsize=20\" -ta l -bg '" ++ cDark ++ "' -fg '#f4f4f4'"
 
 bar :: LayoutClass l Window => XConfig l -> IO (XConfig (ModifiedLayout AvoidStruts l))
 bar = statusBar dzenCommand myDzenPP toggleStrutsKey
