@@ -32,8 +32,8 @@ cDark = "#252526"
 cBlue = "#237AD3"
   
 myDzenPP = def { ppCurrent  = dzenColor "white" cBlue . pad
-               , ppVisible  = dzenColor "white" cDark . pad
-               , ppHidden   = dzenColor "white" cViolet . pad
+               , ppVisible  = dzenColor "white" cViolet . pad
+               , ppHidden   = dzenColor "white" cDark . pad
                , ppHiddenNoWindows = const ""
                , ppUrgent   = dzenColor "red" "yellow" . pad
                , ppWsSep    = ""
@@ -48,7 +48,7 @@ myDzenPP = def { ppCurrent  = dzenColor "white" cBlue . pad
                , ppTitle    = (("^p(10)^bg(" ++ cDark ++ ") ") ++) . dzenEscape
                } 
 
-dzenCommand = "dzen2 -dock -x 0 -y 0 -h 24 -expand right -fn \"DejaVu Sans:pixelsize=20\" -ta l -bg '" ++ cDark ++ "' -fg '#f4f4f4'"
+dzenCommand = "dzen2 -dock -x 0 -y 0 -h 24 -expand right -fn \"WenQuanYi Micro Hei-16\" -ta l -bg '" ++ cDark ++ "' -fg '#f4f4f4'"
 
 bar :: LayoutClass l Window => XConfig l -> IO (XConfig (ModifiedLayout AvoidStruts l))
 bar = statusBar dzenCommand myDzenPP toggleStrutsKey
@@ -71,7 +71,7 @@ myConfig host =
     , borderWidth = 2
     , focusedBorderColor = cBlue
     , normalBorderColor = cDark
-    , workspaces = pure <$> "\"<>PYFAOEUI"
+    , workspaces = ["一", "二", "三", "四", "五", "六", "七", "八", "九", "十" ]
     , manageHook = manageHook kdeConfig <+> insertPosition Below Newer <+> (isDialog --> doF W.shiftMaster <+> doF W.swapDown)
     }
   where myLayout = onHost layoutScreensHost (verticalTiled ||| horizontalTiled ||| Full) $
@@ -179,7 +179,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
                     , xK_period
                     , xK_p
                     , xK_y
-                    , xK_f
                     , xK_a
                     , xK_o
                     , xK_e

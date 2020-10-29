@@ -10,5 +10,5 @@ conky.config = {
 -- ${if_pa_sink_muted}OFF$else${pa_sink_volume}%$endif
 
 conky.text = [[
-${if_up wlp39s0}wlan ${wireless_essid wlp39s0}${endif} \
-^fg()${time %a %b %d %I:%M%P}]]
+${if_up wlp39s0}^fn(FontAwesome)^fn() ${wireless_essid wlp39s0}${endif}^p(20)\
+^fg()${time %m月%d号%H:%M}]]
