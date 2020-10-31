@@ -9,7 +9,7 @@ if [[ ! -e "$SETUP_MARKER" ]]; then
 fi
 
 export TERMINAL=urxvt
-xrdb -merge $HOME/.Xresources
+xrdb -merge $HOME/.Xresources -I$HOME
 setxkbmap us -variant dvorak -option compose:ralt -option caps:ctrl_modifier
 xsetroot -solid "#2A3462"
 pasystray &
