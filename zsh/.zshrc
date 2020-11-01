@@ -35,13 +35,9 @@ setopt autocd
 setopt interactivecomments
 
 alias ls="ls --color"
-
 alias e="emacsclient -n"
 (( $+commands[exa] )) && alias ls="exa"
-# if (( $+commands[most] )); then
-#     alias less="most"
-#     export PAGER="most"
-# fi
+
 if (( $+commands[fzf] )); then
   if (( $+commands[fzf-share] )); then
     # Nixos

@@ -42,6 +42,7 @@ tools=(
     emacs
     git
     zoxide
+    rofi
     )
 for tool in "${tools[@]}"; do
     if ! type "$tool" &>/dev/null; then
