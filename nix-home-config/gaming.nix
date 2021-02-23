@@ -11,6 +11,7 @@ let
 in
 {
   home.packages = with pkgs; [
+    discord
     wineWowPackages.staging
     my_steam
     my_steam.run

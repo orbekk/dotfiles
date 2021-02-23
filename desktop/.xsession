@@ -8,6 +8,8 @@ if [[ ! -e "$SETUP_MARKER" ]]; then
     touch "$SETUP_MARKER"
 fi
 
+source ~/.zshenv
+
 export TERMINAL=urxvt
 xrdb -merge $HOME/.Xresources -I$HOME
 setxkbmap us -variant dvorak -option compose:ralt -option caps:ctrl_modifier
