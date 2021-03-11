@@ -1,9 +1,8 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ ./weechat.nix ./my-env.nix ];
+  imports = [ ./weechat.nix ];
   programs.home-manager.enable = true;
-  programs.neovim.enable = true;
 
   home.stateVersion = "19.03";
 
