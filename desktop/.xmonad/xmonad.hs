@@ -90,6 +90,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- launch dmenu
     , ((modm,               xK_d     ), spawn "rofi -show run")
+    , ((modm,               xK_s     ), spawn "rofipass --type")
 
     -- close focused window
     , ((modm .|. shiftMask, xK_c     ), kill)
@@ -146,8 +147,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm              , xK_v ), spawn decreaseVolumeCommand)
     , ((modm              , xK_z ), spawn increaseVolumeCommand)
 
-    , ((modm              , xK_s ), (layoutScreens 2 (TwoPane 0.5 0.5)))
-    , ((modm .|. shiftMask, xK_s ), rescreen)
+    -- , ((modm              , xK_s ), (layoutScreens 2 (TwoPane 0.5 0.5)))
+    -- , ((modm .|. shiftMask, xK_s ), rescreen)
 
     -- This is redundant because it's added by the statusBar function.
     , ((modm              , xK_b     ), sendMessage ToggleStruts)
