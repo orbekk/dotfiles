@@ -156,5 +156,7 @@
 (remove-hook 'doom-first-buffer-hook #'smartparens-global-mode)
 
 (add-to-list 'auto-mode-alist '("\\.journal\\'" . ledger-mode))
+(after! racket-mode
+  (remove-hook! 'racket-mode #'racket-smart-open-bracket-mode))
 
 (load "~/.doom.d/config.local.el" t)
