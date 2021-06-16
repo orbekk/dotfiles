@@ -30,4 +30,6 @@ if which autorandr >/dev/null; then
   autorandr --change
 fi
 
+dunst &
+
 exec xmonad

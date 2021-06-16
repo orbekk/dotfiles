@@ -90,7 +90,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- launch dmenu
     , ((modm,               xK_d     ), spawn "rofi -show run")
-    , ((modm,               xK_s     ), spawn "rofipass --type")
+    , ((modm,               xK_s     ), spawn "rofipass")
 
     -- close focused window
     , ((modm .|. shiftMask, xK_c     ), kill)
