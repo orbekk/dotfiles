@@ -30,6 +30,6 @@ if which autorandr >/dev/null; then
   autorandr --change
 fi
 
-dunst -max_icon_size 100 &
+dunst -max_icon_size 30 &
 
 exec xmonad
