@@ -66,19 +66,20 @@
            "* Journal entry\n%t\n\n%?" :tree-type week :jump-to-captured t)
           )))
 
+(setq org-roam-directory "~/org/roam")
 (use-package! org)
-(use-package! org-roam
-  :after org
-  :init
-  (setq org-roam-directory "~/org/roam")
-  (setq org-roam-capture-templates
-        '(
-          ("d" "default" plain (function org-roam-capture--get-point)
-           "%?"
-           :file-name "%<%Y%m%d%H%M%S>-${slug}"
-           :head "#+TITLE: ${title}\n"
-           :unnarrowed t)
-          )))
+;; (use-package! org-roam
+;;   :after org
+;;   :init
+;;   (setq org-roam-directory "~/org/roam")
+;;   (setq org-roam-capture-templates
+;;         '(
+;;           ("d" "default" plain (function org-roam-capture--get-point)
+;;            "%?"
+;;            :file-name "%<%Y%m%d%H%M%S>-${slug}"
+;;            :head "#+TITLE: ${title}\n"
+;;            :unnarrowed t)
+;;           )))
 
 (setq deft-directory "~/org/")
 (setq deft-recursive t)
