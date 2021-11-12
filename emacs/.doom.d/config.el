@@ -76,7 +76,7 @@
           ("d" "default" plain (function org-roam-capture--get-point)
            "%?"
            :file-name "%<%Y%m%d%H%M%S>-${slug}"
-           :head "#+TITLE: ${title}\n- tags :: [[file:%<%Y-W%W>.org][%<%Y-W%W>]]"
+           :head "#+TITLE: ${title}\n"
            :unnarrowed t)
           )))
 
