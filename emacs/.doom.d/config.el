@@ -159,4 +159,4 @@
 (after! racket-mode
   (remove-hook! 'racket-mode #'racket-smart-open-bracket-mode))
 
-(load "~/.doom.d/config.local.el" t)
+(load-file "~/.doom.d/config.local.el")
