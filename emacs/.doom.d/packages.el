@@ -48,4 +48,4 @@
 
 ;; (package! hledger-mode)
 
-(load "~/.doom.d/packages.local.el" t)
+(load-file "~/.doom.d/packages.local.el")
