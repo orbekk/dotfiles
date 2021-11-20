@@ -75,7 +75,7 @@
        ;;eshell            ; the elisp shell that works everywhere
        shell             ; simple shell REPL for Emacs
        ;;term              ; basic terminal emulator for Emacs
-       ;;vterm             ; the best terminal emulation in Emacs
+       vterm             ; the best terminal emulation in Emacs
 
        :checkers
        syntax              ; tasing you for every semicolon you forget
@@ -141,7 +141,7 @@
        ;;nim               ; python + lisp at the speed of c
        nix               ; I hereby declare "nix geht mehr!"
        ;;ocaml             ; an objective camel
-       (org +journal +roam2)               ; organize your plain life in plain text
+       (org +journal +roam2) ; organize your plain life in plain text
        ;;perl              ; write code no one else can comprehend
        ;;php               ; perl's insecure younger brother
        ;;plantuml          ; diagrams for confusing people more
@@ -164,7 +164,7 @@
        ;;yaml              ; JSON, but readable
 
        :email
-       mu4e
+       ;;mu4e
        ;;notmuch
        ;;(wanderlust +gmail)
 
