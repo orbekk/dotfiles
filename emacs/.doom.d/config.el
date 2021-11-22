@@ -47,7 +47,8 @@
 (setq deft-recursive t)
 
 ;; Allow more keys when navigating with avy.
-(setq avy-keys (number-sequence ?a ?z))
+(setq avy-keys '(?a ?o ?e ?u ?d ?h ?n ?s ?l ?, ?. ?p ?r))
+(setq avy-timeout-seconds 0.3)
 
 (server-start)
 (remove-hook 'doom-first-buffer-hook #'smartparens-global-mode)
