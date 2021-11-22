@@ -26,6 +26,8 @@
 (setq doom-theme 'doom-dark+)
 (when (equal "pincer" (system-name))
   (setq doom-theme 'doom-one-light))
+(when (equal "orbekk" (system-name))
+  (setq doom-themer 'doom-acario-light))
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -40,6 +42,7 @@
 (setq org-agenda-files '("~/org/roam/todo.org"))
 (setq org-roam-directory (concat org-directory "/roam"))
 (setq org-roam-db-location (concat org-roam-directory "/org-roam.db"))
+(setq org-export-with-toc nil)
 (setq deft-directory org-directory)
 (setq deft-recursive t)
 
