@@ -47,6 +47,7 @@
 (setq deft-directory org-directory)
 (setq deft-recursive t)
 
+
 ;; Allow more keys when navigating with avy.
 (setq avy-keys '(?a ?o ?e ?u ?d ?h ?n ?s ?l ?, ?. ?p ?r))
 (setq avy-timeout-seconds 0.3)
@@ -58,6 +59,11 @@
   (remove-hook! 'racket-mode #'racket-smart-open-bracket-mode))
 
 (after! org
-  (add-hook 'org-mode-hook 'mixed-pitch-mode))
+  (add-hook 'org-mode-hook 'mixed-pitch-mode)
+  (setq org-roam-mode-section-functions
+        (list #'org-roam-backlinks-section
+              #'org-roam-reflinks-section
+              #'org-roam-unlinked-references-section
+              )))
 
 (load-file "~/.doom.d/config.local.el")
