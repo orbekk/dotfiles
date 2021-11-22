@@ -19,6 +19,7 @@
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
 (setq doom-font (font-spec :family "iosevka" :size 14))
+(setq doom-variable-pitch-font (font-spec :family "Noto Serif" :size 14))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
@@ -27,7 +28,7 @@
 (when (equal "pincer" (system-name))
   (setq doom-theme 'doom-one-light))
 (when (equal "orbekk" (system-name))
-  (setq doom-themer 'doom-acario-light))
+  (setq doom-theme 'doom-acario-light))
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -55,5 +56,8 @@
 (add-to-list 'auto-mode-alist '("\\.journal\\'" . ledger-mode))
 (after! racket-mode
   (remove-hook! 'racket-mode #'racket-smart-open-bracket-mode))
+
+(after! org
+  (add-hook 'org-mode-hook 'mixed-pitch-mode))
 
 (load-file "~/.doom.d/config.local.el")
