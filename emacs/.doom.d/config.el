@@ -52,6 +52,9 @@
 (setq avy-keys '(?a ?o ?e ?u ?d ?h ?n ?s ?l ?, ?. ?p ?r))
 (setq avy-timeout-seconds 0.3)
 
+;; Low menu delay.
+(setq which-key-idle-delay 0.15)
+
 (server-start)
 (remove-hook 'doom-first-buffer-hook #'smartparens-global-mode)
 (add-to-list 'auto-mode-alist '("\\.journal\\'" . ledger-mode))
