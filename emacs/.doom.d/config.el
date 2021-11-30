@@ -46,7 +46,8 @@
 (setq org-export-with-toc nil)
 (setq deft-directory org-directory)
 (setq deft-recursive t)
-
+;; Org html export
+(setq org-html-htmlize-output-type 'css)
 
 ;; Allow more keys when navigating with avy.
 (setq avy-keys '(?a ?o ?e ?u ?d ?h ?n ?s ?l ?, ?. ?p ?r))
