@@ -40,7 +40,7 @@
 (setq org-refile-targets '((nil . (:maxlevel . 2))))
 (setq org-log-into-drawer t)
 (setq org-agenda-log-mode-items '(closed clock state))
-(setq org-agenda-files '("~/org/roam/todo.org"))
+(setq org-agenda-files (list org-roam-directory))
 (setq org-roam-directory (concat org-directory "/roam"))
 (setq org-roam-db-location (concat org-roam-directory "/org-roam.db"))
 (setq org-export-with-toc nil)
@@ -48,6 +48,9 @@
 (setq deft-recursive t)
 ;; Org html export
 (setq org-html-htmlize-output-type 'css)
+;; Website publish settings.
+(defvar kj/publish-tag "publish")
+(defvar kj/publish-directory "/ssh:orbekk@dragon.orbekk.com:/storage/srv/kj.orbekk.com")
 
 ;; Allow more keys when navigating with avy.
 (setq avy-keys '(?a ?o ?e ?u ?d ?h ?n ?s ?l ?, ?. ?p ?r))
@@ -55,6 +58,18 @@
 
 ;; Low menu delay.
 (setq which-key-idle-delay 0.15)
+
+;; Replace values in an alist from a list of replacements.
+;;
+;; Example:
+;;   (kj/assq-replace '((:a . 1)) '((:a . 2)))
+(defun kj/assq-replace (replacements alist)
+  (let ((replace1 (lambda (aelem alist)
+                    (cons aelem (assq-delete-all (car aelem) alist)))))
+    (if replacements
+        (assq-replace (cdr replacements)
+                      (funcall replace1 (car replacements) alist))
+      alist)))
 
 (server-start)
 (remove-hook 'doom-first-buffer-hook #'smartparens-global-mode)
@@ -67,7 +82,80 @@
   (setq org-roam-mode-section-functions
         (list #'org-roam-backlinks-section
               #'org-roam-reflinks-section
-              #'org-roam-unlinked-references-section
-              )))
+              #'org-roam-unlinked-references-section))
+
+  (interactive-form 'org-publish)
+
+  (defun kj/find-agenda-files-containing-tag (tag)
+    (let ((candidates (org-agenda-files nil 'ifmode))
+          (matcher (cdr (org-make-tags-matcher tag)))
+          (files))
+      (message "Results:")
+      (dolist (file candidates files)
+        (org-check-agenda-file file)
+        (with-current-buffer (org-get-agenda-file-buffer file)
+          (message "%S" (org-scan-tags 'agenda matcher nil))
+
+           (when (org-scan-tags 'agenda matcher nil)
+             (push file files))))))
+
+  (defun kj/org-publish (&optional project force)
+    (interactive)
+    (setq project (or project "all"))
+    (setq force (or force current-prefix-arg))
+    (let* ((static-files-re (string-join '("css" "txt" "jpg" "png" "gif" "svg") "\\|"))
+           (files-to-include (kj/find-agenda-files-containing-tag kj/publish-tag))
+           (org-babel-default-header-args
+            (kj/assq-replace '((:exports . "both") (:eval . "never-export"))
+                             org-babel-default-header-args))
+           (org-publish-project-alist
+            `(
+              ("static"
+              :base-directory ,(concat org-roam-directory "/static")
+              :base-extension ,static-files-re
+              :recursive t
+              :publishing-directory ,(concat kj/publish-directory "/static")
+              :publishing-function org-publish-attachment)
+              ("source"
+              :base-directory ,org-roam-directory
+              :base-extension "org"
+              :exclude ".*"
+              :include ,files-to-include
+              :recursive t
+              :publishing-directory ,kj/publish-directory
+              :publishing-function org-publish-attachment)
+              ("html"
+              :base-directory ,org-roam-directory
+              :base-extension "org"
+              :recursive t
+              :exclude ".*"
+              :include ,files-to-include
+              :publishing-directory ,kj/publish-directory
+              :publishing-function org-html-publish-to-html
+
+              :with-toc nil
+              :with-latex t
+              :with-drawers t
+              :with-title t
+              :section-numbers nil
+
+              ;; HTML options
+              :html-toplevel-hlevel 2
+              :html-preamble ""
+              :html-postamble ""
+              :html-html5-fancy t
+              :html-doctype "html5"
+              :html-head "<link rel=\"stylesheet\" type=\"text/css\" href=\"static/org.css\"/>"
+              :html-head-include-scripts nil
+              :html-head-include-default-style nil
+              :html-container article
+              )
+              ("all" :components ("static" "source" "html"))
+             )))
+      (org-publish project force))))
+
+;;; Keybindings
+(map! (:after evil-org
+       :leader "n P" #'kj/org-publish))
 
 (load-file "~/.doom.d/config.local.el")
