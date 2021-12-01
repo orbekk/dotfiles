@@ -84,8 +84,6 @@
               #'org-roam-reflinks-section
               #'org-roam-unlinked-references-section))
 
-  (interactive-form 'org-publish)
-
   (defun kj/find-agenda-files-containing-tag (tag)
     (let ((candidates (org-agenda-files nil 'ifmode))
           (matcher (cdr (org-make-tags-matcher tag)))
