@@ -103,6 +103,8 @@
     (setq force (or force current-prefix-arg))
     (let* ((static-files-re (string-join '("css" "txt" "jpg" "png" "gif" "svg") "\\|"))
            (files-to-include (kj/find-agenda-files-containing-tag kj/publish-tag))
+           ;; Disable org babel exports during publish entirely to speed up publish.
+           (org-export-use-babel nil)
            (org-babel-default-header-args
             (kj/assq-replace '((:exports . "both") (:eval . "never-export"))
                              org-babel-default-header-args))
